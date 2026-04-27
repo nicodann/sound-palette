@@ -1,4 +1,33 @@
+main {
+  max-width: 1200px;
+  margin: 0 auto 0 auto;
+}
+
 form {
   display: flex;
   flex-direction: column;
+  gap: 12px;
+}
+
+#form-input_button {
+  display: flex;
+  gap: 12px;
+}
+
+input {
+  min-width: 300px;
+  padding: 4px;
+}
+
+button {
+  padding: 4px;
+}
+
+@media (min-width: 768px) {
+  input {
+    min-width: 700px;
+  }
+}
+
+@media (min-width: 1024px) {
 }

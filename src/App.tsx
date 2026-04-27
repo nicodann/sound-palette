@@ -13,22 +13,25 @@ function App() {
     console.log("form submitted", formValues);
   };
   return (
-    <section>
+    <main>
       <form onSubmit={handleSubmit}>
-        <label>Describe a scene or feeling.</label>
-        <input
-          type="text"
-          value={formValues.prompt}
-          placeholder="A misty lake full of poison fishies"
-          onChange={(e) =>
-            setFormValues((prev) => {
-              return { ...prev, prompt: e.target.value };
-            })
-          }
-        />
-        <button type="submit">Submit</button>
+        <p>Describe a scene or feeling.</p>
+        <div id="form-input_button">
+          <input
+            id="prompt"
+            type="text"
+            value={formValues.prompt}
+            placeholder="A misty lake full of poison fishies"
+            onChange={(e) =>
+              setFormValues((prev) => {
+                return { ...prev, prompt: e.target.value };
+              })
+            }
+          />
+          <button type="submit">Submit</button>
+        </div>
       </form>
-    </section>
+    </main>
   );
 }
 
