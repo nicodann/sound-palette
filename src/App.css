@@ -1,12 +1,14 @@
 main {
   max-width: 1200px;
   margin: 0 auto 0 auto;
+  text-align: center;
 }
 
 form {
   display: flex;
   flex-direction: column;
   gap: 12px;
+  align-items: center;
 }
 
 #form-input_button {
@@ -16,11 +18,12 @@ form {
 
 input {
   min-width: 300px;
-  padding: 4px;
+  padding: 4px 8px;
 }
 
 button {
   padding: 4px;
+  width: 200px;
 }
 
 @media (min-width: 768px) {
