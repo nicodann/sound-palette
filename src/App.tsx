@@ -1,5 +1,6 @@
 import { useState } from "react";
 import "./App.css";
+import { postAiQuery } from "./lib/postAiQuery";
 
 type FormValues = {
   prompt: string;
@@ -7,16 +8,18 @@ type FormValues = {
 
 function App() {
   const [formValues, setFormValues] = useState<FormValues>({ prompt: "" });
+  const [aiResponse, setAiResponse] = useState("");
 
-  const handleSubmit = (e: React.SubmitEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.SubmitEvent<HTMLFormElement>) => {
     e.preventDefault();
     console.log("form submitted", formValues);
+    const answer = await postAiQuery({ query: formValues.prompt });
+    setAiResponse(answer);
   };
   return (
     <main>
       <form onSubmit={handleSubmit}>
         <p>Describe a scene or feeling.</p>
-        {/* <div id="form-input_button"> */}
         <input
           id="prompt"
           type="text"
@@ -29,7 +32,7 @@ function App() {
           }
         />
         <button type="submit">Submit</button>
-        {/* </div> */}
+        <div>{aiResponse}</div>
       </form>
     </main>
   );
