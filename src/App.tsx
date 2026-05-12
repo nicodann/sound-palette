@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./App.css";
 import { postAiQuery } from "./lib/postAiQuery";
 
@@ -14,8 +14,13 @@ function App() {
     e.preventDefault();
     console.log("form submitted", formValues);
     const answer = await postAiQuery({ query: formValues.prompt });
-    setAiResponse(answer);
+    setAiResponse(answer.result);
   };
+
+  useEffect(() => {
+    console.log("RESPONSE:", aiResponse);
+  }, [aiResponse]);
+
   return (
     <main>
       <form onSubmit={handleSubmit}>
