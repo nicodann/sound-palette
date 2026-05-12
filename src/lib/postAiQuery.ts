@@ -2,7 +2,7 @@ export async function postAiQuery({ query }: { query: string }) {
   const url = import.meta.env.VITE_API_URL;
 
   try {
-    const response = await fetch(`${url}/api-query`, {
+    const response = await fetch(`${url}/ai-query`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ input: query }),
