@@ -1,7 +1,18 @@
 main {
-  max-width: 1200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* max-width: 1200px; */
+  min-height: 100vh;
   margin: 0 auto 0 auto;
-  text-align: center;
+  /* text-align: center; */
+  font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+}
+#body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 100px;
 }
 
 form {
@@ -9,6 +20,8 @@ form {
   flex-direction: column;
   gap: 12px;
   align-items: center;
+  border: thin black solid;
+  padding: 20px;
 }
 
 #form-input_button {
@@ -24,6 +37,18 @@ input {
 button {
   padding: 4px;
   width: 200px;
+}
+
+#response {
+  font-size: 40px;
+  background-color: lightgrey;
+  padding: 10px 20px;
+  min-width: 100%;
+  min-height: 80px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 @media (min-width: 768px) {
