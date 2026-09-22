@@ -11,19 +11,35 @@ function App() {
   const [aiResponse, setAiResponse] = useState<
     { adjective: string; colour: string }[]
   >([]);
+  const [hasSubmitted, setHasSubmitted] = useState(false);
+  const [error, setError] = useState<string>();
 
   const handleSubmit = async (e: React.SubmitEvent<HTMLFormElement>) => {
     e.preventDefault();
+    if (!formValues.prompt.trim()) {
+      setError("Please enter some text.");
+      return;
+    }
+    setError("");
     console.log("form submitted", formValues);
     const answer = await postAiQuery({ query: formValues.prompt });
     setAiResponse(answer);
+    setHasSubmitted(true);
+  };
+
+  const reset = () => {
+    setHasSubmitted(false);
   };
 
   useEffect(() => {
     console.log("RESPONSE:", aiResponse);
   }, [aiResponse]);
 
-  const adjectives = aiResponse?.map((item) => item.adjective).join(", ") ?? "";
+  useEffect(() => {
+    console.log("hasSubmitted", hasSubmitted);
+  }, [hasSubmitted]);
+
+  const adjectives = aiResponse?.map((item) => item.adjective).join(" ") ?? "";
   const colours = aiResponse?.map((item) => item.colour);
 
   console.log("COLOURS:", colours);
@@ -41,27 +57,45 @@ function App() {
   console.log("BACKGROUND GRADIENT STRING:", backgroundGradientString);
 
   return (
-    <main style={{ background: backgroundGradientString }}>
-      <div id="body">
+    <div
+      id="background"
+      className={`
+        archivo-black-regular 
+        ${hasSubmitted ? "hasSubmitted" : "beforeSubmitted"}
+        `}
+      style={{ background: backgroundGradientString }}
+    >
+      <header>
+        <button id="reset" hidden={!hasSubmitted} onClick={() => reset()}>
+          X
+        </button>
+        {/* <div id="response">Puple, flightly, yellow, beige, boring</div> */}
+        <p id="response">{adjectives}</p>
+      </header>
+      <main>
         <form onSubmit={handleSubmit}>
           <p>Describe a scene or feeling.</p>
           <input
+            aria-invalid={!!error}
+            aria-describedby="prompt-error"
             id="prompt"
             type="text"
             value={formValues.prompt}
             placeholder="A misty lake full of poison fishies"
-            onChange={(e) =>
+            onChange={(e) => {
+              setError("");
               setFormValues((prev) => {
                 return { ...prev, prompt: e.target.value };
-              })
-            }
+              });
+            }}
           />
+          <p id="error" hidden={!error} role="alert">
+            {error}
+          </p>
           <button type="submit">Submit</button>
         </form>
-        {/* <div id="response">{adjectives}</div> */}
-        <div id="response">Puple, flightly, yellow, beige, boring</div>
-      </div>
-    </main>
+      </main>
+    </div>
   );
 }
 
