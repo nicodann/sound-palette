@@ -40,11 +40,12 @@ function App() {
     console.log("hasSubmitted", hasSubmitted);
   }, [hasSubmitted]);
 
-  const adjectives = aiResponse?.map((item) => item.adjective).join(" ") ?? "";
+  const adjectiveString =
+    aiResponse?.map((item) => item.adjective).join(" ") ?? "";
   const colours = aiResponse?.map((item) => item.colour);
 
   console.log("COLOURS:", colours);
-  console.log("ADJECTIVES:", adjectives);
+  console.log("ADJECTIVEString:", adjectiveString);
 
   let percentage = 0;
   let backgroundGradientString = "linear-gradient(90deg, ";
@@ -71,7 +72,11 @@ function App() {
           X
         </button>
         {/* <div id="response">Puple, flightly, yellow, beige, boring</div> */}
-        <p id="response">{adjectives}</p>
+        <div id="response">
+          {aiResponse.map((element, i) => {
+            return <p key={i}>{element.adjective}</p>;
+          })}
+        </div>
       </header>
       <main>
         <form onSubmit={handleSubmit}>

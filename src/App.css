@@ -50,9 +50,20 @@ button#reset {
   }
 }
 
-p#response {
+#response {
+  display: flex;
+  justify-content: center;
+  gap: 200px;
+  max-width: 90vw;
+}
+
+#response p {
   margin-right: -4000px;
-  transition: margin-right 0.5s ease;
+  transition: margin-right 3s ease;
+}
+
+.hasSubmitted #response p {
+  margin-right: 0px;
 }
 
 main {
@@ -70,10 +81,6 @@ main {
   transform: scale(0);
   opacity: 0;
   visibility: hidden;
-}
-
-.hasSubmitted p#response {
-  margin-right: 0px;
 }
 
 form {
