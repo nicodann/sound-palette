@@ -1,12 +1,14 @@
 #background {
+  position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
-  /* max-width: 1200px; */
+  max-width: 100vw;
   min-height: 100vh;
   margin: 0 auto 0 auto;
   /* text-align: center; */
   font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+  overflow: hidden;
 }
 
 /* .centered {
@@ -28,23 +30,27 @@ header {
   width: 100vw;
   font-size: 40px;
   padding: 10px;
+  text-align: center;
 }
 button#reset {
   background: none;
   border: none;
-  padding: none;
-  margin: none;
+  padding: 0px;
+  margin: 0px;
   position: absolute;
-  top: 0px;
+  top: 50%;
+  transform: translateY(-50%);
   right: 0px;
+  font-size: 0.5em;
+
+  &:hover {
+    cursor: pointer;
+    opacity: 0.5;
+  }
 }
 
 p#response {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  margin-right: -2000px;
+  margin-right: -4000px;
   transition: margin-right 0.5s ease;
 }
 

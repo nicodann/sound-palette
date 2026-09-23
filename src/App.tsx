@@ -6,6 +6,13 @@ type FormValues = {
   prompt: string;
 };
 
+const bodyFont = DM_Sans({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-body",
+  display: "swap",
+});
+
 function App() {
   const [formValues, setFormValues] = useState<FormValues>({ prompt: "" });
   const [aiResponse, setAiResponse] = useState<
