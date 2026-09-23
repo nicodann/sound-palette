@@ -1,17 +1,11 @@
 import { useEffect, useState } from "react";
 import "./App.css";
 import { postAiQuery } from "./lib/postAiQuery";
+import "@fontsource-variable/dm-sans";
 
 type FormValues = {
   prompt: string;
 };
-
-const bodyFont = DM_Sans({
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-  variable: "--font-body",
-  display: "swap",
-});
 
 function App() {
   const [formValues, setFormValues] = useState<FormValues>({ prompt: "" });

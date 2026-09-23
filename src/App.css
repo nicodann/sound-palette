@@ -6,9 +6,10 @@
   max-width: 100vw;
   min-height: 100vh;
   margin: 0 auto 0 auto;
-  /* text-align: center; */
-  font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
   overflow: hidden;
+  font-family: "DM Sans Variable", sans-serif;
+  /* text-align: center; */
+  /* font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif; */
 }
 
 /* .centered {
