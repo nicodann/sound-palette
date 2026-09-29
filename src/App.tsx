@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import "./App.css";
 
 import "@fontsource-variable/dm-sans";
@@ -10,35 +10,29 @@ function App() {
   const [aiResponse, setAiResponse] = useState<AiResponse>([]);
   const [hasSubmitted, setHasSubmitted] = useState(false);
 
+  const onPaletteGenerated = (response: AiResponse) => {
+    setAiResponse(response);
+    setHasSubmitted(true);
+  };
+
   const onReset = () => {
     setHasSubmitted(false);
   };
 
-  useEffect(() => {
-    console.log("RESPONSE:", aiResponse);
-  }, [aiResponse]);
+  const responseColours = aiResponse?.map((item) => item.colour);
 
-  useEffect(() => {
-    console.log("hasSubmitted", hasSubmitted);
-  }, [hasSubmitted]);
+  const buildGradientString = (colours: string[]) => {
+    let percentage = 0;
+    let backgroundGradientString = "linear-gradient(90deg, ";
 
-  const adjectiveString =
-    aiResponse?.map((item) => item.adjective).join(" ") ?? "";
-  const colours = aiResponse?.map((item) => item.colour);
+    for (let i = 0; i < colours.length; i++) {
+      backgroundGradientString += `${colours[i]} ${percentage}%`;
+      percentage += 20;
+      backgroundGradientString += i < colours.length - 1 ? "," : ")";
+    }
 
-  console.log("COLOURS:", colours);
-  console.log("ADJECTIVEString:", adjectiveString);
-
-  let percentage = 0;
-  let backgroundGradientString = "linear-gradient(90deg, ";
-
-  for (let i = 0; i < colours.length; i++) {
-    backgroundGradientString += `${colours[i]} ${percentage}%`;
-    percentage += 20;
-    backgroundGradientString += i < colours.length - 1 ? "," : ")";
-  }
-
-  console.log("BACKGROUND GRADIENT STRING:", backgroundGradientString);
+    return backgroundGradientString;
+  };
 
   return (
     <div
@@ -47,7 +41,7 @@ function App() {
         archivo-black-regular 
         ${hasSubmitted ? "hasSubmitted" : "beforeSubmitted"}
         `}
-      style={{ background: backgroundGradientString }}
+      style={{ background: buildGradientString(responseColours) }}
     >
       <Header
         aiResponse={aiResponse}
@@ -55,10 +49,7 @@ function App() {
         hasSubmitted={hasSubmitted}
       />
       <main>
-        <PaletteForm
-          setHasSubmitted={setHasSubmitted}
-          setAiResponse={setAiResponse}
-        />
+        <PaletteForm onSubmitSuccess={onPaletteGenerated} />
       </main>
     </div>
   );

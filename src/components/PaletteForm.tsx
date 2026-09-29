@@ -3,18 +3,14 @@ import type { AiResponse } from "../types";
 import { postAiQuery } from "../lib/postAiQuery";
 
 type PaletteFormProps = {
-  setHasSubmitted: React.Dispatch<React.SetStateAction<boolean>>;
-  setAiResponse: React.Dispatch<React.SetStateAction<AiResponse>>;
+  onSubmitSuccess: (response: AiResponse) => void;
 };
 
 type FormValues = {
   prompt: string;
 };
 
-export default function PaletteForm({
-  setAiResponse,
-  setHasSubmitted,
-}: PaletteFormProps) {
+export default function PaletteForm({ onSubmitSuccess }: PaletteFormProps) {
   const [formValues, setFormValues] = useState<FormValues>({ prompt: "" });
 
   const [error, setError] = useState<string>();
@@ -27,9 +23,8 @@ export default function PaletteForm({
     }
     setError("");
     console.log("form submitted", formValues);
-    const answer = await postAiQuery({ query: formValues.prompt });
-    setAiResponse(answer);
-    setHasSubmitted(true);
+    const response = await postAiQuery({ query: formValues.prompt });
+    onSubmitSuccess(response);
   };
 
   return (
