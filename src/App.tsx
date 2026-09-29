@@ -1,32 +1,14 @@
 import { useEffect, useState } from "react";
 import "./App.css";
-import { postAiQuery } from "./lib/postAiQuery";
+
 import "@fontsource-variable/dm-sans";
 import Header from "./components/Header";
 import type { AiResponse } from "./types";
-
-type FormValues = {
-  prompt: string;
-};
+import PaletteForm from "./components/PaletteForm";
 
 function App() {
-  const [formValues, setFormValues] = useState<FormValues>({ prompt: "" });
   const [aiResponse, setAiResponse] = useState<AiResponse>([]);
   const [hasSubmitted, setHasSubmitted] = useState(false);
-  const [error, setError] = useState<string>();
-
-  const handleSubmit = async (e: React.SubmitEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    if (!formValues.prompt.trim()) {
-      setError("Please enter some text.");
-      return;
-    }
-    setError("");
-    console.log("form submitted", formValues);
-    const answer = await postAiQuery({ query: formValues.prompt });
-    setAiResponse(answer);
-    setHasSubmitted(true);
-  };
 
   const onReset = () => {
     setHasSubmitted(false);
@@ -73,27 +55,10 @@ function App() {
         hasSubmitted={hasSubmitted}
       />
       <main>
-        <form onSubmit={handleSubmit}>
-          <p>Describe a scene or feeling.</p>
-          <input
-            aria-invalid={!!error}
-            aria-describedby="prompt-error"
-            id="prompt"
-            type="text"
-            value={formValues.prompt}
-            placeholder="A misty lake full of poison fishies..."
-            onChange={(e) => {
-              setError("");
-              setFormValues((prev) => {
-                return { ...prev, prompt: e.target.value };
-              });
-            }}
-          />
-          <p id="error" hidden={!error} role="alert">
-            {error}
-          </p>
-          <button type="submit">Submit</button>
-        </form>
+        <PaletteForm
+          setHasSubmitted={setHasSubmitted}
+          setAiResponse={setAiResponse}
+        />
       </main>
     </div>
   );
