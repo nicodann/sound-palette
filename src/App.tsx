@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import "./App.css";
 import { postAiQuery } from "./lib/postAiQuery";
 import "@fontsource-variable/dm-sans";
+import Header from "./components/Header";
+import type { AiResponse } from "./types";
 
 type FormValues = {
   prompt: string;
@@ -9,9 +11,7 @@ type FormValues = {
 
 function App() {
   const [formValues, setFormValues] = useState<FormValues>({ prompt: "" });
-  const [aiResponse, setAiResponse] = useState<
-    { adjective: string; colour: string }[]
-  >([]);
+  const [aiResponse, setAiResponse] = useState<AiResponse>([]);
   const [hasSubmitted, setHasSubmitted] = useState(false);
   const [error, setError] = useState<string>();
 
@@ -28,7 +28,7 @@ function App() {
     setHasSubmitted(true);
   };
 
-  const reset = () => {
+  const onReset = () => {
     setHasSubmitted(false);
   };
 
@@ -67,19 +67,11 @@ function App() {
         `}
       style={{ background: backgroundGradientString }}
     >
-      <header>
-        {/* <div id="response">Puple, flightly, yellow, beige, boring</div> */}
-        {hasSubmitted && (
-          <div id="response">
-            {aiResponse.map((element, i) => {
-              return <p key={i}>{element.adjective}</p>;
-            })}
-            <button id="reset" onClick={() => reset()}>
-              X
-            </button>
-          </div>
-        )}
-      </header>
+      <Header
+        aiResponse={aiResponse}
+        onReset={onReset}
+        hasSubmitted={hasSubmitted}
+      />
       <main>
         <form onSubmit={handleSubmit}>
           <p>Describe a scene or feeling.</p>

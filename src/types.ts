@@ -11,3 +11,8 @@ export type SavedPalette = {
   adjectives: string[];
   createAt: string;
 };
+
+export type AiResponse = {
+  adjective: string;
+  colour: string;
+}[];
