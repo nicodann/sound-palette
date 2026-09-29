@@ -68,15 +68,17 @@ function App() {
       style={{ background: backgroundGradientString }}
     >
       <header>
-        <button id="reset" hidden={!hasSubmitted} onClick={() => reset()}>
-          X
-        </button>
         {/* <div id="response">Puple, flightly, yellow, beige, boring</div> */}
-        <div id="response">
-          {aiResponse.map((element, i) => {
-            return <p key={i}>{element.adjective}</p>;
-          })}
-        </div>
+        {hasSubmitted && (
+          <div id="response">
+            {aiResponse.map((element, i) => {
+              return <p key={i}>{element.adjective}</p>;
+            })}
+            <button id="reset" onClick={() => reset()}>
+              X
+            </button>
+          </div>
+        )}
       </header>
       <main>
         <form onSubmit={handleSubmit}>
@@ -87,7 +89,7 @@ function App() {
             id="prompt"
             type="text"
             value={formValues.prompt}
-            placeholder="A misty lake full of poison fishies"
+            placeholder="A misty lake full of poison fishies..."
             onChange={(e) => {
               setError("");
               setFormValues((prev) => {

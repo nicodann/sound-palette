@@ -8,6 +8,7 @@
   margin: 0 auto 0 auto;
   overflow: hidden;
   font-family: "DM Sans Variable", sans-serif;
+  padding: 0px 4px;
   /* text-align: center; */
   /* font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif; */
 }
@@ -26,44 +27,60 @@
 } */
 header {
   position: absolute;
+  display: flex;
+  justify-content: center;
   top: 0;
   left: 0;
   width: 100vw;
-  font-size: 40px;
+  font-size: 1.2em;
   padding: 10px;
-  text-align: center;
-}
-button#reset {
-  background: none;
-  border: none;
-  padding: 0px;
-  margin: 0px;
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  right: 0px;
-  font-size: 0.5em;
-
-  &:hover {
-    cursor: pointer;
-    opacity: 0.5;
-  }
+  /* text-align: center; */
 }
 
 #response {
   display: flex;
   justify-content: center;
-  gap: 200px;
-  max-width: 90vw;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  width: 90vw;
 }
 
-#response p {
-  margin-right: -4000px;
-  transition: margin-right 3s ease;
+#response > * {
+  animation: slide-in 1s ease both;
+  animation-delay: calc(var(--i) * 150ms);
+  /* margin-right: -4000px;
+  transition: margin-right 3s ease; */
 }
 
-.hasSubmitted #response p {
+@keyframes slide-in {
+  from {
+    transform: translateX(100vw);
+    opacity: 0;
+  }
+  to {
+    transform: transalteX(0);
+    opacity: 1;
+  }
+}
+
+.hasSubmitted #response > * {
   margin-right: 0px;
+}
+
+button#reset {
+  background: none;
+  border: none;
+  padding: 0px;
+  margin: 0px;
+  font-size: 0.5em;
+  width: 50px;
+  padding: 5px 0px 0px 0px;
+
+  &:hover {
+    cursor: pointer;
+    opacity: 0.5;
+  }
 }
 
 main {
@@ -87,19 +104,16 @@ form {
   display: flex;
   flex-direction: column;
   gap: 12px;
-  align-items: center;
-  border: thin black solid;
-  padding: 20px;
-}
-
-#form-input_button {
-  display: flex;
-  gap: 12px;
+  /* align-items: center; */
+  /* border: thin black solid; */
+  padding: 8px;
+  font-size: 0.8em;
 }
 
 input {
-  min-width: 300px;
+  width: 300px;
   padding: 4px 8px;
+  font-size: 0.8em;
 }
 
 p#error {
@@ -108,16 +122,33 @@ p#error {
   padding: 2px 6px;
 }
 
-button {
+button[type="submit"] {
   padding: 4px;
   width: 200px;
 }
 
 @media (min-width: 768px) {
+  header {
+    font-size: 30px;
+  }
+  #response {
+    gap: 50px;
+  }
+  form {
+    padding: 8px 20px;
+    font-size: 1em;
+  }
+
   input {
-    min-width: 700px;
+    font-size: 1em;
   }
 }
 
 @media (min-width: 1024px) {
+  input {
+    min-width: 600px;
+  }
+  #response {
+    gap: 100px;
+  }
 }
