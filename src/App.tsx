@@ -6,6 +6,7 @@ import Header from "./components/Header";
 import type { AiResponse } from "./types";
 import PaletteForm from "./components/PaletteForm";
 import LoginRegisterModal from "./components/LoginRegisterModal";
+import LoginForm from "./components/LoginForm";
 
 function App() {
   const [aiResponse, setAiResponse] = useState<AiResponse>([]);
@@ -70,6 +71,7 @@ function App() {
         <LoginRegisterModal
           onCloseRegisterLoginModal={onCloseRegisterLoginModal}
         />
+        <LoginForm />
       </main>
     </div>
   );

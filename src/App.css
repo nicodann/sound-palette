@@ -108,10 +108,19 @@ form {
   display: flex;
   flex-direction: column;
   gap: 12px;
+
   /* align-items: center; */
   /* border: thin black solid; */
   padding: 8px;
   font-size: 0.8em;
+}
+
+label {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: flex-start;
+  flex-wrap: wrap;
 }
 
 form#paletteForm {
@@ -154,6 +163,17 @@ form#paletteForm {
   visibility: visible;
 }
 
+form#loginForm,
+form#registerForm {
+  background-color: bisque;
+  border-width: 2px;
+  border-style: outset;
+  border-color: buttonborder;
+  border-image: none;
+  padding: 20px;
+  margin: 20px;
+}
+
 button#close {
   position: absolute;
   top: 0px;
@@ -161,7 +181,7 @@ button#close {
 }
 
 input {
-  width: 300px;
+  width: 260px;
   padding: 4px 8px;
   font-size: 0.8em;
 }
@@ -195,7 +215,7 @@ button[type="submit"] {
 }
 
 @media (min-width: 1024px) {
-  input {
+  input#prompt {
     min-width: 600px;
   }
   #response {
