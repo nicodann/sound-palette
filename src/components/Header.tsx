@@ -11,9 +11,12 @@ export default function Header({
   onReset,
   hasSubmitted,
 }: HeaderProps) {
+  const handleSave = (aiResponse: AiResponse) => {
+    console.log("AI Response: ", aiResponse);
+  };
+
   return (
     <header>
-      {/* <div id="response">Puple, flightly, yellow, beige, boring</div> */}
       {hasSubmitted && (
         <div id="response">
           {aiResponse.map((element, i) => {
@@ -21,6 +24,9 @@ export default function Header({
           })}
           <button id="reset" onClick={() => onReset()}>
             X
+          </button>
+          <button id="save" onClick={() => handleSave(aiResponse)}>
+            save palette
           </button>
         </div>
       )}

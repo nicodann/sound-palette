@@ -28,7 +28,7 @@ export default function PaletteForm({ onSubmitSuccess }: PaletteFormProps) {
   };
 
   return (
-    <form id="paletteForm" onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit}>
       <p>Describe a scene or feeling.</p>
       <input
         aria-invalid={!!error}
