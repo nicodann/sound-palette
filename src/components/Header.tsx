@@ -4,17 +4,15 @@ type HeaderProps = {
   aiResponse: AiResponse;
   onReset: () => void;
   hasSubmitted: boolean;
+  onSave: () => void;
 };
 
 export default function Header({
   aiResponse,
   onReset,
   hasSubmitted,
+  onSave,
 }: HeaderProps) {
-  const handleSave = (aiResponse: AiResponse) => {
-    console.log("AI Response: ", aiResponse);
-  };
-
   return (
     <header>
       {hasSubmitted && (
@@ -25,7 +23,7 @@ export default function Header({
           <button id="reset" onClick={() => onReset()}>
             X
           </button>
-          <button id="save" onClick={() => handleSave(aiResponse)}>
+          <button id="save" onClick={() => onSave()}>
             save palette
           </button>
         </div>

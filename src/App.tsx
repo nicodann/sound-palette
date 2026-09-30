@@ -1,14 +1,16 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./App.css";
 
 import "@fontsource-variable/dm-sans";
 import Header from "./components/Header";
 import type { AiResponse } from "./types";
 import PaletteForm from "./components/PaletteForm";
+import LoginRegisterModal from "./components/LoginRegisterModal";
 
 function App() {
   const [aiResponse, setAiResponse] = useState<AiResponse>([]);
   const [hasSubmitted, setHasSubmitted] = useState(false);
+  const [loginRegisterModalOpen, setLoginRegisterModalOpen] = useState(false);
 
   const onPaletteGenerated = (response: AiResponse) => {
     setAiResponse(response);
@@ -17,7 +19,20 @@ function App() {
 
   const onReset = () => {
     setHasSubmitted(false);
+    setLoginRegisterModalOpen(false);
   };
+
+  const onSave = () => {
+    setLoginRegisterModalOpen(true);
+  };
+
+  const onCloseRegisterLoginModal = () => {
+    setLoginRegisterModalOpen(false);
+  };
+
+  useEffect(() => {
+    console.log("RegisterMOdalOpen?", loginRegisterModalOpen);
+  }, [loginRegisterModalOpen]);
 
   const responseColours = aiResponse?.map((item) => item.colour);
 
@@ -40,6 +55,7 @@ function App() {
       className={`
         archivo-black-regular 
         ${hasSubmitted ? "hasSubmitted" : "beforeSubmitted"}
+        ${loginRegisterModalOpen ? "loginRegisterActive" : "loginRegisterInactive"}
         `}
       style={{ background: buildGradientString(responseColours) }}
     >
@@ -47,9 +63,13 @@ function App() {
         aiResponse={aiResponse}
         onReset={onReset}
         hasSubmitted={hasSubmitted}
+        onSave={onSave}
       />
       <main>
         <PaletteForm onSubmitSuccess={onPaletteGenerated} />
+        <LoginRegisterModal
+          onCloseRegisterLoginModal={onCloseRegisterLoginModal}
+        />
       </main>
     </div>
   );

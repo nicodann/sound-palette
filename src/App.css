@@ -73,7 +73,8 @@ header {
   margin-right: 0px;
 }
 
-button#reset {
+button#reset,
+button#close {
   background: none;
   border: none;
   padding: 0px;
@@ -83,8 +84,14 @@ button#reset {
   padding: 5px 0px 0px 0px;
 }
 
-button#save {
+button#save,
+button#login,
+button#register {
   padding: 0px 12px;
+}
+
+button#save {
+  background-color: bisque;
 }
 
 main {
@@ -118,6 +125,39 @@ form#paletteForm {
   transform: scale(0);
   opacity: 0;
   visibility: hidden;
+}
+
+#loginRegisterModal {
+  background-color: bisque;
+  height: 200px;
+  width: 300px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  transition:
+    transform 1s ease,
+    opacity 1s ease,
+    visibility 1s;
+  transform: scale(0);
+  opacity: 0;
+  visibility: hidden;
+  border-width: 2px;
+  border-style: outset;
+  border-color: buttonborder;
+  border-image: none;
+}
+
+.loginRegisterActive #loginRegisterModal {
+  transform: scale(1);
+  opacity: 1;
+  visibility: visible;
+}
+
+button#close {
+  position: absolute;
+  top: 0px;
+  right: 0px;
 }
 
 input {
