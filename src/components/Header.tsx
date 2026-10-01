@@ -30,7 +30,7 @@ export default function Header({
           </button>
         </div>
       )}
-      {loggedInUser && <p>{loggedInUser}</p>}
+      <div className="navMenu">{loggedInUser && <p>{loggedInUser}</p>}</div>
     </header>
   );
 }

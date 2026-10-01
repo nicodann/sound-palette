@@ -42,6 +42,14 @@ header {
   /* text-align: center; */
 }
 
+header .navMenu {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  font-size: 0.5em;
+  padding: 10px 20px;
+}
+
 #response {
   display: flex;
   justify-content: center;
