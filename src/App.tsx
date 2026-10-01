@@ -9,6 +9,7 @@ import LoginRegisterModal from "./components/LoginRegisterModal";
 import LoginForm from "./components/LoginForm";
 
 function App() {
+  const [loggedInUser, setLoggedInUser] = useState<string>();
   const [aiResponse, setAiResponse] = useState<AiResponse>([]);
   const [hasSubmitted, setHasSubmitted] = useState(false);
   const [loginRegisterModalOpen, setLoginRegisterModalOpen] = useState(false);
@@ -65,13 +66,14 @@ function App() {
         onReset={onReset}
         hasSubmitted={hasSubmitted}
         onSave={onSave}
+        loggedInUser={loggedInUser}
       />
       <main>
         <PaletteForm onSubmitSuccess={onPaletteGenerated} />
         <LoginRegisterModal
           onCloseRegisterLoginModal={onCloseRegisterLoginModal}
         />
-        <LoginForm />
+        <LoginForm setLoggedInUser={setLoggedInUser} />
       </main>
     </div>
   );

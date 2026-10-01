@@ -5,6 +5,7 @@ type HeaderProps = {
   onReset: () => void;
   hasSubmitted: boolean;
   onSave: () => void;
+  loggedInUser?: string;
 };
 
 export default function Header({
@@ -12,6 +13,7 @@ export default function Header({
   onReset,
   hasSubmitted,
   onSave,
+  loggedInUser,
 }: HeaderProps) {
   return (
     <header>
@@ -28,6 +30,7 @@ export default function Header({
           </button>
         </div>
       )}
+      {loggedInUser && <p>{loggedInUser}</p>}
     </header>
   );
 }
