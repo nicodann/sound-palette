@@ -8,11 +8,13 @@ import PaletteForm from "./components/PaletteForm";
 import LoginRegisterModal from "./components/LoginRegisterModal";
 import LoginForm from "./components/LoginForm";
 
+type UiState = "empty" | "paletteForm" | "loginRegister" | "login" | "register";
+
 function App() {
   const [loggedInUser, setLoggedInUser] = useState<string>();
   const [aiResponse, setAiResponse] = useState<AiResponse>([]);
   const [hasSubmitted, setHasSubmitted] = useState(false);
-  const [loginRegisterModalOpen, setLoginRegisterModalOpen] = useState(false);
+  const [uiState, setUiState] = useState<UiState>("paletteForm");
 
   const onPaletteGenerated = (response: AiResponse) => {
     setAiResponse(response);
@@ -21,24 +23,22 @@ function App() {
 
   const onReset = () => {
     setHasSubmitted(false);
-    setLoginRegisterModalOpen(false);
+    setUiState("paletteForm");
+    setAiResponse([]);
   };
 
   const onSave = () => {
-    setLoginRegisterModalOpen(true);
+    setUiState("loginRegister");
   };
 
   const onCloseRegisterLoginModal = () => {
-    setLoginRegisterModalOpen(false);
+    setUiState("paletteForm");
   };
-
-  useEffect(() => {
-    console.log("RegisterMOdalOpen?", loginRegisterModalOpen);
-  }, [loginRegisterModalOpen]);
 
   const responseColours = aiResponse?.map((item) => item.colour);
 
   const buildGradientString = (colours: string[]) => {
+    if (colours.length === 0) return undefined;
     let percentage = 0;
     let backgroundGradientString = "linear-gradient(90deg, ";
 
@@ -51,14 +51,19 @@ function App() {
     return backgroundGradientString;
   };
 
+  useEffect(() => {
+    console.log("uiState: ", uiState);
+  }, [uiState]);
+
   return (
     <div
       id="background"
       className={`
         archivo-black-regular 
         ${hasSubmitted ? "hasSubmitted" : "beforeSubmitted"}
-        ${loginRegisterModalOpen ? "loginRegisterActive" : "loginRegisterInactive"}
+        ${uiState === "loginRegister" ? "loginRegisterActive" : "loginRegisterInactive"}
         `}
+      data-ui={uiState}
       style={{ background: buildGradientString(responseColours) }}
     >
       <Header

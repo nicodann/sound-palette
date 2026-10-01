@@ -136,12 +136,15 @@ form#paletteForm {
     transform 1s ease,
     opacity 1s ease,
     visibility 1s;
-}
-
-.hasSubmitted form#paletteForm {
   transform: scale(0);
   opacity: 0;
   visibility: hidden;
+}
+
+[data-ui="paletteForm"] form#paletteForm {
+  transform: scale(1);
+  opacity: 1;
+  visibility: visible;
 }
 
 #loginRegisterModal {
@@ -165,7 +168,7 @@ form#paletteForm {
   border-image: none;
 }
 
-.loginRegisterActive #loginRegisterModal {
+[data-ui="loginRegister"] #loginRegisterModal {
   transform: scale(1);
   opacity: 1;
   visibility: visible;
@@ -180,6 +183,25 @@ form#registerForm {
   border-image: none;
   padding: 20px;
   margin: 20px;
+  transition:
+    transform 1s ease,
+    opacity 1s ease,
+    visibility 1s;
+  transform: scale(0);
+  opacity: 0;
+  visibility: hidden;
+}
+
+[data-ui="login"] form#loginForm {
+  transform: scale(1);
+  opacity: 1;
+  visibility: visible;
+}
+
+[data-ui="register"] form#registerForm {
+  transform: scale(1);
+  opacity: 1;
+  visibility: visible;
 }
 
 button#close {
