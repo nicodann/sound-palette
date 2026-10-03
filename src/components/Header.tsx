@@ -1,11 +1,13 @@
+import { useAppContext } from "../context/useAppContext";
 import type { AiResponse } from "../types";
+import LoginButton from "./LoginButton";
+import LogoutButton from "./LogoutButton";
 
 type HeaderProps = {
   aiResponse: AiResponse;
   onReset: () => void;
   hasSubmitted: boolean;
   onSave: () => void;
-  loggedInUser?: string;
 };
 
 export default function Header({
@@ -13,8 +15,9 @@ export default function Header({
   onReset,
   hasSubmitted,
   onSave,
-  loggedInUser,
 }: HeaderProps) {
+  const { loggedInUser } = useAppContext();
+
   return (
     <header>
       {hasSubmitted && (
@@ -30,7 +33,10 @@ export default function Header({
           </button>
         </div>
       )}
-      <div className="navMenu">{loggedInUser && <p>{loggedInUser}</p>}</div>
+      <div className="navMenu">
+        {loggedInUser ? <p>{loggedInUser}</p> : <LoginButton />}
+        <LogoutButton />
+      </div>
     </header>
   );
 }

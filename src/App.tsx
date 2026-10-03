@@ -7,14 +7,17 @@ import type { AiResponse } from "./types";
 import PaletteForm from "./components/PaletteForm";
 import LoginRegisterModal from "./components/LoginRegisterModal";
 import LoginForm from "./components/LoginForm";
+import { useAppContext } from "./context/useAppContext";
 
-type UiState = "empty" | "paletteForm" | "loginRegister" | "login" | "register";
+// type UiState = "empty" | "paletteForm" | "loginRegister" | "login" | "register";
 
 function App() {
-  const [loggedInUser, setLoggedInUser] = useState<string>();
+  // const [loggedInUser, setLoggedInUser] = useState<string>();
   const [aiResponse, setAiResponse] = useState<AiResponse>([]);
   const [hasSubmitted, setHasSubmitted] = useState(false);
-  const [uiState, setUiState] = useState<UiState>("paletteForm");
+  // const [uiState, setUiState] = useState<UiState>("paletteForm");
+
+  const { uiState, setUiState } = useAppContext();
 
   const onPaletteGenerated = (response: AiResponse) => {
     setAiResponse(response);
@@ -71,14 +74,13 @@ function App() {
         onReset={onReset}
         hasSubmitted={hasSubmitted}
         onSave={onSave}
-        loggedInUser={loggedInUser}
       />
       <main>
         <PaletteForm onSubmitSuccess={onPaletteGenerated} />
         <LoginRegisterModal
           onCloseRegisterLoginModal={onCloseRegisterLoginModal}
         />
-        <LoginForm setLoggedInUser={setLoggedInUser} />
+        <LoginForm />
       </main>
     </div>
   );

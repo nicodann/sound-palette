@@ -1,10 +1,9 @@
-import { useState, type SetStateAction } from "react";
+import { useState } from "react";
+import { useAppContext } from "../context/useAppContext";
 
-export default function LoginForm({
-  setLoggedInUser,
-}: {
-  setLoggedInUser: React.Dispatch<SetStateAction<string | undefined>>;
-}) {
+export default function LoginForm() {
+  const { setLoggedInUser } = useAppContext();
+
   const [formValues, setFormValues] = useState({
     email: "",
     password: "",
@@ -27,30 +26,38 @@ export default function LoginForm({
         `${import.meta.env.VITE_API_URL}/auth/login`,
         {
           method: "POST",
+          credentials: "include",
+          headers: { "Content-type": "application/json" },
           body: JSON.stringify({
             email: formValues.email,
             password: formValues.password,
           }),
         },
       );
-      const result = await response.json();
-      console.log("result:", result);
-      localStorage.setItem("token", result.token);
-      setLoggedInUser(formValues.email);
+
+      if (!response.ok) {
+        setError({ password: "Invalid email or password." });
+        return;
+      }
+      const user = await response.json();
+
+      setLoggedInUser(user.email);
     } catch (error) {
       console.error("There was a login error:", error);
+      setError({ password: "Something went wrong, please try again." });
     }
-    console.log("form submitted", formValues);
   };
 
   return (
     <form id="loginForm" onSubmit={handleSubmit}>
-      <label>
-        Email
+      <div className="field">
+        <label htmlFor="email">Email</label>
         <input
           id="email"
-          value={formValues.email}
           type="email"
+          aria-invalid={!!error.email}
+          aria-describedby="email-error"
+          value={formValues.email}
           autoComplete="email"
           required
           onChange={(e) => {
@@ -62,17 +69,19 @@ export default function LoginForm({
             });
           }}
         />
-        <p id="error" role="alert">
+        <p className="error" id="email-error" role="alert">
           {error.email}
         </p>
-      </label>
-      <label>
-        Password
+      </div>
+      <div className="field">
+        <label htmlFor="passord">Password</label>
         <input
           id="password"
-          value={formValues.password}
           type="password"
-          autoComplete="password"
+          aria-invalid={!!error.password}
+          aria-describedby="error-password"
+          value={formValues.password}
+          autoComplete="current-password"
           required
           onChange={(e) => {
             setError((prev) => {
@@ -83,10 +92,10 @@ export default function LoginForm({
             });
           }}
         />
-        <p id="error" role="alert">
+        <p className="error" id="password-error" role="alert">
           {error.password}
         </p>
-      </label>
+      </div>
       <button type="submit">Submit</button>
     </form>
   );

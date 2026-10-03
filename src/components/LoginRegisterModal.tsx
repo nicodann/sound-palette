@@ -1,3 +1,5 @@
+import LoginButton from "./LoginButton";
+
 export default function LoginRegisterModal({
   onCloseRegisterLoginModal,
 }: {
@@ -5,7 +7,7 @@ export default function LoginRegisterModal({
 }) {
   return (
     <div id="loginRegisterModal">
-      <button id="login">Login</button>
+      <LoginButton />
       <button id="register">Register</button>
       <button id="close" onClick={() => onCloseRegisterLoginModal()}>
         X

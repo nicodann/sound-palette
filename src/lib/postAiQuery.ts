@@ -4,6 +4,7 @@ export async function postAiQuery({ query }: { query: string }) {
   try {
     const response = await fetch(`${url}/ai-query`, {
       method: "POST",
+      credentials: "include",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ input: query }),
     });
