@@ -1,11 +1,10 @@
 export type User = {
-  id: number;
+  id: string;
   email: string;
-  password: string;
 };
 
 export type SavedPalette = {
-  id: number;
+  id: string;
   prompt: string;
   colours: string[];
   adjectives: string[];

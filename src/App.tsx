@@ -1,24 +1,18 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import "./App.css";
 
 import "@fontsource-variable/dm-sans";
 import Header from "./components/Header";
-import type { AiResponse } from "./types";
 import PaletteForm from "./components/PaletteForm";
 import LoginRegisterModal from "./components/LoginRegisterModal";
 import LoginForm from "./components/LoginForm";
 import { useAppContext } from "./context/useAppContext";
 
 function App() {
-  const [aiResponse, setAiResponse] = useState<AiResponse>([]);
+  // const [aiResponse, setAiResponse] = useState<AiResponse>([]);
 
+  const { uiState, setUiState, aiResponse, setAiResponse } = useAppContext();
   const hasSubmitted = aiResponse.length > 0;
-
-  const { uiState, setUiState } = useAppContext();
-
-  const onPaletteGenerated = (response: AiResponse) => {
-    setAiResponse(response);
-  };
 
   const onReset = () => {
     setAiResponse([]);
@@ -67,7 +61,7 @@ function App() {
         onSave={onSave}
       />
       <main>
-        <PaletteForm onSubmitSuccess={onPaletteGenerated} />
+        <PaletteForm />
         <LoginRegisterModal />
         <LoginForm />
       </main>

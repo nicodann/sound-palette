@@ -1,19 +1,18 @@
 import { useState } from "react";
-import type { AiResponse } from "../types";
 import { postAiQuery } from "../lib/postAiQuery";
-
-type PaletteFormProps = {
-  onSubmitSuccess: (response: AiResponse) => void;
-};
+import { useAppContext } from "../context/useAppContext";
 
 type FormValues = {
   prompt: string;
 };
 
-export default function PaletteForm({ onSubmitSuccess }: PaletteFormProps) {
+export default function PaletteForm() {
   const [formValues, setFormValues] = useState<FormValues>({ prompt: "" });
+  const [isLoading, setIsLoading] = useState(false);
 
   const [error, setError] = useState<string>();
+
+  const { setAiResponse } = useAppContext();
 
   const handleSubmit = async (e: React.SubmitEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -22,9 +21,15 @@ export default function PaletteForm({ onSubmitSuccess }: PaletteFormProps) {
       return;
     }
     setError("");
+    try {
+      setIsLoading(true);
+      const response = await postAiQuery({ query: formValues.prompt });
+      setAiResponse(response);
+      setIsLoading(false);
+    } catch {
+      setError("Couldn't generate a palette, please try again.");
+    }
     console.log("form submitted", formValues);
-    const response = await postAiQuery({ query: formValues.prompt });
-    onSubmitSuccess(response);
   };
 
   return (
@@ -44,10 +49,12 @@ export default function PaletteForm({ onSubmitSuccess }: PaletteFormProps) {
           });
         }}
       />
-      <p id="error" hidden={!error} role="alert">
+      <p id="prompt-error" className="error" hidden={!error} role="alert">
         {error}
       </p>
-      <button type="submit">Submit</button>
+      <button type="submit" disabled={isLoading}>
+        {isLoading ? "Colouring..." : "Submit"}
+      </button>
     </form>
   );
 }

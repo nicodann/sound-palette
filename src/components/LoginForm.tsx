@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useAppContext } from "../context/useAppContext";
+import CloseButton from "./CloseButton";
 
 export default function LoginForm() {
   const { setLoggedInUser, setUiState } = useAppContext();
@@ -112,6 +113,7 @@ export default function LoginForm() {
         </p>
       </div>
       <button type="submit">Submit</button>
+      <CloseButton />
     </form>
   );
 }
