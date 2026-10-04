@@ -143,7 +143,7 @@ form#paletteForm {
   visibility: hidden;
 }
 
-[data-ui="paletteForm"] form#paletteForm {
+[data-ui="empty"][data-palette="visible"] form#paletteForm {
   transform: scale(1);
   opacity: 1;
   visibility: visible;

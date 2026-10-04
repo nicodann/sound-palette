@@ -9,33 +9,23 @@ import LoginRegisterModal from "./components/LoginRegisterModal";
 import LoginForm from "./components/LoginForm";
 import { useAppContext } from "./context/useAppContext";
 
-// type UiState = "empty" | "paletteForm" | "loginRegister" | "login" | "register";
-
 function App() {
-  // const [loggedInUser, setLoggedInUser] = useState<string>();
   const [aiResponse, setAiResponse] = useState<AiResponse>([]);
-  const [hasSubmitted, setHasSubmitted] = useState(false);
-  // const [uiState, setUiState] = useState<UiState>("paletteForm");
+
+  const hasSubmitted = aiResponse.length > 0;
 
   const { uiState, setUiState } = useAppContext();
 
   const onPaletteGenerated = (response: AiResponse) => {
     setAiResponse(response);
-    setHasSubmitted(true);
   };
 
   const onReset = () => {
-    setHasSubmitted(false);
-    setUiState("paletteForm");
     setAiResponse([]);
   };
 
   const onSave = () => {
     setUiState("loginRegister");
-  };
-
-  const onCloseRegisterLoginModal = () => {
-    setUiState("paletteForm");
   };
 
   const responseColours = aiResponse?.map((item) => item.colour);
@@ -67,6 +57,7 @@ function App() {
         ${uiState === "loginRegister" ? "loginRegisterActive" : "loginRegisterInactive"}
         `}
       data-ui={uiState}
+      data-palette={hasSubmitted ? "hidden" : "visible"}
       style={{ background: buildGradientString(responseColours) }}
     >
       <Header
@@ -77,9 +68,7 @@ function App() {
       />
       <main>
         <PaletteForm onSubmitSuccess={onPaletteGenerated} />
-        <LoginRegisterModal
-          onCloseRegisterLoginModal={onCloseRegisterLoginModal}
-        />
+        <LoginRegisterModal />
         <LoginForm />
       </main>
     </div>

@@ -1,4 +1,8 @@
+import { useAppContext } from "../context/useAppContext";
+
 export default function LogoutButton() {
+  const { setLoggedInUser } = useAppContext();
+
   const handleLogoutClick = async () => {
     try {
       const response = await fetch(
@@ -14,6 +18,7 @@ export default function LogoutButton() {
         console.log("Failed to logout");
         return;
       }
+      setLoggedInUser(undefined);
     } catch (error) {
       console.error("There was a logout error:", error);
     }

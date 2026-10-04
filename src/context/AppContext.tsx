@@ -1,11 +1,6 @@
 import { createContext } from "react";
 
-export type UiState =
-  | "empty"
-  | "paletteForm"
-  | "loginRegister"
-  | "login"
-  | "register";
+export type UiState = "empty" | "loginRegister" | "login" | "register";
 
 type AppContextValue = {
   uiState: UiState;

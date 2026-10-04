@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useAppContext } from "../context/useAppContext";
 
 export default function LoginForm() {
-  const { setLoggedInUser } = useAppContext();
+  const { setLoggedInUser, setUiState } = useAppContext();
 
   const [formValues, setFormValues] = useState({
     email: "",
@@ -12,6 +12,7 @@ export default function LoginForm() {
   const [error, setError] = useState<{ email?: string; password?: string }>({});
 
   const handleSubmit = async (e: React.SubmitEvent<HTMLFormElement>) => {
+    console.log("submit fired");
     e.preventDefault();
 
     if (!formValues.email.trim()) {
@@ -42,6 +43,7 @@ export default function LoginForm() {
       const user = await response.json();
 
       setLoggedInUser(user.email);
+      setUiState("empty");
     } catch (error) {
       console.error("There was a login error:", error);
       setError({ password: "Something went wrong, please try again." });
@@ -69,17 +71,25 @@ export default function LoginForm() {
             });
           }}
         />
-        <p className="error" id="email-error" role="alert">
+        <p
+          className="error"
+          id="email-error"
+          role="alert"
+          hidden={!error.email}
+        >
           {error.email}
         </p>
       </div>
       <div className="field">
-        <label htmlFor="passord">Password</label>
+        <label htmlFor="password">Password</label>
         <input
+          onKeyDown={(e) =>
+            console.log("key:", e.key, "prevented:", e.defaultPrevented)
+          }
           id="password"
           type="password"
           aria-invalid={!!error.password}
-          aria-describedby="error-password"
+          aria-describedby="password-error"
           value={formValues.password}
           autoComplete="current-password"
           required
@@ -92,7 +102,12 @@ export default function LoginForm() {
             });
           }}
         />
-        <p className="error" id="password-error" role="alert">
+        <p
+          className="error"
+          id="password-error"
+          role="alert"
+          hidden={!error.password}
+        >
           {error.password}
         </p>
       </div>
