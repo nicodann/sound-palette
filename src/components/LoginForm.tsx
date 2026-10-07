@@ -1,28 +1,42 @@
 import { useState } from "react";
 import { useAppContext } from "../context/useAppContext";
 import CloseButton from "./CloseButton";
+import type { FormErrors, LoginValues } from "../types";
 
 export default function LoginForm() {
   const { setLoggedInUser, setUiState } = useAppContext();
 
-  const [formValues, setFormValues] = useState({
+  const [formValues, setFormValues] = useState<LoginValues>({
     email: "",
     password: "",
   });
 
-  const [error, setError] = useState<{ email?: string; password?: string }>({});
+  const [error, setError] = useState<FormErrors<LoginValues>>({});
 
   const handleSubmit = async (e: React.SubmitEvent<HTMLFormElement>) => {
-    console.log("submit fired");
     e.preventDefault();
 
-    if (!formValues.email.trim()) {
-      setError((prev) => {
-        return { ...prev, email: "Please enter some text." };
-      });
+    const newErrors: FormErrors<LoginValues> = {};
+
+    const email = formValues.email.trim();
+
+    if (!email) {
+      newErrors.email = "Please enter your e-mail";
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      newErrors.email = "Please enter a valid e-mail";
+    }
+
+    if (!formValues.password) {
+      newErrors.password = "Please enter your password";
+    }
+
+    if (newErrors.email || newErrors.password) {
+      setError(newErrors);
       return;
     }
+
     setError({});
+
     try {
       const response = await fetch(
         `${import.meta.env.VITE_API_URL}/auth/login`,
@@ -31,7 +45,7 @@ export default function LoginForm() {
           credentials: "include",
           headers: { "Content-type": "application/json" },
           body: JSON.stringify({
-            email: formValues.email,
+            email: email,
             password: formValues.password,
           }),
         },
@@ -52,7 +66,7 @@ export default function LoginForm() {
   };
 
   return (
-    <form id="loginForm" onSubmit={handleSubmit}>
+    <form id="loginForm" onSubmit={handleSubmit} noValidate>
       <div className="field">
         <label htmlFor="email">Email</label>
         <input
@@ -62,7 +76,6 @@ export default function LoginForm() {
           aria-describedby="email-error"
           value={formValues.email}
           autoComplete="email"
-          required
           onChange={(e) => {
             setError((prev) => {
               return { ...prev, email: "" };
@@ -93,7 +106,6 @@ export default function LoginForm() {
           aria-describedby="password-error"
           value={formValues.password}
           autoComplete="current-password"
-          required
           onChange={(e) => {
             setError((prev) => {
               return { ...prev, password: "" };

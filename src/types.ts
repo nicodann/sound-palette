@@ -15,3 +15,14 @@ export type AiResponse = {
   adjective: string;
   colour: string;
 }[];
+
+export type FormErrors<T> = Partial<Record<keyof T, string>>;
+
+export type LoginValues = {
+  email: string;
+  password: string;
+};
+
+export type RegisterValues = LoginValues & {
+  confirmPassword: string;
+};

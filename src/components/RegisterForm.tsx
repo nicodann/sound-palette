@@ -1,53 +1,178 @@
-import { useState } from "react";
-import type { AiResponse } from "../types";
-import { postAiQuery } from "../lib/postAiQuery";
+import { useId, useState } from "react";
+import type { FormErrors, RegisterValues } from "../types";
 
-type PaletteFormProps = {
-  onSubmitSuccess: (response: AiResponse) => void;
-};
+import { useAppContext } from "../context/useAppContext";
+import CloseButton from "./CloseButton";
 
-type FormValues = {
-  prompt: string;
-};
+export default function RegisterForm() {
+  const { setLoggedInUser, setUiState } = useAppContext();
 
-export default function PaletteForm({ onSubmitSuccess }: PaletteFormProps) {
-  const [formValues, setFormValues] = useState<FormValues>({ prompt: "" });
+  const [formValues, setFormValues] = useState<RegisterValues>({
+    email: "",
+    password: "",
+    confirmPassword: "",
+  });
 
-  const [error, setError] = useState<string>();
+  const [error, setError] = useState<FormErrors<RegisterValues>>({});
+
+  const idEmail = useId();
+  const idPassword = useId();
+  const idConfirmPassword = useId();
 
   const handleSubmit = async (e: React.SubmitEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (!formValues.prompt.trim()) {
-      setError("Please enter some text.");
+
+    const newErrors: FormErrors<RegisterValues> = {};
+
+    const email = formValues.email.trim();
+
+    if (!email) {
+      newErrors.email = "Please enter your e-mail";
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      newErrors.email = "Please enter a valid e-mail";
+    }
+
+    if (!formValues.password) {
+      newErrors.password = "Please enter your password";
+    }
+
+    if (!formValues.confirmPassword) {
+      newErrors.confirmPassword = "Please confirm your password";
+    } else if (formValues.password !== formValues.confirmPassword) {
+      newErrors.confirmPassword = "The passwords do not match";
+    }
+
+    if (newErrors.email || newErrors.password || newErrors.confirmPassword) {
+      setError(newErrors);
       return;
     }
-    setError("");
+
+    setError({});
     console.log("form submitted", formValues);
-    const response = await postAiQuery({ query: formValues.prompt });
-    onSubmitSuccess(response);
+
+    try {
+      const response = await fetch(
+        `${import.meta.env.VITE_API_URL}/auth/register`,
+        {
+          method: "POST",
+          credentials: "include",
+          headers: { "Content-type": "application/json" },
+          body: JSON.stringify({
+            email: email,
+            password: formValues.password,
+          }),
+        },
+      );
+
+      if (response.status === 409) {
+        setError({ email: "An account with this email already exists." });
+        return;
+      }
+      if (!response.ok) {
+        setError({ password: "Registration server error, please try again." });
+        return;
+      }
+      const user = await response.json();
+
+      setLoggedInUser(user.email);
+      setUiState("empty");
+    } catch (error) {
+      console.error("Error in registration submit", error);
+      setError({ confirmPassword: "Something went wrong, please try again." });
+    }
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <p>Describe a scene or feeling.</p>
-      <input
-        aria-invalid={!!error}
-        aria-describedby="prompt-error"
-        id="prompt"
-        type="text"
-        value={formValues.prompt}
-        placeholder="A misty lake full of poison fishies..."
-        onChange={(e) => {
-          setError("");
-          setFormValues((prev) => {
-            return { ...prev, prompt: e.target.value };
-          });
-        }}
-      />
-      <p id="error" hidden={!error} role="alert">
-        {error}
-      </p>
+    <form id="registerForm" onSubmit={handleSubmit} noValidate>
+      <div className="field">
+        <label htmlFor={idEmail}>Email</label>
+        <input
+          id={`${idEmail}`}
+          type="email"
+          aria-invalid={!!error.email}
+          aria-describedby={`${idEmail}-error`}
+          value={formValues.email}
+          autoComplete="email"
+          onChange={(e) => {
+            setError((prev) => {
+              return { ...prev, email: "" };
+            });
+            setFormValues((prev) => {
+              return { ...prev, email: e.target.value };
+            });
+          }}
+        />
+        <p
+          className="error"
+          id={`${idEmail}-error`}
+          role="alert"
+          hidden={!error.email}
+        >
+          {error.email}
+        </p>
+      </div>
+      <div className="field">
+        <label htmlFor={idPassword}>Password</label>
+        <input
+          onKeyDown={(e) =>
+            console.log("key:", e.key, "prevented:", e.defaultPrevented)
+          }
+          id={idPassword}
+          type="password"
+          aria-invalid={!!error.password}
+          aria-describedby={`${idPassword}-error`}
+          value={formValues.password}
+          autoComplete="new-password"
+          onChange={(e) => {
+            setError((prev) => {
+              return { ...prev, password: "" };
+            });
+            setFormValues((prev) => {
+              return { ...prev, password: e.target.value };
+            });
+          }}
+        />
+        <p
+          className="error"
+          id={`${idPassword}-error`}
+          role="alert"
+          hidden={!error.password}
+        >
+          {error.password}
+        </p>
+      </div>
+      <div className="field">
+        <label htmlFor={idConfirmPassword}>Confirm Password</label>
+        <input
+          onKeyDown={(e) =>
+            console.log("key:", e.key, "prevented:", e.defaultPrevented)
+          }
+          id={idConfirmPassword}
+          type="password"
+          aria-invalid={!!error.confirmPassword}
+          aria-describedby={`${idConfirmPassword}-error`}
+          value={formValues.confirmPassword}
+          autoComplete="new-password"
+          onChange={(e) => {
+            setError((prev) => {
+              return { ...prev, confirmPassword: "" };
+            });
+            setFormValues((prev) => {
+              return { ...prev, confirmPassword: e.target.value };
+            });
+          }}
+        />
+        <p
+          className="error"
+          id={`${idConfirmPassword}-error`}
+          role="alert"
+          hidden={!error.confirmPassword}
+        >
+          {error.confirmPassword}
+        </p>
+      </div>
       <button type="submit">Submit</button>
+      <CloseButton />
     </form>
   );
 }
