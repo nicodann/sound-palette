@@ -1,6 +1,6 @@
 import { useAppContext } from "../context/useAppContext";
 
-export default function Register() {
+export default function RegisterButton() {
   const { setUiState, loggedInUser } = useAppContext();
   const handleLoginClick = () => {
     setUiState("register");
