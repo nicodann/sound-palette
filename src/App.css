@@ -77,7 +77,7 @@ header .navMenu {
   }
 }
 
-.hasSubmitted #response > * {
+[data-palette="hidden"] #response > * {
   margin-right: 0px;
 }
 
@@ -110,9 +110,6 @@ main {
 main > * {
   grid-area: 1 / 1;
 }
-
-/* .hasSubmitted main {
-} */
 
 form {
   display: flex;

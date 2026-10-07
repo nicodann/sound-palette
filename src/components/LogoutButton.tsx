@@ -1,7 +1,7 @@
 import { useAppContext } from "../context/useAppContext";
 
 export default function LogoutButton() {
-  const { setLoggedInUser } = useAppContext();
+  const { setLoggedInUser, loggedInUser } = useAppContext();
 
   const handleLogoutClick = async () => {
     try {
@@ -24,7 +24,7 @@ export default function LogoutButton() {
     }
   };
   return (
-    <button id="login" onClick={handleLogoutClick}>
+    <button id="login" onClick={handleLogoutClick} hidden={!loggedInUser}>
       Logout
     </button>
   );

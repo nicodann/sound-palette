@@ -47,8 +47,6 @@ function App() {
       id="background"
       className={`
         archivo-black-regular 
-        ${hasSubmitted ? "hasSubmitted" : "beforeSubmitted"}
-        ${uiState === "loginRegister" ? "loginRegisterActive" : "loginRegisterInactive"}
         `}
       data-ui={uiState}
       data-palette={hasSubmitted ? "hidden" : "visible"}
