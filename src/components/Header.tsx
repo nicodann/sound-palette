@@ -2,6 +2,7 @@ import { useAppContext } from "../context/useAppContext";
 import type { AiResponse } from "../types";
 import LoginButton from "./LoginButton";
 import LogoutButton from "./LogoutButton";
+import RegisterButton from "./RegisterButton";
 
 type HeaderProps = {
   aiResponse: AiResponse;
@@ -35,6 +36,7 @@ export default function Header({
       )}
       <div className="navMenu">
         {loggedInUser ? <p>{loggedInUser}</p> : <LoginButton />}
+        <RegisterButton />
         <LogoutButton />
       </div>
     </header>

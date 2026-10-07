@@ -6,8 +6,12 @@ export default function RegisterButton() {
     setUiState("register");
   };
   return (
-    <button id="login" onClick={handleLoginClick} hidden={!loggedInUser}>
-      Login
+    <button
+      id="register"
+      onClick={handleLoginClick}
+      hidden={loggedInUser ? true : false}
+    >
+      Register
     </button>
   );
 }

@@ -46,6 +46,8 @@ header .navMenu {
   position: absolute;
   top: 0px;
   right: 0px;
+  display: flex;
+  gap: 8px;
   font-size: 0.5em;
   padding: 10px 20px;
 }
