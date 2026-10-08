@@ -1,8 +1,4 @@
-import { useAppContext } from "../context/useAppContext";
 import type { AiResponse } from "../types";
-import LoginButton from "./LoginButton";
-import LogoutButton from "./LogoutButton";
-import RegisterButton from "./RegisterButton";
 
 type HeaderProps = {
   aiResponse: AiResponse;
@@ -17,8 +13,6 @@ export default function Header({
   hasSubmitted,
   onSave,
 }: HeaderProps) {
-  const { loggedInUser } = useAppContext();
-
   return (
     <header>
       {hasSubmitted && (
@@ -34,11 +28,6 @@ export default function Header({
           </button>
         </div>
       )}
-      <div className="navMenu">
-        {loggedInUser ? <p>{loggedInUser}</p> : <LoginButton />}
-        <RegisterButton />
-        <LogoutButton />
-      </div>
     </header>
   );
 }

@@ -8,6 +8,7 @@ import LoginRegisterModal from "./components/LoginRegisterModal";
 import LoginForm from "./components/LoginForm";
 import { useAppContext } from "./context/useAppContext";
 import RegisterForm from "./components/RegisterForm";
+import NavMenu from "./components/NavMenu";
 
 function App() {
   // const [aiResponse, setAiResponse] = useState<AiResponse>([]);
@@ -65,6 +66,7 @@ function App() {
         <LoginForm />
         <RegisterForm />
       </main>
+      <NavMenu />
     </div>
   );
 }

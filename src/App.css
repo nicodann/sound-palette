@@ -35,14 +35,14 @@ header {
   justify-content: center;
   top: 0;
   left: 0;
-  width: 100vw;
+  /* width: 100vw; */
   font-size: 1.2em;
   padding: 10px;
-  /* background-color: bisque; */
+  background-color: bisque;
   /* text-align: center; */
 }
 
-header .navMenu {
+.navMenu {
   position: absolute;
   top: 0px;
   right: 0px;
@@ -55,11 +55,12 @@ header .navMenu {
 
 #response {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   gap: 20px;
   flex-wrap: wrap;
-  width: 90vw;
+  /* width: 90vw; */
 }
 
 #response > * {
