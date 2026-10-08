@@ -1,6 +1,7 @@
 import { useState } from "react";
-import { postAiQuery } from "../lib/postAiQuery";
+
 import { useAppContext } from "../context/useAppContext";
+import { postAiQuery } from "../api/ai";
 
 type FormValues = {
   prompt: string;

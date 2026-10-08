@@ -12,6 +12,7 @@ export async function apiFetch<T>(
   options: RequestInit = {},
 ): Promise<T> {
   const response = await fetch(`${import.meta.env.VITE_API_URL}${path}`, {
+    credentials: "include",
     headers: { "Content-type": "application/json" },
     ...options,
   });
