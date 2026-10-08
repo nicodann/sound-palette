@@ -34,6 +34,8 @@ export default function RegisterForm() {
 
     if (!formValues.password) {
       newErrors.password = "Please enter your password";
+    } else if (formValues.password.length < 8) {
+      newErrors.password = "Password must be at least 8 characters";
     }
 
     if (!formValues.confirmPassword) {
@@ -120,7 +122,7 @@ export default function RegisterForm() {
           id={idPassword}
           type="password"
           aria-invalid={!!error.password}
-          aria-describedby={`${idPassword}-error`}
+          aria-describedby={`${idPassword}-hint ${idPassword}-error`}
           value={formValues.password}
           autoComplete="new-password"
           onChange={(e) => {
@@ -132,6 +134,9 @@ export default function RegisterForm() {
             });
           }}
         />
+        <p id={`${idPassword}-hint`} className="field-hint">
+          At least 8 characters.
+        </p>
         <p
           className="error"
           id={`${idPassword}-error`}

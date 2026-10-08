@@ -7,6 +7,7 @@ import PaletteForm from "./components/PaletteForm";
 import LoginRegisterModal from "./components/LoginRegisterModal";
 import LoginForm from "./components/LoginForm";
 import { useAppContext } from "./context/useAppContext";
+import RegisterForm from "./components/RegisterForm";
 
 function App() {
   // const [aiResponse, setAiResponse] = useState<AiResponse>([]);
@@ -62,6 +63,7 @@ function App() {
         <PaletteForm />
         <LoginRegisterModal />
         <LoginForm />
+        <RegisterForm />
       </main>
     </div>
   );
