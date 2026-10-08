@@ -5,11 +5,13 @@ export type User = {
 
 export type SavedPalette = {
   id: string;
+  name: string;
   prompt: string;
-  colours: string[];
-  adjectives: string[];
-  createAt: string;
+  palette: AiResponse;
+  created_at: string;
 };
+
+export type NewPalette = Omit<SavedPalette, "id" | "created_at">;
 
 export type AiResponse = {
   adjective: string;
