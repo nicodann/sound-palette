@@ -56,11 +56,11 @@ header {
 #response {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
-  gap: 20px;
-  flex-wrap: wrap;
   /* width: 90vw; */
+  height: 100vh;
+  padding: 40px 0px;
 }
 
 #response > * {
@@ -85,24 +85,15 @@ header {
   margin-right: 0px;
 }
 
-button#reset,
-button#close {
-  background: none;
-  border: none;
-  padding: 0px;
-  margin: 0px;
-  font-size: 0.5em;
-  width: 50px;
-  padding: 5px 0px 0px 0px;
-}
-
 button#save,
 button#login,
-button#register {
+button#register,
+button#reset {
   padding: 0px 12px;
 }
 
-button#save {
+button#save,
+button#reset {
   background-color: bisque;
 }
 
@@ -235,7 +226,7 @@ button[type="submit"] {
     font-size: 30px;
   }
   #response {
-    gap: 50px;
+    /* gap: 50px; */
   }
   form {
     padding: 8px 20px;
@@ -252,6 +243,6 @@ button[type="submit"] {
     min-width: 600px;
   }
   #response {
-    gap: 100px;
+    /* gap: 50px; */
   }
 }

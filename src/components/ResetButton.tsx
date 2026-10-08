@@ -1,10 +1,10 @@
 import { useAppContext } from "../context/useAppContext";
 
 export default function ResetButton() {
-  const { setUiState } = useAppContext();
+  const { setAiResponse } = useAppContext();
 
   return (
-    <button id="close" onClick={() => setUiState("empty")}>
+    <button id="reset" onClick={() => setAiResponse([])}>
       Reset Palette
     </button>
   );
