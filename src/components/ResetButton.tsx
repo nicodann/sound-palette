@@ -1,7 +1,7 @@
 import { useAppContext } from "../context/useAppContext";
 
 export default function ResetButton() {
-  const { setAiResponse, setSubmittedPrompt } = useAppContext();
+  const { setAiResponse, setSubmittedPrompt, setPendingSave } = useAppContext();
 
   return (
     <button
@@ -9,6 +9,7 @@ export default function ResetButton() {
       onClick={() => {
         setAiResponse([]);
         setSubmittedPrompt("");
+        setPendingSave(false);
       }}
     >
       Reset Palette
