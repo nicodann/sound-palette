@@ -1,12 +1,13 @@
 import { useAppContext } from "../context/useAppContext";
 import ResetButton from "./ResetButton";
+import SavePaletteButton from "./SavePaletteButton";
 
 type PaletteResultProps = {
   hasSubmitted: boolean;
 };
 
 export default function PaletteResult({ hasSubmitted }: PaletteResultProps) {
-  const { setUiState, aiResponse } = useAppContext();
+  const { aiResponse } = useAppContext();
   return (
     <header>
       {hasSubmitted && (
@@ -15,9 +16,7 @@ export default function PaletteResult({ hasSubmitted }: PaletteResultProps) {
             return <p key={i}>{element.adjective}</p>;
           })}
           <ResetButton />
-          <button id="save" onClick={() => setUiState("loginRegister")}>
-            save palette
-          </button>
+          <SavePaletteButton />
         </div>
       )}
     </header>

@@ -20,3 +20,9 @@ export function register({ email, password }: LoginValues) {
     }),
   });
 }
+
+export const getCurrentUser = () => apiFetch<User>("/auth/me");
+
+export const logout = () => {
+  return apiFetch<void>("auth/logout");
+};
