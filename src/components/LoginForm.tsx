@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useAppContext } from "../context/useAppContext";
-import CloseButton from "./CloseButton";
+import ResetButton from "./ResetButton";
 import type { FormErrors, LoginValues } from "../types";
 
 export default function LoginForm() {
@@ -125,7 +125,7 @@ export default function LoginForm() {
         </p>
       </div>
       <button type="submit">Submit</button>
-      <CloseButton />
+      <ResetButton />
     </form>
   );
 }

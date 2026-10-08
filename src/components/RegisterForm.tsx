@@ -2,7 +2,7 @@ import { useId, useState } from "react";
 import type { FormErrors, RegisterValues } from "../types";
 
 import { useAppContext } from "../context/useAppContext";
-import CloseButton from "./CloseButton";
+import ResetButton from "./ResetButton";
 
 export default function RegisterForm() {
   const { setLoggedInUser, setUiState } = useAppContext();
@@ -177,7 +177,7 @@ export default function RegisterForm() {
         </p>
       </div>
       <button type="submit">Submit</button>
-      <CloseButton />
+      <ResetButton />
     </form>
   );
 }

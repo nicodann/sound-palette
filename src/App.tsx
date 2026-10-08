@@ -8,21 +8,11 @@ import LoginForm from "./components/LoginForm";
 import { useAppContext } from "./context/useAppContext";
 import RegisterForm from "./components/RegisterForm";
 import NavMenu from "./components/NavMenu";
-import PaletteResult from "./components/Header";
+import PaletteResult from "./components/PaletteResult";
 
 function App() {
-  // const [aiResponse, setAiResponse] = useState<AiResponse>([]);
-
-  const { uiState, setUiState, aiResponse, setAiResponse } = useAppContext();
+  const { uiState, aiResponse } = useAppContext();
   const hasSubmitted = aiResponse.length > 0;
-
-  const onReset = () => {
-    setAiResponse([]);
-  };
-
-  const onSave = () => {
-    setUiState("loginRegister");
-  };
 
   const responseColours = aiResponse?.map((item) => item.colour);
 
@@ -54,18 +44,15 @@ function App() {
       data-palette={hasSubmitted ? "hidden" : "visible"}
       style={{ background: buildGradientString(responseColours) }}
     >
-      <PaletteResult
-        aiResponse={aiResponse}
-        onReset={onReset}
-        hasSubmitted={hasSubmitted}
-        onSave={onSave}
-      />
+      <PaletteResult hasSubmitted={hasSubmitted} />
+
       <main>
         <PaletteForm />
         <LoginRegisterModal />
         <LoginForm />
         <RegisterForm />
       </main>
+
       <NavMenu />
     </div>
   );

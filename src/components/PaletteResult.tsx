@@ -1,18 +1,12 @@
-import type { AiResponse } from "../types";
+import { useAppContext } from "../context/useAppContext";
+import ResetButton from "./ResetButton";
 
 type PaletteResultProps = {
-  aiResponse: AiResponse;
-  onReset: () => void;
   hasSubmitted: boolean;
-  onSave: () => void;
 };
 
-export default function PaletteResult({
-  aiResponse,
-  onReset,
-  hasSubmitted,
-  onSave,
-}: PaletteResultProps) {
+export default function PaletteResult({ hasSubmitted }: PaletteResultProps) {
+  const { setUiState, aiResponse } = useAppContext();
   return (
     <header>
       {hasSubmitted && (
@@ -20,10 +14,8 @@ export default function PaletteResult({
           {aiResponse.map((element, i) => {
             return <p key={i}>{element.adjective}</p>;
           })}
-          <button id="reset" onClick={() => onReset()}>
-            X
-          </button>
-          <button id="save" onClick={() => onSave()}>
+          <ResetButton />
+          <button id="save" onClick={() => setUiState("loginRegister")}>
             save palette
           </button>
         </div>

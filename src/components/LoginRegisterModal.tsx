@@ -1,4 +1,4 @@
-import CloseButton from "./CloseButton";
+import ResetButton from "./ResetButton";
 import LoginButton from "./LoginButton";
 import RegisterButton from "./RegisterButton";
 
@@ -7,7 +7,7 @@ export default function LoginRegisterModal() {
     <div id="loginRegisterModal">
       <LoginButton />
       <RegisterButton />
-      <CloseButton />
+      <ResetButton />
     </div>
   );
 }
