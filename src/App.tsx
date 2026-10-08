@@ -2,13 +2,13 @@ import { useEffect } from "react";
 import "./App.css";
 
 import "@fontsource-variable/dm-sans";
-import Header from "./components/Header";
 import PaletteForm from "./components/PaletteForm";
 import LoginRegisterModal from "./components/LoginRegisterModal";
 import LoginForm from "./components/LoginForm";
 import { useAppContext } from "./context/useAppContext";
 import RegisterForm from "./components/RegisterForm";
 import NavMenu from "./components/NavMenu";
+import PaletteResult from "./components/Header";
 
 function App() {
   // const [aiResponse, setAiResponse] = useState<AiResponse>([]);
@@ -54,7 +54,7 @@ function App() {
       data-palette={hasSubmitted ? "hidden" : "visible"}
       style={{ background: buildGradientString(responseColours) }}
     >
-      <Header
+      <PaletteResult
         aiResponse={aiResponse}
         onReset={onReset}
         hasSubmitted={hasSubmitted}

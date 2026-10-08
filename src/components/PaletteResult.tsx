@@ -1,18 +1,18 @@
 import type { AiResponse } from "../types";
 
-type HeaderProps = {
+type PaletteResultProps = {
   aiResponse: AiResponse;
   onReset: () => void;
   hasSubmitted: boolean;
   onSave: () => void;
 };
 
-export default function Header({
+export default function PaletteResult({
   aiResponse,
   onReset,
   hasSubmitted,
   onSave,
-}: HeaderProps) {
+}: PaletteResultProps) {
   return (
     <header>
       {hasSubmitted && (
