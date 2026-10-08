@@ -3,6 +3,8 @@ import type { FormErrors, RegisterValues } from "../types";
 
 import { useAppContext } from "../context/useAppContext";
 import CloseButton from "./CloseButton";
+import { register } from "../api/auth";
+import { ApiError } from "../api/client";
 
 export default function RegisterForm() {
   const { setLoggedInUser, setUiState } = useAppContext();
@@ -53,34 +55,43 @@ export default function RegisterForm() {
     console.log("form submitted", formValues);
 
     try {
-      const response = await fetch(
-        `${import.meta.env.VITE_API_URL}/auth/register`,
-        {
-          method: "POST",
-          credentials: "include",
-          headers: { "Content-type": "application/json" },
-          body: JSON.stringify({
-            email: email,
-            password: formValues.password,
-          }),
-        },
-      );
+      const user = await register({ email, password: formValues.password });
+      // const response = await fetch(
+      //   `${import.meta.env.VITE_API_URL}/auth/register`,
+      //   {
+      //     method: "POST",
+      //     credentials: "include",
+      //     headers: { "Content-type": "application/json" },
+      //     body: JSON.stringify({
+      //       email: email,
+      //       password: formValues.password,
+      //     }),
+      //   },
+      // );
 
-      if (response.status === 409) {
-        setError({ email: "An account with this email already exists." });
-        return;
-      }
-      if (!response.ok) {
-        setError({ password: "Registration server error, please try again." });
-        return;
-      }
-      const user = await response.json();
+      // if (response.status === 409) {
+      //   setError({ email: "An account with this email already exists." });
+      //   return;
+      // }
+      // if (!response.ok) {
+      //   setError({ password: "Registration server error, please try again." });
+      //   return;
+      // }
+      // const user = await response.json();
 
       setLoggedInUser(user.email);
       setUiState("empty");
     } catch (error) {
-      console.error("Error in registration submit", error);
-      setError({ confirmPassword: "Something went wrong, please try again." });
+      if (error instanceof ApiError && error.status === 409) {
+        setError({ email: "AAn account with this email already exists." });
+      } else if (error instanceof ApiError && error.status === 400) {
+        setError({ password: error.message });
+      } else {
+        console.error("Error in registration submit", error);
+        setError({
+          confirmPassword: "Something went wrong, please try again.",
+        });
+      }
     }
   };
 

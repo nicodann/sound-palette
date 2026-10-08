@@ -2,6 +2,8 @@ import { useState } from "react";
 import { useAppContext } from "../context/useAppContext";
 import type { FormErrors, LoginValues } from "../types";
 import CloseButton from "./CloseButton";
+import { login } from "../api/auth";
+import { ApiError } from "../api/client";
 
 export default function LoginForm() {
   const { setLoggedInUser, setUiState } = useAppContext();
@@ -38,30 +40,35 @@ export default function LoginForm() {
     setError({});
 
     try {
-      const response = await fetch(
-        `${import.meta.env.VITE_API_URL}/auth/login`,
-        {
-          method: "POST",
-          credentials: "include",
-          headers: { "Content-type": "application/json" },
-          body: JSON.stringify({
-            email: email,
-            password: formValues.password,
-          }),
-        },
-      );
+      const user = await login({ email, password: formValues.password });
+      // const response = await fetch(
+      //   `${import.meta.env.VITE_API_URL}/auth/login`,
+      //   {
+      //     method: "POST",
+      //     credentials: "include",
+      //     headers: { "Content-type": "application/json" },
+      //     body: JSON.stringify({
+      //       email: email,
+      //       password: formValues.password,
+      //     }),
+      //   },
+      // );
 
-      if (!response.ok) {
-        setError({ password: "Invalid email or password." });
-        return;
-      }
-      const user = await response.json();
+      // if (!response.ok) {
+      //   setError({ password: "Invalid email or password." });
+      //   return;
+      // }
+      // const user = await response.json();
 
       setLoggedInUser(user.email);
       setUiState("empty");
     } catch (error) {
-      console.error("There was a login error:", error);
-      setError({ password: "Something went wrong, please try again." });
+      if (error instanceof ApiError && error.status === 401) {
+        setError({ password: "Invalid email or password." });
+      } else {
+        console.error("There was a login error:", error);
+        setError({ password: "Something went wrong, please try again." });
+      }
     }
   };
 
