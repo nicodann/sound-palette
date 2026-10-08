@@ -41,24 +41,6 @@ export default function LoginForm() {
 
     try {
       const user = await login({ email, password: formValues.password });
-      // const response = await fetch(
-      //   `${import.meta.env.VITE_API_URL}/auth/login`,
-      //   {
-      //     method: "POST",
-      //     credentials: "include",
-      //     headers: { "Content-type": "application/json" },
-      //     body: JSON.stringify({
-      //       email: email,
-      //       password: formValues.password,
-      //     }),
-      //   },
-      // );
-
-      // if (!response.ok) {
-      //   setError({ password: "Invalid email or password." });
-      //   return;
-      // }
-      // const user = await response.json();
 
       setLoggedInUser(user.email);
       setUiState("empty");
