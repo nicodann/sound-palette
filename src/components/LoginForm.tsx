@@ -43,6 +43,7 @@ export default function LoginForm() {
       const user = await login({ email, password: formValues.password });
 
       setLoggedInUser(user.email);
+
       setUiState("empty");
     } catch (error) {
       if (error instanceof ApiError && error.status === 401) {
