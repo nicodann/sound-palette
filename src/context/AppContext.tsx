@@ -10,6 +10,8 @@ type AppContextValue = {
   setLoggedInUser: (user?: string) => void;
   aiResponse: AiResponse;
   setAiResponse: (response: AiResponse) => void;
+  submittedPrompt: string;
+  setSubmittedPrompt: (prompt: string) => void;
 };
 
 export const AppContext = createContext<AppContextValue | null>(null);
