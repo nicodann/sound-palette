@@ -14,6 +14,8 @@ type AppContextValue = {
   setSubmittedPrompt: (prompt: string) => void;
   pendingSave: boolean;
   setPendingSave: (boolean: boolean) => void;
+  savePaletteError: string;
+  setSavePaletteError: (error: string) => void;
 };
 
 export const AppContext = createContext<AppContextValue | null>(null);

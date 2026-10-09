@@ -5,15 +5,18 @@ import { useAppContext } from "../context/useAppContext";
 import CloseButton from "./CloseButton";
 import { register } from "../api/auth";
 import { ApiError } from "../api/client";
+import useSavePalette from "../hooks/useSavePalette";
 
 export default function RegisterForm() {
-  const { setLoggedInUser, setUiState } = useAppContext();
+  const { setLoggedInUser, setUiState, pendingSave } = useAppContext();
 
   const [formValues, setFormValues] = useState<RegisterValues>({
     email: "",
     password: "",
     confirmPassword: "",
   });
+
+  const saveCurrentPalette = useSavePalette();
 
   const [error, setError] = useState<FormErrors<RegisterValues>>({});
 
@@ -58,6 +61,9 @@ export default function RegisterForm() {
       const user = await register({ email, password: formValues.password });
 
       setLoggedInUser(user.email);
+
+      if (pendingSave) await saveCurrentPalette();
+
       setUiState("empty");
     } catch (error) {
       if (error instanceof ApiError && error.status === 409) {

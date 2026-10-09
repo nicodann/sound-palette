@@ -10,6 +10,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
   const [aiResponse, setAiResponse] = useState<AiResponse>([]);
   const [submittedPrompt, setSubmittedPrompt] = useState("");
   const [pendingSave, setPendingSave] = useState(false);
+  const [savePaletteError, setSavePaletteError] = useState("");
 
   useEffect(() => {
     getCurrentUser()
@@ -33,6 +34,8 @@ export function AppProvider({ children }: { children: ReactNode }) {
         setSubmittedPrompt,
         pendingSave,
         setPendingSave,
+        savePaletteError,
+        setSavePaletteError,
       }}
     >
       {children}

@@ -7,7 +7,7 @@ type PaletteResultProps = {
 };
 
 export default function PaletteResult({ hasSubmitted }: PaletteResultProps) {
-  const { aiResponse } = useAppContext();
+  const { aiResponse, savePaletteError } = useAppContext();
   return (
     <header>
       {hasSubmitted && (
@@ -17,6 +17,9 @@ export default function PaletteResult({ hasSubmitted }: PaletteResultProps) {
           })}
           <ResetButton />
           <SavePaletteButton />
+          <p className="error" role="alert" hidden={!savePaletteError}>
+            {savePaletteError}
+          </p>
         </div>
       )}
     </header>

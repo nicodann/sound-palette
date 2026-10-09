@@ -4,7 +4,7 @@ import { createPaletteName } from "../lib/createPaletteName";
 import type { NewPalette } from "../types";
 
 export default function useSavePalette() {
-  const { submittedPrompt, aiResponse, setPendingSave, setUiState } =
+  const { submittedPrompt, aiResponse, setPendingSave, setSavePaletteError } =
     useAppContext();
 
   const submittedPalette: NewPalette = {
@@ -13,15 +13,18 @@ export default function useSavePalette() {
     palette: aiResponse,
   };
 
-  return async () => {
+  const saveCurrentPalette = async () => {
+    setSavePaletteError("");
     try {
       const savedPalette = await savePalette(submittedPalette);
       console.log("Saved Palette:", savedPalette);
-      setUiState("empty");
     } catch (error) {
-      console.log("error saving palette", error);
+      setSavePaletteError(`Couldn't save your palette, please try again.`);
+      console.error("Palette save failed: ", error);
     } finally {
       setPendingSave(false);
     }
   };
+
+  return saveCurrentPalette;
 }

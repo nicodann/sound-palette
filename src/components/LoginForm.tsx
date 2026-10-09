@@ -4,14 +4,17 @@ import type { FormErrors, LoginValues } from "../types";
 import CloseButton from "./CloseButton";
 import { login } from "../api/auth";
 import { ApiError } from "../api/client";
+import useSavePalette from "../hooks/useSavePalette";
 
 export default function LoginForm() {
-  const { setLoggedInUser, setUiState } = useAppContext();
+  const { setLoggedInUser, setUiState, pendingSave } = useAppContext();
 
   const [formValues, setFormValues] = useState<LoginValues>({
     email: "",
     password: "",
   });
+
+  const saveCurrentPalette = useSavePalette();
 
   const [error, setError] = useState<FormErrors<LoginValues>>({});
 
@@ -43,6 +46,8 @@ export default function LoginForm() {
       const user = await login({ email, password: formValues.password });
 
       setLoggedInUser(user.email);
+
+      if (pendingSave) await saveCurrentPalette();
 
       setUiState("empty");
     } catch (error) {
