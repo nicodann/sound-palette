@@ -1,12 +1,8 @@
 import { useAppContext } from "../context/useAppContext";
 
 export default function ResetButton() {
-  const {
-    setAiResponse,
-    setSubmittedPrompt,
-    setPendingSave,
-    setSavePaletteError,
-  } = useAppContext();
+  const { setAiResponse, setSubmittedPrompt, setPendingSave, setSaveStatus } =
+    useAppContext();
 
   return (
     <button
@@ -15,7 +11,7 @@ export default function ResetButton() {
         setAiResponse([]);
         setSubmittedPrompt("");
         setPendingSave(false);
-        setSavePaletteError("");
+        setSaveStatus("idle");
       }}
     >
       Reset Palette

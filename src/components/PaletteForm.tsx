@@ -13,8 +13,7 @@ export default function PaletteForm() {
 
   const [error, setError] = useState<string>();
 
-  const { setAiResponse, setSubmittedPrompt, setSavePaletteError } =
-    useAppContext();
+  const { setAiResponse, setSubmittedPrompt, setSaveStatus } = useAppContext();
 
   const handleSubmit = async (e: React.SubmitEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -23,7 +22,7 @@ export default function PaletteForm() {
       return;
     }
     setError("");
-    setSavePaletteError("");
+    setSaveStatus("idle");
     try {
       setIsLoading(true);
       setSubmittedPrompt(formValues.prompt);

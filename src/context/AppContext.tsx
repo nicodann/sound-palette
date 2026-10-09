@@ -3,6 +3,8 @@ import type { AiResponse } from "../types";
 
 export type UiState = "empty" | "loginRegister" | "login" | "register";
 
+export type SaveStatus = "idle" | "saving" | "saved" | "error";
+
 type AppContextValue = {
   uiState: UiState;
   setUiState: (state: UiState) => void;
@@ -14,8 +16,8 @@ type AppContextValue = {
   setSubmittedPrompt: (prompt: string) => void;
   pendingSave: boolean;
   setPendingSave: (boolean: boolean) => void;
-  savePaletteError: string;
-  setSavePaletteError: (error: string) => void;
+  saveStatus: SaveStatus;
+  setSaveStatus: (status: SaveStatus) => void;
 };
 
 export const AppContext = createContext<AppContextValue | null>(null);
