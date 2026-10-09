@@ -17,7 +17,15 @@ export default function PaletteResult({ hasSubmitted }: PaletteResultProps) {
           })}
           <ResetButton />
           <SavePaletteButton />
-          <p className="error" role="alert" hidden={!saveStatus}>
+          <p
+            className={`
+              ${saveStatus === "error" && "error"}
+              ${saveStatus === "saving" && "saving"}
+              ${saveStatus === "saved" && "saved"}
+            `}
+            role="alert"
+            hidden={saveStatus === "idle"}
+          >
             {saveStatus}
           </p>
         </div>

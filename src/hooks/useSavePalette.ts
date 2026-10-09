@@ -14,9 +14,10 @@ export default function useSavePalette() {
   };
 
   const saveCurrentPalette = async () => {
-    setSaveStatus("idle");
+    setSaveStatus("saving");
     try {
       const savedPalette = await savePalette(submittedPalette);
+      setSaveStatus("saved");
       console.log("Saved Palette:", savedPalette);
     } catch (error) {
       setSaveStatus("error");

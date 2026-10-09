@@ -2,7 +2,8 @@ import { useAppContext } from "../context/useAppContext";
 import useSavePalette from "../hooks/useSavePalette";
 
 export default function SavePaletteButton() {
-  const { setUiState, setPendingSave, loggedInUser } = useAppContext();
+  const { setUiState, setPendingSave, loggedInUser, setSaveStatus } =
+    useAppContext();
 
   const saveCurrentPalette = useSavePalette();
 
@@ -13,6 +14,7 @@ export default function SavePaletteButton() {
         if (loggedInUser) {
           await saveCurrentPalette();
         } else {
+          setSaveStatus("saving");
           setUiState("loginRegister");
           setPendingSave(true);
         }

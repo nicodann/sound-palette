@@ -1,7 +1,7 @@
 import { useAppContext } from "../context/useAppContext";
 
 export default function LogoutButton() {
-  const { setLoggedInUser, loggedInUser } = useAppContext();
+  const { setLoggedInUser, loggedInUser, setSaveStatus } = useAppContext();
 
   const handleLogoutClick = async () => {
     try {
@@ -19,6 +19,7 @@ export default function LogoutButton() {
         return;
       }
       setLoggedInUser(undefined);
+      setSaveStatus("idle");
     } catch (error) {
       console.error("There was a logout error:", error);
     }
