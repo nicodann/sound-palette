@@ -1,27 +1,14 @@
 import { savePalette } from "../api/palette";
 import { useAppContext } from "../context/useAppContext";
+import { createPaletteName } from "../lib/createPaletteName";
 import type { NewPalette } from "../types";
-
-const capitalize = (word: string) =>
-  word.charAt(0).toUpperCase() + word.slice(1);
-
-const createName = (prompt: string) =>
-  prompt
-    .trim()
-    .split(/\s+/)
-    .slice(0, 2)
-    .map((string, i) => {
-      const lower = string.toLowerCase();
-      return i === 0 ? lower : capitalize(lower);
-    })
-    .join("");
 
 export default function useSavePalette() {
   const { submittedPrompt, aiResponse, setPendingSave, setUiState } =
     useAppContext();
 
   const submittedPalette: NewPalette = {
-    name: createName(submittedPrompt),
+    name: createPaletteName(submittedPrompt),
     prompt: submittedPrompt,
     palette: aiResponse,
   };
