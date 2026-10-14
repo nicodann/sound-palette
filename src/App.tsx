@@ -9,26 +9,11 @@ import { useAppContext } from "./context/useAppContext";
 import RegisterForm from "./components/RegisterForm";
 import NavMenu from "./components/NavMenu";
 import PaletteResult from "./components/PaletteResult";
+import { buildGradientString } from "./lib/buildGradientString";
 
 function App() {
   const { uiState, aiResponse } = useAppContext();
   const hasSubmitted = aiResponse.length > 0;
-
-  const responseColours = aiResponse?.map((item) => item.colour);
-
-  const buildGradientString = (colours: string[]) => {
-    if (colours.length === 0) return undefined;
-    let percentage = 0;
-    let backgroundGradientString = "linear-gradient(90deg, ";
-
-    for (let i = 0; i < colours.length; i++) {
-      backgroundGradientString += `${colours[i]} ${percentage}%`;
-      percentage += 20;
-      backgroundGradientString += i < colours.length - 1 ? "," : ")";
-    }
-
-    return backgroundGradientString;
-  };
 
   useEffect(() => {
     console.log("uiState: ", uiState);
@@ -42,7 +27,7 @@ function App() {
         `}
       data-ui={uiState}
       data-palette={hasSubmitted ? "hidden" : "visible"}
-      style={{ background: buildGradientString(responseColours) }}
+      style={{ background: buildGradientString(aiResponse) }}
     >
       <PaletteResult hasSubmitted={hasSubmitted} />
 
