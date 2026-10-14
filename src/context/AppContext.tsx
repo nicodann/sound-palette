@@ -1,5 +1,5 @@
-import { createContext } from "react";
-import type { AiResponse } from "../types";
+import { createContext, type Dispatch, type SetStateAction } from "react";
+import type { AiResponse, SavedPalette } from "../types";
 
 export type UiState = "empty" | "loginRegister" | "login" | "register";
 
@@ -7,17 +7,19 @@ export type SaveStatus = "idle" | "saving" | "saved" | "error";
 
 type AppContextValue = {
   uiState: UiState;
-  setUiState: (state: UiState) => void;
+  setUiState: Dispatch<SetStateAction<UiState>>;
   loggedInUser?: string;
-  setLoggedInUser: (user?: string) => void;
+  setLoggedInUser: Dispatch<SetStateAction<string | undefined>>;
   aiResponse: AiResponse;
-  setAiResponse: (response: AiResponse) => void;
+  setAiResponse: Dispatch<SetStateAction<AiResponse>>;
   submittedPrompt: string;
-  setSubmittedPrompt: (prompt: string) => void;
+  setSubmittedPrompt: Dispatch<SetStateAction<string>>;
   pendingSave: boolean;
-  setPendingSave: (boolean: boolean) => void;
+  setPendingSave: Dispatch<SetStateAction<boolean>>;
   saveStatus: SaveStatus;
-  setSaveStatus: (status: SaveStatus) => void;
+  setSaveStatus: Dispatch<SetStateAction<SaveStatus>>;
+  userPalettes: SavedPalette[];
+  setUserPalettes: Dispatch<SetStateAction<SavedPalette[]>>;
 };
 
 export const AppContext = createContext<AppContextValue | null>(null);

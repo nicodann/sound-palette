@@ -1,13 +1,10 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useAppContext } from "../context/useAppContext";
 import { getPalettes } from "../api/palette";
-import type { SavedPalette } from "../types";
 import PaletteContainer from "./PaletteContainer";
 
 export default function PaletteGallery() {
-  const { loggedInUser } = useAppContext();
-
-  const [userPalettes, setUserPalettes] = useState<SavedPalette[]>([]);
+  const { loggedInUser, setUserPalettes, userPalettes } = useAppContext();
 
   useEffect(() => {
     if (!loggedInUser) return;
@@ -21,7 +18,7 @@ export default function PaletteGallery() {
       .catch((err) => {
         console.error("Failed to fetch palettes or no palettes found: ", err);
       });
-  }, [loggedInUser]);
+  }, [loggedInUser, setUserPalettes]);
 
   if (!loggedInUser) return null;
 

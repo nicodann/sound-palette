@@ -4,8 +4,13 @@ import { createPaletteName } from "../lib/createPaletteName";
 import type { NewPalette } from "../types";
 
 export default function useSavePalette() {
-  const { submittedPrompt, aiResponse, setPendingSave, setSaveStatus } =
-    useAppContext();
+  const {
+    submittedPrompt,
+    aiResponse,
+    setPendingSave,
+    setSaveStatus,
+    setUserPalettes,
+  } = useAppContext();
 
   const submittedPalette: NewPalette = {
     name: createPaletteName(submittedPrompt),
@@ -17,6 +22,7 @@ export default function useSavePalette() {
     setSaveStatus("saving");
     try {
       const savedPalette = await savePalette(submittedPalette);
+      setUserPalettes((prev) => [savedPalette, ...prev]);
       setSaveStatus("saved");
       console.log("Saved Palette:", savedPalette);
     } catch (error) {
