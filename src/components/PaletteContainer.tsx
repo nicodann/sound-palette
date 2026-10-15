@@ -7,10 +7,10 @@ export default function PaletteContainer({
 }: {
   paletteObject: SavedPalette;
 }) {
-  const { setCurrentPalette } = useAppContext();
+  const { setCurrentPalette, currentPalette } = useAppContext();
   return (
     <div
-      className="paletteContainer"
+      className={`paletteContainer ${currentPalette && currentPalette.id === paletteObject.id && "selected"}`}
       onClick={() => {
         setCurrentPalette(paletteObject);
       }}
