@@ -13,7 +13,6 @@ export default function PaletteContainer({
       className="paletteContainer"
       onClick={() => {
         setCurrentPalette(paletteObject);
-        // setCurrentPaletteId(paletteObject.id);
       }}
     >
       <h3>{paletteObject.name}</h3>

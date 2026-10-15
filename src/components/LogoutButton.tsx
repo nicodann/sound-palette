@@ -7,7 +7,6 @@ export default function LogoutButton() {
     setSaveStatus,
     setUserPalettes,
     currentPalette,
-    // currentPaletteId,
     setCurrentPalette,
   } = useAppContext();
 

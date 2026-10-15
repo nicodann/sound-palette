@@ -4,6 +4,7 @@ import SavePaletteButton from "./SavePaletteButton";
 
 export default function PaletteResult() {
   const { currentPalette, saveStatus } = useAppContext();
+
   return (
     <header>
       {currentPalette && (
@@ -12,7 +13,7 @@ export default function PaletteResult() {
             return <p key={i}>{element.adjective}</p>;
           })}
           <ResetButton />
-          {!currentPalette && <SavePaletteButton />}
+          {!currentPalette.id && <SavePaletteButton />}
           <p
             id="saveStatus"
             className={`

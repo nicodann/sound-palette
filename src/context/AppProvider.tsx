@@ -10,11 +10,9 @@ export function AppProvider({ children }: { children: ReactNode }) {
   const [currentPalette, setCurrentPalette] = useState<CurrentPalette | null>(
     null,
   );
-  // const [submittedPrompt, setSubmittedPrompt] = useState("");
   const [pendingSave, setPendingSave] = useState(false);
   const [saveStatus, setSaveStatus] = useState<SaveStatus>("idle");
   const [userPalettes, setUserPalettes] = useState<SavedPalette[]>([]);
-  // const [currentPaletteId, setCurrentPaletteId] = useState<string>();
 
   useEffect(() => {
     getCurrentUser()
@@ -34,16 +32,12 @@ export function AppProvider({ children }: { children: ReactNode }) {
         setLoggedInUser,
         currentPalette,
         setCurrentPalette,
-        // submittedPrompt,
-        // setSubmittedPrompt,
         pendingSave,
         setPendingSave,
         saveStatus,
         setSaveStatus,
         userPalettes,
         setUserPalettes,
-        // currentPaletteId,
-        // setCurrentPaletteId,
       }}
     >
       {children}

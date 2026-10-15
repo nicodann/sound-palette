@@ -13,7 +13,6 @@ import { buildGradientString } from "./lib/buildGradientString";
 
 function App() {
   const { uiState, currentPalette } = useAppContext();
-  // const hasSubmitted = !!currentPalette;
 
   useEffect(() => {
     console.log("uiState: ", uiState);
