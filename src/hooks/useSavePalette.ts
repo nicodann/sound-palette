@@ -5,20 +5,20 @@ import type { NewPalette } from "../types";
 
 export default function useSavePalette() {
   const {
-    submittedPrompt,
+    // submittedPrompt,
     currentPalette,
     setPendingSave,
     setSaveStatus,
     setUserPalettes,
-    setCurrentPaletteId,
+    // setCurrentPaletteId,
   } = useAppContext();
 
   const saveCurrentPalette = async () => {
     if (!currentPalette) return;
 
     const submittedPalette: NewPalette = {
-      name: createPaletteName(submittedPrompt),
-      prompt: submittedPrompt,
+      name: createPaletteName(currentPalette.prompt),
+      prompt: currentPalette.prompt,
       palette: currentPalette.palette,
     };
 
@@ -27,7 +27,7 @@ export default function useSavePalette() {
       const savedPalette = await savePalette(submittedPalette);
       setUserPalettes((prev) => [savedPalette, ...prev]);
       setSaveStatus("saved");
-      setCurrentPaletteId(savedPalette.id);
+      // setCurrentPaletteId(savedPalette.id);
       console.log("Saved Palette:", savedPalette);
     } catch (error) {
       setSaveStatus("error");

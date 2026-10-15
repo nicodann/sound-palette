@@ -12,16 +12,16 @@ type AppContextValue = {
   setLoggedInUser: Dispatch<SetStateAction<string | undefined>>;
   currentPalette: CurrentPalette | null;
   setCurrentPalette: Dispatch<SetStateAction<CurrentPalette | null>>;
-  submittedPrompt: string;
-  setSubmittedPrompt: Dispatch<SetStateAction<string>>;
+  // submittedPrompt: string;
+  // setSubmittedPrompt: Dispatch<SetStateAction<string>>;
   pendingSave: boolean;
   setPendingSave: Dispatch<SetStateAction<boolean>>;
   saveStatus: SaveStatus;
   setSaveStatus: Dispatch<SetStateAction<SaveStatus>>;
   userPalettes: SavedPalette[];
   setUserPalettes: Dispatch<SetStateAction<SavedPalette[]>>;
-  currentPaletteId?: string;
-  setCurrentPaletteId: Dispatch<SetStateAction<string | undefined>>;
+  // currentPaletteId?: string;
+  // setCurrentPaletteId: Dispatch<SetStateAction<string | undefined>>;
 };
 
 export const AppContext = createContext<AppContextValue | null>(null);

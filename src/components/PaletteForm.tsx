@@ -16,9 +16,9 @@ export default function PaletteForm() {
 
   const {
     setCurrentPalette,
-    setSubmittedPrompt,
+    // setSubmittedPrompt,
     setSaveStatus,
-    setCurrentPaletteId,
+    // setCurrentPaletteId,
   } = useAppContext();
 
   const handleSubmit = async (e: React.SubmitEvent<HTMLFormElement>) => {
@@ -31,14 +31,14 @@ export default function PaletteForm() {
     setSaveStatus("idle");
     try {
       setIsLoading(true);
-      setSubmittedPrompt(formValues.prompt);
+      // setSubmittedPrompt(formValues.prompt);
       const response = await postAiQuery({ query: formValues.prompt });
       const newPalette: CurrentPalette = {
         prompt: formValues.prompt,
         palette: response,
       };
       setCurrentPalette(newPalette);
-      setCurrentPaletteId(undefined);
+      // setCurrentPaletteId(undefined);
       setFormValues({ prompt: "" });
     } catch {
       setError("Couldn't generate a palette, please try again.");

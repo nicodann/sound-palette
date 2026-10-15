@@ -6,7 +6,8 @@ export default function LogoutButton() {
     loggedInUser,
     setSaveStatus,
     setUserPalettes,
-    currentPaletteId,
+    currentPalette,
+    // currentPaletteId,
     setCurrentPalette,
   } = useAppContext();
 
@@ -28,7 +29,7 @@ export default function LogoutButton() {
       setLoggedInUser(undefined);
       setUserPalettes([]);
       setSaveStatus("idle");
-      if (currentPaletteId) setCurrentPalette(null);
+      if (currentPalette) setCurrentPalette(null);
     } catch (error) {
       console.error("There was a logout error:", error);
     }
