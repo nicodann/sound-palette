@@ -7,7 +7,7 @@ type PaletteResultProps = {
 };
 
 export default function PaletteResult({ hasSubmitted }: PaletteResultProps) {
-  const { aiResponse, saveStatus } = useAppContext();
+  const { aiResponse, saveStatus, currentPaletteId } = useAppContext();
   return (
     <header>
       {hasSubmitted && (
@@ -16,8 +16,9 @@ export default function PaletteResult({ hasSubmitted }: PaletteResultProps) {
             return <p key={i}>{element.adjective}</p>;
           })}
           <ResetButton />
-          <SavePaletteButton />
+          {!currentPaletteId && <SavePaletteButton />}
           <p
+            id="saveStatus"
             className={`
               ${saveStatus === "error" && "error"}
               ${saveStatus === "saving" && "saving"}

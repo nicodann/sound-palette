@@ -7,11 +7,14 @@ export default function PaletteContainer({
 }: {
   paletteObject: SavedPalette;
 }) {
-  const { setAiResponse } = useAppContext();
+  const { setAiResponse, setCurrentPaletteId } = useAppContext();
   return (
     <div
       className="paletteContainer"
-      onClick={() => setAiResponse(paletteObject.palette)}
+      onClick={() => {
+        setAiResponse(paletteObject.palette);
+        setCurrentPaletteId(paletteObject.id);
+      }}
     >
       <h3>{paletteObject.name}</h3>
       <div

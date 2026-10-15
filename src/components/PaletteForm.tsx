@@ -13,7 +13,12 @@ export default function PaletteForm() {
 
   const [error, setError] = useState<string>();
 
-  const { setAiResponse, setSubmittedPrompt, setSaveStatus } = useAppContext();
+  const {
+    setAiResponse,
+    setSubmittedPrompt,
+    setSaveStatus,
+    setCurrentPaletteId,
+  } = useAppContext();
 
   const handleSubmit = async (e: React.SubmitEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -28,6 +33,7 @@ export default function PaletteForm() {
       setSubmittedPrompt(formValues.prompt);
       const response = await postAiQuery({ query: formValues.prompt });
       setAiResponse(response);
+      setCurrentPaletteId(undefined);
       setFormValues({ prompt: "" });
     } catch {
       setError("Couldn't generate a palette, please try again.");

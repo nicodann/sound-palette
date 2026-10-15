@@ -10,6 +10,7 @@ export default function useSavePalette() {
     setPendingSave,
     setSaveStatus,
     setUserPalettes,
+    setCurrentPaletteId,
   } = useAppContext();
 
   const submittedPalette: NewPalette = {
@@ -24,6 +25,7 @@ export default function useSavePalette() {
       const savedPalette = await savePalette(submittedPalette);
       setUserPalettes((prev) => [savedPalette, ...prev]);
       setSaveStatus("saved");
+      setCurrentPaletteId(savedPalette.id);
       console.log("Saved Palette:", savedPalette);
     } catch (error) {
       setSaveStatus("error");

@@ -12,6 +12,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
   const [pendingSave, setPendingSave] = useState(false);
   const [saveStatus, setSaveStatus] = useState<SaveStatus>("idle");
   const [userPalettes, setUserPalettes] = useState<SavedPalette[]>([]);
+  const [currentPaletteId, setCurrentPaletteId] = useState<string>();
 
   useEffect(() => {
     getCurrentUser()
@@ -39,6 +40,8 @@ export function AppProvider({ children }: { children: ReactNode }) {
         setSaveStatus,
         userPalettes,
         setUserPalettes,
+        currentPaletteId,
+        setCurrentPaletteId,
       }}
     >
       {children}

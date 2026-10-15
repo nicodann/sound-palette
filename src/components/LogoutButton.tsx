@@ -1,8 +1,14 @@
 import { useAppContext } from "../context/useAppContext";
 
 export default function LogoutButton() {
-  const { setLoggedInUser, loggedInUser, setSaveStatus, setUserPalettes } =
-    useAppContext();
+  const {
+    setLoggedInUser,
+    loggedInUser,
+    setSaveStatus,
+    setUserPalettes,
+    currentPaletteId,
+    setAiResponse,
+  } = useAppContext();
 
   const handleLogoutClick = async () => {
     try {
@@ -22,6 +28,7 @@ export default function LogoutButton() {
       setLoggedInUser(undefined);
       setUserPalettes([]);
       setSaveStatus("idle");
+      if (currentPaletteId) setAiResponse([]);
     } catch (error) {
       console.error("There was a logout error:", error);
     }
