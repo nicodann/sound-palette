@@ -3,20 +3,29 @@ export type User = {
   email: string;
 };
 
+export type PaletteColour = {
+  adjective: string;
+  colour: string;
+};
+
+export type PaletteColours = PaletteColour[];
+
 export type SavedPalette = {
   id: string;
   name: string;
   prompt: string;
-  palette: AiResponse;
+  palette: PaletteColours;
   created_at: string;
 };
 
-export type NewPalette = Omit<SavedPalette, "id" | "created_at">;
+export type CurrentPalette = {
+  id?: string;
+  name?: string;
+  prompt: string;
+  palette: PaletteColours;
+};
 
-export type AiResponse = {
-  adjective: string;
-  colour: string;
-}[];
+export type NewPalette = Omit<SavedPalette, "id" | "created_at">;
 
 export type FormErrors<T> = Partial<Record<keyof T, string>>;
 

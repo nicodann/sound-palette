@@ -7,7 +7,7 @@ export default function LogoutButton() {
     setSaveStatus,
     setUserPalettes,
     currentPaletteId,
-    setAiResponse,
+    setCurrentPalette,
   } = useAppContext();
 
   const handleLogoutClick = async () => {
@@ -28,7 +28,7 @@ export default function LogoutButton() {
       setLoggedInUser(undefined);
       setUserPalettes([]);
       setSaveStatus("idle");
-      if (currentPaletteId) setAiResponse([]);
+      if (currentPaletteId) setCurrentPalette(null);
     } catch (error) {
       console.error("There was a logout error:", error);
     }

@@ -12,8 +12,8 @@ import PaletteResult from "./components/PaletteResult";
 import { buildGradientString } from "./lib/buildGradientString";
 
 function App() {
-  const { uiState, aiResponse } = useAppContext();
-  const hasSubmitted = aiResponse.length > 0;
+  const { uiState, currentPalette } = useAppContext();
+  // const hasSubmitted = !!currentPalette;
 
   useEffect(() => {
     console.log("uiState: ", uiState);
@@ -26,10 +26,14 @@ function App() {
         archivo-black-regular 
         `}
       data-ui={uiState}
-      data-palette={hasSubmitted ? "hidden" : "visible"}
-      style={{ background: buildGradientString(aiResponse) }}
+      data-palette={currentPalette ? "hidden" : "visible"}
+      style={{
+        background: currentPalette
+          ? buildGradientString(currentPalette?.palette)
+          : "",
+      }}
     >
-      <PaletteResult hasSubmitted={hasSubmitted} />
+      <PaletteResult />
 
       <main>
         <PaletteForm />

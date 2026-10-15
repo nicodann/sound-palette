@@ -2,17 +2,13 @@ import { useAppContext } from "../context/useAppContext";
 import ResetButton from "./ResetButton";
 import SavePaletteButton from "./SavePaletteButton";
 
-type PaletteResultProps = {
-  hasSubmitted: boolean;
-};
-
-export default function PaletteResult({ hasSubmitted }: PaletteResultProps) {
-  const { aiResponse, saveStatus, currentPaletteId } = useAppContext();
+export default function PaletteResult() {
+  const { currentPalette, saveStatus, currentPaletteId } = useAppContext();
   return (
     <header>
-      {hasSubmitted && (
+      {currentPalette && (
         <div id="response">
-          {aiResponse.map((element, i) => {
+          {currentPalette.palette.map((element, i) => {
             return <p key={i}>{element.adjective}</p>;
           })}
           <ResetButton />

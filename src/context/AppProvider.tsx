@@ -1,13 +1,15 @@
 import { useEffect, useState, type ReactNode } from "react";
 import { AppContext, type SaveStatus, type UiState } from "./AppContext";
-import type { AiResponse, SavedPalette } from "../types";
+import type { CurrentPalette, SavedPalette } from "../types";
 import { getCurrentUser } from "../api/auth";
 import { ApiError } from "../api/client";
 
 export function AppProvider({ children }: { children: ReactNode }) {
   const [loggedInUser, setLoggedInUser] = useState<string>();
   const [uiState, setUiState] = useState<UiState>("empty");
-  const [aiResponse, setAiResponse] = useState<AiResponse>([]);
+  const [currentPalette, setCurrentPalette] = useState<CurrentPalette | null>(
+    null,
+  );
   const [submittedPrompt, setSubmittedPrompt] = useState("");
   const [pendingSave, setPendingSave] = useState(false);
   const [saveStatus, setSaveStatus] = useState<SaveStatus>("idle");
@@ -30,8 +32,8 @@ export function AppProvider({ children }: { children: ReactNode }) {
         setUiState,
         loggedInUser,
         setLoggedInUser,
-        aiResponse,
-        setAiResponse,
+        currentPalette,
+        setCurrentPalette,
         submittedPrompt,
         setSubmittedPrompt,
         pendingSave,

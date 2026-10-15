@@ -6,20 +6,22 @@ import type { NewPalette } from "../types";
 export default function useSavePalette() {
   const {
     submittedPrompt,
-    aiResponse,
+    currentPalette,
     setPendingSave,
     setSaveStatus,
     setUserPalettes,
     setCurrentPaletteId,
   } = useAppContext();
 
-  const submittedPalette: NewPalette = {
-    name: createPaletteName(submittedPrompt),
-    prompt: submittedPrompt,
-    palette: aiResponse,
-  };
-
   const saveCurrentPalette = async () => {
+    if (!currentPalette) return;
+
+    const submittedPalette: NewPalette = {
+      name: createPaletteName(submittedPrompt),
+      prompt: submittedPrompt,
+      palette: currentPalette.palette,
+    };
+
     setSaveStatus("saving");
     try {
       const savedPalette = await savePalette(submittedPalette);

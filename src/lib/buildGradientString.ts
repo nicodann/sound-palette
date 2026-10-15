@@ -1,7 +1,7 @@
-import type { AiResponse } from "../types";
+import type { PaletteColours } from "../types";
 
-export const buildGradientString = (aiResponse: AiResponse) => {
-  const colours = aiResponse?.map((item) => item.colour);
+export const buildGradientString = (paletteColours: PaletteColours) => {
+  const colours = paletteColours?.map((item) => item.colour);
 
   if (colours.length === 0) return undefined;
   let percentage = 0;
