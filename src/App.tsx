@@ -8,7 +8,7 @@ import LoginForm from "./components/LoginForm";
 import { useAppContext } from "./context/useAppContext";
 import RegisterForm from "./components/RegisterForm";
 import NavMenu from "./components/NavMenu";
-import PaletteResult from "./components/PaletteResult";
+import PaletteControl from "./components/PaletteControl";
 import { buildGradientString } from "./lib/buildGradientString";
 
 function App() {
@@ -32,7 +32,7 @@ function App() {
           : "",
       }}
     >
-      <PaletteResult />
+      <PaletteControl />
 
       <main>
         <PaletteForm />

@@ -2,11 +2,11 @@ import { useAppContext } from "../context/useAppContext";
 import ResetButton from "./ResetButton";
 import SavePaletteButton from "./SavePaletteButton";
 
-export default function PaletteResult() {
+export default function PaletteControl() {
   const { currentPalette, saveStatus } = useAppContext();
 
   return (
-    <header>
+    <div id="paletteControl">
       {currentPalette && (
         <div id="response">
           {currentPalette.palette.map((element, i) => {
@@ -28,6 +28,6 @@ export default function PaletteResult() {
           </p>
         </div>
       )}
-    </header>
+    </div>
   );
 }
