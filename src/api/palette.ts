@@ -13,3 +13,9 @@ export function savePalette({ name, prompt, palette }: NewPalette) {
     }),
   });
 }
+
+export function deletePalette(id: string) {
+  return apiFetch<void>(`/palettes/${id}`, {
+    method: "DELETE",
+  });
+}
