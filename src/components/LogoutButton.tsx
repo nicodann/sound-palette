@@ -28,7 +28,7 @@ export default function LogoutButton() {
       setLoggedInUser(undefined);
       setUserPalettes([]);
       setSaveStatus("idle");
-      if (currentPalette) setCurrentPalette(null);
+      if (currentPalette?.id) setCurrentPalette(null);
     } catch (error) {
       console.error("There was a logout error:", error);
     }

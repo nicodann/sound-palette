@@ -37,3 +37,5 @@ export type LoginValues = {
 export type RegisterValues = LoginValues & {
   confirmPassword: string;
 };
+
+export type DeleteStatus = "idle" | "deleting" | "deleted" | "error";

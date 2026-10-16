@@ -2,9 +2,11 @@ import { useEffect } from "react";
 import { useAppContext } from "../context/useAppContext";
 import { getPalettes } from "../api/palette";
 import PaletteContainer from "./PaletteContainer";
+import DeleteStatus from "./DeleteStatus";
 
 export default function PaletteGallery() {
-  const { loggedInUser, setUserPalettes, userPalettes } = useAppContext();
+  const { loggedInUser, setUserPalettes, userPalettes, pendingDelete } =
+    useAppContext();
 
   useEffect(() => {
     if (!loggedInUser) return;
@@ -26,7 +28,10 @@ export default function PaletteGallery() {
     <div id="paletteGallery">
       <h2>My Colours</h2>
       {userPalettes?.map((palette) => (
-        <PaletteContainer paletteObject={palette} key={palette.id} />
+        <>
+          <PaletteContainer paletteObject={palette} key={palette.id} />
+          {palette.id === pendingDelete && <DeleteStatus />}
+        </>
       ))}
     </div>
   );

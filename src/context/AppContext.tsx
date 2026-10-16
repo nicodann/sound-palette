@@ -1,5 +1,5 @@
 import { createContext, type Dispatch, type SetStateAction } from "react";
-import type { CurrentPalette, SavedPalette } from "../types";
+import type { CurrentPalette, DeleteStatus, SavedPalette } from "../types";
 
 export type UiState = "empty" | "loginRegister" | "login" | "register";
 
@@ -18,6 +18,10 @@ type AppContextValue = {
   setSaveStatus: Dispatch<SetStateAction<SaveStatus>>;
   userPalettes: SavedPalette[];
   setUserPalettes: Dispatch<SetStateAction<SavedPalette[]>>;
+  deleteStatus: DeleteStatus;
+  setDeleteStatus: Dispatch<SetStateAction<DeleteStatus>>;
+  pendingDelete?: string;
+  setPendingDelete: Dispatch<SetStateAction<string | undefined>>;
 };
 
 export const AppContext = createContext<AppContextValue | null>(null);

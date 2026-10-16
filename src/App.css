@@ -107,6 +107,22 @@ header {
 
 }
 
+p.deleting {
+  background-color: yellow;
+  color: black;
+  padding: 2px 6px;
+}
+
+p.deleted {
+  background-color: green;
+  color: white;
+  padding: 2px 6px;
+}
+
+.deleteStatus.deleted {
+  animation: fade-out 0.5s ease 2s forwards;
+}
+
 #response {
   display: flex;
   flex-direction: column;

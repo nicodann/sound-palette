@@ -1,6 +1,6 @@
 import { useEffect, useState, type ReactNode } from "react";
 import { AppContext, type SaveStatus, type UiState } from "./AppContext";
-import type { CurrentPalette, SavedPalette } from "../types";
+import type { CurrentPalette, DeleteStatus, SavedPalette } from "../types";
 import { getCurrentUser } from "../api/auth";
 import { ApiError } from "../api/client";
 
@@ -13,6 +13,8 @@ export function AppProvider({ children }: { children: ReactNode }) {
   const [pendingSave, setPendingSave] = useState(false);
   const [saveStatus, setSaveStatus] = useState<SaveStatus>("idle");
   const [userPalettes, setUserPalettes] = useState<SavedPalette[]>([]);
+  const [deleteStatus, setDeleteStatus] = useState<DeleteStatus>("idle");
+  const [pendingDelete, setPendingDelete] = useState<string>();
 
   useEffect(() => {
     getCurrentUser()
@@ -38,6 +40,10 @@ export function AppProvider({ children }: { children: ReactNode }) {
         setSaveStatus,
         userPalettes,
         setUserPalettes,
+        deleteStatus,
+        setDeleteStatus,
+        pendingDelete,
+        setPendingDelete,
       }}
     >
       {children}

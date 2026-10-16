@@ -10,9 +10,22 @@ export default function PaletteContainer({
 }: {
   paletteObject: SavedPalette;
 }) {
-  const { setCurrentPalette, currentPalette } = useAppContext();
+  const {
+    setCurrentPalette,
+    currentPalette,
+    setDeleteStatus,
+    setPendingDelete,
+  } = useAppContext();
   const [isOpenDeletePaletteModal, setIsOpenDeletePaletteModal] =
     useState(false);
+
+  const closeModal = () => setIsOpenDeletePaletteModal(false);
+
+  const cancelDelete = () => {
+    closeModal();
+    setPendingDelete(undefined);
+    setDeleteStatus("idle");
+  };
 
   return (
     <div
@@ -31,8 +44,9 @@ export default function PaletteContainer({
       </button>
       <button
         onClick={(e) => {
-          setIsOpenDeletePaletteModal(true);
           e.stopPropagation();
+          setIsOpenDeletePaletteModal(true);
+          setPendingDelete(paletteObject.id);
         }}
       >
         delete
@@ -41,7 +55,8 @@ export default function PaletteContainer({
         createPortal(
           <ConfirmPaletteDeleteModal
             palette={paletteObject}
-            onClose={() => setIsOpenDeletePaletteModal(false)}
+            onCancel={cancelDelete}
+            onConfirm={closeModal}
           />,
           document.body,
         )}

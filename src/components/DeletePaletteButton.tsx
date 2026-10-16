@@ -4,24 +4,28 @@ import { useAppContext } from "../context/useAppContext";
 
 export default function DeletePaletteButton({
   paletteId,
+  onConfirm,
 }: {
   paletteId: string;
+  onConfirm: () => void;
 }) {
-  const { setUserPalettes, setCurrentPalette } = useAppContext();
+  const { setCurrentPalette, setDeleteStatus } = useAppContext();
 
   const handleClick = async () => {
+    onConfirm();
+    setDeleteStatus("deleting");
     try {
       await deletePalette(paletteId);
     } catch (error) {
       if (!(error instanceof ApiError && error.status === 404)) {
         console.error("Failed to delete:", error);
+        setDeleteStatus("error");
         return;
       }
     }
-    setUserPalettes((prev) =>
-      prev.filter((palette) => palette.id !== paletteId),
-    );
+
     setCurrentPalette((prev) => (prev?.id === paletteId ? null : prev));
+    setDeleteStatus("deleted");
   };
   return (
     <button
@@ -31,7 +35,7 @@ export default function DeletePaletteButton({
         handleClick();
       }}
     >
-      Yes, Delete
+      delete
     </button>
   );
 }
