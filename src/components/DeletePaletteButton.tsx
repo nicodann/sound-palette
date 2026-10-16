@@ -31,7 +31,7 @@ export default function DeletePaletteButton({
         handleClick();
       }}
     >
-      Delete
+      Yes, Delete
     </button>
   );
 }

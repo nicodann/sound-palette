@@ -87,6 +87,26 @@ header {
   border: thin blue solid;
 }
 
+.confirmDeletePaletteModal::backdrop {
+  background-color: rgb(0 0 0 / 0.6);  
+}
+
+.confirmDeletePaletteModal {
+  margin: auto;
+  padding: 10px 20px;
+  background-color: white;
+  align-items: center;
+}
+
+.confirmDeletePaletteModal[open] {
+  position: absolute; 
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  justify-content: center;
+
+}
+
 #response {
   display: flex;
   flex-direction: column;
