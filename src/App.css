@@ -385,7 +385,4 @@ button[type="submit"] {
   input#prompt {
     min-width: 600px;
   }
-  #response {
-    /* gap: 50px; */
-  }
 }
