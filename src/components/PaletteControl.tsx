@@ -8,47 +8,57 @@ export default function PaletteControl() {
   const [isExpanded, setIsExpanded] = useState(true);
 
   return (
-    <>
-      {currentPalette && (
-        <header id="paletteControl" data-expanded={isExpanded}>
-          <div className="drawer">
-            <div className="drawerInner" id="paletteWords">
-              <div id="response">
-                {currentPalette.palette.map((element, i) => {
-                  return <p key={i}>{element.adjective}</p>;
-                })}
-              </div>
-            </div>
+    <header id="paletteControl" data-expanded={isExpanded}>
+      <div className="drawer">
+        <div className="drawerInner" id="paletteWords">
+          <div id="response">
+            {currentPalette?.palette.map((element, i, all) => {
+              return (
+                <p
+                  key={i}
+                  style={
+                    {
+                      "--i": i,
+                    } as React.CSSProperties
+                  }
+                  onAnimationEnd={
+                    i === all.length - 1
+                      ? () => setIsExpanded(false)
+                      : undefined
+                  }
+                >
+                  {element.adjective}
+                </p>
+              );
+            })}
           </div>
-          <div className="bar">
-            <ResetButton />
-            {!currentPalette.id && <SavePaletteButton />}
-            <p
-              id="saveStatus"
-              className={`
+        </div>
+      </div>
+      <div className="bar">
+        <ResetButton />
+        {!currentPalette.id && <SavePaletteButton />}
+        <p
+          id="saveStatus"
+          className={`
             ${saveStatus === "error" && "error"}
             ${saveStatus === "saving" && "saving"}
             ${saveStatus === "saved" && "saved"}
             `}
-              role="alert"
-              hidden={saveStatus === "idle"}
-            >
-              {saveStatus}
-            </p>
-            <button
-              className="expand"
-              aria-expanded={isExpanded}
-              aria-controls="paletteWords"
-              aria-label={
-                isExpanded ? "Hide palette words" : "Show palette words"
-              }
-              onClick={() => setIsExpanded((prev) => !prev)}
-            >
-              ▴
-            </button>
-          </div>
-        </header>
-      )}
-    </>
+          role="alert"
+          hidden={saveStatus === "idle"}
+        >
+          {saveStatus}
+        </p>
+        <button
+          className="expand"
+          aria-expanded={isExpanded}
+          aria-controls="paletteWords"
+          aria-label={isExpanded ? "Hide palette words" : "Show palette words"}
+          onClick={() => setIsExpanded((prev) => !prev)}
+        >
+          ▴
+        </button>
+      </div>
+    </header>
   );
 }

@@ -32,7 +32,11 @@ function App() {
           : "",
       }}
     >
-      <PaletteControl />
+      {currentPalette && (
+        <PaletteControl
+          key={currentPalette.palette.map((c) => c.colour).join()}
+        />
+      )}
 
       <main>
         <PaletteForm />

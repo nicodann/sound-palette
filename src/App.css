@@ -56,7 +56,9 @@ button:hover {
 }
 
 .drawerInner {
-  overflow: hidden;
+  overflow-x: visible;
+  overflow-y: clip;
+  min-height: 0;
 }
 
 #response {
