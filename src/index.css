@@ -1,5 +1,5 @@
 :root {
-  /* --text: #6b6375;
+  --text: #6b6375;
   --text-h: #08060d;
   --bg: #fff;
   --border: #e5e4e7;
@@ -13,26 +13,26 @@
 
   --sans: system-ui, 'Segoe UI', Roboto, sans-serif;
   --heading: system-ui, 'Segoe UI', Roboto, sans-serif;
-  --mono: ui-monospace, Consolas, monospace; */
+  --mono: ui-monospace, Consolas, monospace;
   font-size: 24px;
-  /* font: 18px/145% var(--sans); */
-  /*letter-spacing: 0.18px;
+  font: 18px/145% var(--sans); 
+  letter-spacing: 0.18px; 
   color-scheme: light dark;
   color: var(--text);
   background: var(--bg);
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale; */
+  -moz-osx-font-smoothing: grayscale;
 
   @media (max-width: 1024px) {
-    /* font-size: 16px; */
+    font-size: 16px;
   }
 }
 
-/* @media (prefers-color-scheme: dark) {
-  :root { */
-/* --text: #9ca3af;
+@media (prefers-color-scheme: dark) {
+  :root { 
+ --text: #9ca3af;
     --text-h: #f3f4f6;
     --bg: #16171d;
     --border: #2e303a;
@@ -42,13 +42,13 @@
     --accent-border: rgba(192, 132, 252, 0.5);
     --social-bg: rgba(47, 48, 58, 0.5);
     --shadow:
-      rgba(0, 0, 0, 0.4) 0 10px 15px -3px, rgba(0, 0, 0, 0.25) 0 4px 6px -2px; */
-/* } */
+      rgba(0, 0, 0, 0.4) 0 10px 15px -3px, rgba(0, 0, 0, 0.25) 0 4px 6px -2px;
+ }   
 
-/* #social .button-icon { */
-/* filter: invert(1) brightness(2); */
-/* } */
-/* } */
+  #social .button-icon { 
+    filter: invert(1) brightness(2); 
+  } 
+}
 
 * {
   box-sizing: border-box;

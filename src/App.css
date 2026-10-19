@@ -36,7 +36,7 @@ button:hover {
   justify-content: center;
   top: 0;
   left: 0;
-  font-size: 1.2em;
+  /* font-size: 1.2em; */
   /* background-color: bisque; */
   --bar-height: 8rem;
   /* text-align: center; */
@@ -101,9 +101,9 @@ button:hover {
   height: var(--bar-height);
 }
 
-.bar button.expand {
+/* .bar button.expand {
   width: 50px;
-}
+} */
 
 #paletteControl[data-expanded="false"] .bar button[aria-expanded] {
   transform: rotateX(180deg);
@@ -116,7 +116,7 @@ button:hover {
   display: flex;
   flex-direction: column;
   gap: 8px;
-  font-size: 0.5em;
+  /* font-size: 0.5em; */
   padding: 10px 20px;
 }
 
@@ -190,7 +190,7 @@ p.deleted {
   animation: fade-out 0.5s ease 2s forwards;
 }
 
-button#save,
+/* button#save,
 button#login,
 button#register,
 button#reset {
@@ -205,7 +205,7 @@ button#reset {
 .paletteContainer button {
   border: none;
   background: none;
-}
+} */
 
 .paletteContainer h3 {
   font-weight: bold;
@@ -234,7 +234,11 @@ form {
   /* align-items: center; */
   /* border: thin black solid; */
   padding: 8px;
-  font-size: 0.8em;
+  /* font-size: 0.8em; */
+}
+
+form button[type="submit"] {
+  align-self: flex-end;
 }
 
 .field {
@@ -327,7 +331,7 @@ button#close {
 input {
   width: 260px;
   padding: 4px 8px;
-  font-size: 0.8em;
+  /* font-size: 0.8em; */
 }
 
 p.error {
@@ -359,25 +363,23 @@ p.saved {
   }
 }
 
-button[type="submit"] {
+/* button[type="submit"] {
   padding: 4px;
   width: 200px;
-}
+} */
 
 @media (min-width: 768px) {
-  #paletteControl {
+  /* #paletteControl {
     font-size: 30px;
-  }
-  #response {
-    /* gap: 50px; */
-  }
+  } */
+  
   form {
     padding: 8px 20px;
-    font-size: 1em;
+    /* font-size: 1em; */
   }
 
   input {
-    font-size: 1em;
+    /* font-size: 1em; */
   }
 }
 
