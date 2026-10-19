@@ -32,14 +32,79 @@ button:hover {
 #paletteControl {
   position: absolute;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   top: 0;
   left: 0;
-  /* width: 100vw; */
   font-size: 1.2em;
-  padding: 10px;
   background-color: bisque;
+  --bar-height: 8rem;
   /* text-align: center; */
+}
+
+
+.drawer {
+  display: grid;
+  grid-template-rows: 0fr; 
+  transition: grid-template-rows 0.5s ease;
+  border-bottom: thick solid black;
+
+}
+
+#paletteControl[data-expanded="true"] .drawer {
+  grid-template-rows: 1fr;
+}
+
+.drawerInner {
+  overflow: hidden;
+}
+
+#response {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 40px 0px;
+  min-height: calc(100dvh - var(--bar-height));
+}
+
+#response > * {
+  animation: slide-in 1s ease both;
+  animation-delay: calc(var(--i) * 150ms);
+  /* margin-right: -4000px;
+  transition: margin-right 3s ease; */
+}
+
+@keyframes slide-in {
+  from {
+    transform: translateX(100vw);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+[data-palette="hidden"] #response > * {
+  margin-right: 0px;
+}
+
+.bar {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: center;
+  padding: 20px 10px;
+  height: var(--bar-height);
+}
+
+.bar button.expand {
+  width: 50px;
+}
+
+#paletteControl[data-expanded="false"] .bar button[aria-expanded] {
+  transform: rotateX(180deg);
 }
 
 #navMenu {
@@ -121,38 +186,6 @@ p.deleted {
 
 .deleteStatus.deleted {
   animation: fade-out 0.5s ease 2s forwards;
-}
-
-#response {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
-  /* width: 90vw; */
-  height: 100vh;
-  padding: 40px 0px;
-}
-
-#response > * {
-  animation: slide-in 1s ease both;
-  animation-delay: calc(var(--i) * 150ms);
-  /* margin-right: -4000px;
-  transition: margin-right 3s ease; */
-}
-
-@keyframes slide-in {
-  from {
-    transform: translateX(100vw);
-    opacity: 0;
-  }
-  to {
-    transform: translateX(0);
-    opacity: 1;
-  }
-}
-
-[data-palette="hidden"] #response > * {
-  margin-right: 0px;
 }
 
 button#save,

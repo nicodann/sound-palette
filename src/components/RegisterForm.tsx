@@ -67,7 +67,7 @@ export default function RegisterForm() {
       setUiState("empty");
     } catch (error) {
       if (error instanceof ApiError && error.status === 409) {
-        setError({ email: "AAn account with this email already exists." });
+        setError({ email: "An account with this email already exists." });
       } else if (error instanceof ApiError && error.status === 400) {
         setError({ password: error.message });
       } else {
