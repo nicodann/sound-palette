@@ -37,7 +37,7 @@ button:hover {
   top: 0;
   left: 0;
   font-size: 1.2em;
-  background-color: bisque;
+  /* background-color: bisque; */
   --bar-height: 8rem;
   /* text-align: center; */
 }
@@ -46,7 +46,7 @@ button:hover {
 .drawer {
   display: grid;
   grid-template-rows: 0fr; 
-  transition: grid-template-rows 0.5s ease;
+  transition: grid-template-rows 1s ease;
   border-bottom: thick solid black;
 
 }

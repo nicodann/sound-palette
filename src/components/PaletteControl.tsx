@@ -7,12 +7,14 @@ export default function PaletteControl() {
   const { currentPalette, saveStatus } = useAppContext();
   const [isExpanded, setIsExpanded] = useState(true);
 
+  if (!currentPalette) return null;
+
   return (
     <header id="paletteControl" data-expanded={isExpanded}>
       <div className="drawer">
         <div className="drawerInner" id="paletteWords">
           <div id="response">
-            {currentPalette?.palette.map((element, i, all) => {
+            {currentPalette.palette.map((element, i, all) => {
               return (
                 <p
                   key={i}
