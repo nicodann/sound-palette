@@ -24,7 +24,7 @@ export default function ConfirmPaletteDeleteModal({
       className="confirmDeletePaletteModal"
     >
       <h3 id="confirm-delete-title">
-        {`Are You Sure You Want To Delete ${palette.name ? palette.name : "this palette"}?`}
+        {`Are You Sure You Want To Delete ${palette.name ? '"' + palette.name + '"' : "this palette"}?`}
       </h3>
       <DeletePaletteButton paletteId={palette.id} onConfirm={onConfirm} />
       <button onClick={onCancel}>Cancel</button>

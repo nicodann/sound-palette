@@ -7,10 +7,20 @@
   min-height: 100vh;
   margin: 0 auto 0 auto;
   overflow: hidden;
-  font-family: "DM Sans Variable", sans-serif;
+  /* font-family: "DM Sans Variable", sans-serif; */
   padding: 0px 4px;
   /* text-align: center; */
   /* font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif; */
+}
+
+button {
+  padding: 2px 8px;
+  width: 100%;
+}
+
+button#close,
+button#submit {
+  width: auto;
 }
 
 button:hover {
@@ -24,11 +34,6 @@ button:hover {
   transform: translate(-50%, -50%);
 } */
 
-/* .archivo-black-regular {
-  font-family: "Archivo Black", sans-serif;
-  font-weight: 400;
-  font-style: normal;
-} */
 #paletteControl {
   position: absolute;
   display: flex;
@@ -42,13 +47,10 @@ button:hover {
   /* text-align: center; */
 }
 
-
 .drawer {
   display: grid;
-  grid-template-rows: 0fr; 
+  grid-template-rows: 0fr;
   transition: grid-template-rows 1s ease;
-  border-bottom: thick solid black;
-
 }
 
 #paletteControl[data-expanded="true"] .drawer {
@@ -66,8 +68,11 @@ button:hover {
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  padding: 40px 0px;
+  padding: 40px 8px;
   min-height: calc(100dvh - var(--bar-height));
+  /* color: black; */
+  color: black;
+  font-size: 1.5em;
 }
 
 #response > * {
@@ -99,11 +104,17 @@ button:hover {
   align-items: center;
   padding: 20px 10px;
   height: var(--bar-height);
+  button {
+    max-width: 180px;
+  }
 }
 
-/* .bar button.expand {
-  width: 50px;
-} */
+.bar button.expand {
+  background: none;
+  border: none;
+  color: black;
+  font-size: 2em;
+}
 
 #paletteControl[data-expanded="false"] .bar button[aria-expanded] {
   transform: rotateX(180deg);
@@ -115,15 +126,22 @@ button:hover {
   right: 0px;
   display: flex;
   flex-direction: column;
-  gap: 8px;
-  /* font-size: 0.5em; */
+  gap: 20px;
+  background-color: rgba(255, 255, 255, 0.5);
   padding: 10px 20px;
+
+  #nav {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
 }
 
 #paletteGallery {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 10px;
+  align-items: center;
   & h2 {
     font-weight: bold;
   }
@@ -132,30 +150,51 @@ button:hover {
 .paletteContainer {
   display: flex;
   flex-direction: column;
-  gap: 4px;
   transition:
     transform 1s ease,
     opacity 1s ease;
   transform: scale(1);
   opacity: 1;
-  
+
   &:hover {
     cursor: pointer;
     transform: scale(1.1);
     /* opacity: 0.8; */
   }
+
+  button {
+    background: none;
+    border: none;
+    color: black;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+  }
+
+  h3 {
+    font-weight: bold;
+  }
+
+  button#deletePalette {
+    &:hover {
+      opacity: 0.5;
+    }
+    font-size: 0.8em;
+  }
 }
 
 .paletteColourBox {
-  width: 100px;  
+  width: 100px;
   height: 100px;
 }
 .selected .paletteColourBox {
-  border: thin blue solid;
+  border-width: 2px;
+  border-style: outset;
 }
 
 .confirmDeletePaletteModal::backdrop {
-  background-color: rgb(0 0 0 / 0.6);  
+  background-color: rgb(0 0 0 / 0.6);
 }
 
 .confirmDeletePaletteModal {
@@ -163,15 +202,15 @@ button:hover {
   padding: 10px 20px;
   background-color: white;
   align-items: center;
+  color: black;
 }
 
 .confirmDeletePaletteModal[open] {
-  position: absolute; 
+  position: absolute;
   display: flex;
   flex-direction: column;
   gap: 12px;
   justify-content: center;
-
 }
 
 p.deleting {
@@ -190,33 +229,6 @@ p.deleted {
   animation: fade-out 0.5s ease 2s forwards;
 }
 
-/* button#save,
-button#login,
-button#register,
-button#reset {
-  padding: 0px 12px;
-}
-
-button#save,
-button#reset {
-  background-color: bisque;
-}
-
-.paletteContainer button {
-  border: none;
-  background: none;
-} */
-
-.paletteContainer h3 {
-  font-weight: bold;
-}
-
-button.deletePalette {
-  &:hover {
-    opacity: 0.5;
-  }
-}
-
 main {
   display: grid;
   place-items: center;
@@ -230,11 +242,7 @@ form {
   display: flex;
   flex-direction: column;
   gap: 12px;
-
-  /* align-items: center; */
-  /* border: thin black solid; */
   padding: 8px;
-  /* font-size: 0.8em; */
 }
 
 form button[type="submit"] {
@@ -265,6 +273,16 @@ form#paletteForm {
   visibility: visible;
 }
 
+textarea#prompt {
+  padding: 0px 8px;
+  width: 100%;
+  resize: vertical;
+  field-sizing: content;
+  min-height: 3lh;
+  font: inherit;
+  max-width: 600px;
+}
+
 #loginRegisterModal {
   background-color: bisque;
   height: 200px;
@@ -273,6 +291,7 @@ form#paletteForm {
   justify-content: center;
   align-items: center;
   gap: 16px;
+  padding: 12px;
   transition:
     transform 1s ease,
     opacity 1s ease,
@@ -326,6 +345,10 @@ button#close {
   position: absolute;
   top: 0px;
   right: 0px;
+  border: none;
+  background: none;
+  color: black;
+  font-weight: bold;
 }
 
 input {
@@ -372,7 +395,7 @@ p.saved {
   /* #paletteControl {
     font-size: 30px;
   } */
-  
+
   form {
     padding: 8px 20px;
     /* font-size: 1em; */

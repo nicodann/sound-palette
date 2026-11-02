@@ -8,9 +8,11 @@ export default function NavMenu() {
   const { loggedInUser } = useAppContext();
   return (
     <div id="navMenu">
-      {loggedInUser ? <p>{loggedInUser}</p> : <LoginButton />}
-      <RegisterButton />
-      <LogoutButton />
+      <div id="nav">
+        {loggedInUser ? <p>{loggedInUser}</p> : <LoginButton />}
+        <RegisterButton />
+        <LogoutButton />
+      </div>
       <PaletteGallery />
     </div>
   );

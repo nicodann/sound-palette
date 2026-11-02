@@ -16,7 +16,7 @@ export default function PaletteControl() {
           <div id="response">
             {currentPalette.palette.map((element, i, all) => {
               return (
-                <p
+                <h2
                   key={i}
                   style={
                     {
@@ -30,7 +30,7 @@ export default function PaletteControl() {
                   }
                 >
                   {element.adjective}
-                </p>
+                </h2>
               );
             })}
           </div>

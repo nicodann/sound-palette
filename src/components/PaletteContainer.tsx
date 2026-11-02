@@ -32,6 +32,7 @@ export default function PaletteContainer({
       className={`paletteContainer ${currentPalette && currentPalette.id === paletteObject.id && "selected"}`}
     >
       <button
+        id="paletteObject"
         onClick={() => {
           setCurrentPalette(paletteObject);
         }}
@@ -43,6 +44,7 @@ export default function PaletteContainer({
         />
       </button>
       <button
+        id="deletePalette"
         onClick={(e) => {
           e.stopPropagation();
           setIsOpenDeletePaletteModal(true);

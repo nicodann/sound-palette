@@ -43,19 +43,26 @@ export default function PaletteForm() {
 
   return (
     <form id="paletteForm" onSubmit={handleSubmit}>
-      <p>Describe a scene or feeling.</p>
-      <input
-        aria-invalid={!!error}
-        aria-describedby="prompt-error"
+      <p>Describe a scene or feeling. (max 500 chars.)</p>
+      <textarea
         id="prompt"
-        type="text"
+        rows={3}
         value={formValues.prompt}
         placeholder="A misty lake full of poison fishies..."
+        maxLength={500}
+        aria-invalid={!!error}
+        aria-describedby="prompt-error"
         onChange={(e) => {
           setError("");
           setFormValues((prev) => {
             return { ...prev, prompt: e.target.value };
           });
+        }}
+        onKeyDown={(e) => {
+          if (e.key === "Enter" && (e.metaKey || e.ctrlKey)) {
+            e.preventDefault();
+            e.currentTarget.form?.requestSubmit();
+          }
         }}
       />
       <p id="prompt-error" className="error" hidden={!error} role="alert">
