@@ -10,7 +10,7 @@ export default function PaletteControl() {
   if (!currentPalette) return null;
 
   return (
-    <header id="paletteControl" data-expanded={isExpanded}>
+    <div id="paletteControl" data-expanded={isExpanded}>
       <div className="drawer">
         <div className="drawerInner" id="paletteWords">
           <div id="response">
@@ -61,6 +61,6 @@ export default function PaletteControl() {
           ▴
         </button>
       </div>
-    </header>
+    </div>
   );
 }

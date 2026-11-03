@@ -32,6 +32,8 @@ function App() {
           : "",
       }}
     >
+      <NavMenu />
+
       {currentPalette && (
         <PaletteControl
           key={currentPalette.palette.map((c) => c.colour).join()}
@@ -44,8 +46,6 @@ function App() {
         <LoginForm />
         <RegisterForm />
       </main>
-
-      <NavMenu />
     </div>
   );
 }

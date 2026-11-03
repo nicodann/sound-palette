@@ -1,18 +1,3 @@
-#background {
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  max-width: 100vw;
-  min-height: 100vh;
-  margin: 0 auto 0 auto;
-  overflow: hidden;
-  /* font-family: "DM Sans Variable", sans-serif; */
-  padding: 0px 4px;
-  /* text-align: center; */
-  /* font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif; */
-}
-
 button {
   padding: 2px 8px;
   width: 100%;
@@ -27,15 +12,44 @@ button:hover {
   cursor: pointer;
 }
 
-/* .centered {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-} */
+#background {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  /* justify-content: center;
+  align-items: center; */
+  max-width: 100vw;
+  min-height: 100vh;
+  margin: 0 auto 0 auto;
+  overflow: hidden;
+  /* font-family: "DM Sans Variable", sans-serif; */
+  padding: 0px 4px;
+  --nav-height: 100px;
+  /* text-align: center; */
+  /* font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif; */
+}
+
+#navMenu {
+  /* position: absolute;
+  top: 0px;
+  right: 0px; */
+  width: 100%;
+  height: var(--nav-height);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  background-color: rgba(255, 255, 255, 0.5);
+  padding: 10px 20px;
+
+  #nav {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+}
 
 #paletteControl {
-  position: absolute;
+  /* position: absolute; */
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -45,41 +59,6 @@ button:hover {
   /* background-color: bisque; */
   --bar-height: 8rem;
   /* text-align: center; */
-}
-
-.drawer {
-  display: grid;
-  grid-template-rows: 0fr;
-  transition: grid-template-rows 1s ease;
-}
-
-#paletteControl[data-expanded="true"] .drawer {
-  grid-template-rows: 1fr;
-}
-
-.drawerInner {
-  overflow-x: visible;
-  overflow-y: clip;
-  min-height: 0;
-}
-
-#response {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
-  padding: 40px 8px;
-  min-height: calc(100dvh - var(--bar-height));
-  /* color: black; */
-  color: black;
-  font-size: 1.5em;
-}
-
-#response > * {
-  animation: slide-in 1s ease both;
-  animation-delay: calc(var(--i) * 150ms);
-  /* margin-right: -4000px;
-  transition: margin-right 3s ease; */
 }
 
 @keyframes slide-in {
@@ -120,21 +99,40 @@ button:hover {
   transform: rotateX(180deg);
 }
 
-#navMenu {
-  position: absolute;
-  top: 0px;
-  right: 0px;
+.drawer {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 1s ease;
+}
+
+#paletteControl[data-expanded="true"] .drawer {
+  grid-template-rows: 1fr;
+}
+
+.drawerInner {
+  overflow-x: visible;
+  overflow-y: clip;
+  min-height: 0;
+}
+
+#response {
   display: flex;
   flex-direction: column;
-  gap: 20px;
-  background-color: rgba(255, 255, 255, 0.5);
-  padding: 10px 20px;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 8px;
+  /* padding: 40px 8px; */
+  min-height: calc(80dvh - var(--bar-height) - var(--nav-height));
+  /* color: black; */
+  color: black;
+  font-size: 1em;
+}
 
-  #nav {
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-  }
+#response > * {
+  animation: slide-in 1s ease both;
+  animation-delay: calc(var(--i) * 150ms);
+  /* margin-right: -4000px;
+  transition: margin-right 3s ease; */
 }
 
 #paletteGallery {
@@ -200,7 +198,7 @@ button:hover {
 .confirmDeletePaletteModal {
   margin: auto;
   padding: 10px 20px;
-  background-color: white;
+  background-color: var(--text-box-bg);
   align-items: center;
   color: black;
 }
@@ -232,6 +230,8 @@ p.deleted {
 main {
   display: grid;
   place-items: center;
+  width: 100%;
+  grid-template-columns: minmax(0, 1fr);
 }
 
 main > * {
@@ -265,6 +265,7 @@ form#paletteForm {
   transform: scale(0);
   opacity: 0;
   visibility: hidden;
+  width: min(100%, 600px);
 }
 
 [data-ui="empty"][data-palette="visible"] form#paletteForm {
@@ -284,7 +285,7 @@ textarea#prompt {
 }
 
 #loginRegisterModal {
-  background-color: bisque;
+  background-color: var(--text-box-bg);
   height: 200px;
   width: 300px;
   display: flex;
@@ -392,16 +393,12 @@ p.saved {
 } */
 
 @media (min-width: 768px) {
-  /* #paletteControl {
-    font-size: 30px;
-  } */
+  #background {
+    flex-direction: row;
+  }
 
   form {
     padding: 8px 20px;
-    /* font-size: 1em; */
-  }
-
-  input {
     /* font-size: 1em; */
   }
 }
