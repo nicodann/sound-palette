@@ -8,7 +8,7 @@ import LoginForm from "./components/LoginForm";
 import { useAppContext } from "./context/useAppContext";
 import RegisterForm from "./components/RegisterForm";
 import NavMenu from "./components/NavMenu";
-import PaletteControl from "./components/PaletteControl";
+// import PaletteControl from "./components/PaletteControl";
 import { buildGradientString } from "./lib/buildGradientString";
 
 function App() {
@@ -34,11 +34,11 @@ function App() {
     >
       <NavMenu />
 
-      {currentPalette && (
+      {/* {currentPalette && (
         <PaletteControl
           key={currentPalette.palette.map((c) => c.colour).join()}
         />
-      )}
+      )} */}
 
       <main>
         <PaletteForm />

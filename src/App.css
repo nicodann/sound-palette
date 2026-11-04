@@ -24,9 +24,20 @@ button:hover {
   overflow: hidden;
   /* font-family: "DM Sans Variable", sans-serif; */
   padding: 0px 4px;
-  --nav-height: 100px;
+  --nav-height: auto;
   /* text-align: center; */
   /* font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif; */
+}
+
+@keyframes slide-in {
+  from {
+    transform: translateX(100vw);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
 }
 
 #navMenu {
@@ -37,6 +48,7 @@ button:hover {
   height: var(--nav-height);
   display: flex;
   flex-direction: column;
+  align-items: center;
   gap: 20px;
   background-color: rgba(255, 255, 255, 0.5);
   padding: 10px 20px;
@@ -61,16 +73,6 @@ button:hover {
   /* text-align: center; */
 }
 
-@keyframes slide-in {
-  from {
-    transform: translateX(100vw);
-    opacity: 0;
-  }
-  to {
-    transform: translateX(0);
-    opacity: 1;
-  }
-}
 
 [data-palette="hidden"] #response > * {
   margin-right: 0px;
