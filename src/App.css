@@ -83,7 +83,6 @@ button:hover {
   flex-direction: column;
   gap: 8px;
   align-items: center;
-  padding: 20px 10px;
   height: var(--bar-height);
   button {
     max-width: 180px;
@@ -97,7 +96,8 @@ button:hover {
   font-size: 2em;
 }
 
-#paletteControl[data-expanded="false"] .bar button[aria-expanded] {
+#paletteControl[data-expanded="false"] .bar button[aria-expanded],
+#paletteGallery[data-expanded="false"] .bar button[aria-expanded] {
   transform: rotateX(180deg);
 }
 
@@ -107,7 +107,8 @@ button:hover {
   transition: grid-template-rows 1s ease;
 }
 
-#paletteControl[data-expanded="true"] .drawer {
+#paletteControl[data-expanded="true"] .drawer,
+#paletteGallery[data-expanded="true"] .drawer {
   grid-template-rows: 1fr;
 }
 

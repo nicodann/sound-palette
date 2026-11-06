@@ -9,6 +9,8 @@ export default function PaletteGallery() {
     useAppContext();
   const [isExpanded, setIsExpanded] = useState(true);
 
+  console.log("isExpanded: ", isExpanded);
+
   useEffect(() => {
     if (!loggedInUser) return;
 
@@ -26,8 +28,9 @@ export default function PaletteGallery() {
   if (!loggedInUser) return null;
 
   return (
-    <div id="paletteGallery">
+    <div id="paletteGallery" data-expanded={isExpanded}>
       <div className="bar">
+        <h2>My Colours</h2>
         <button
           className="expand"
           aria-expanded={isExpanded}
@@ -37,7 +40,7 @@ export default function PaletteGallery() {
           }
           onClick={() => setIsExpanded((prev) => !prev)}
         >
-          <p>My Colours</p>▴
+          {/* <span className="drawerArrow">▴</span> */}▴
         </button>
       </div>
       <div className="drawer">

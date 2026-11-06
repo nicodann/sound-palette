@@ -10,9 +10,10 @@ import RegisterForm from "./components/RegisterForm";
 import NavMenu from "./components/NavMenu";
 // import PaletteControl from "./components/PaletteControl";
 import { buildGradientString } from "./lib/buildGradientString";
+import PaletteGallery from "./components/PaletteGallery";
 
 function App() {
-  const { uiState, currentPalette } = useAppContext();
+  const { uiState, currentPalette, loggedInUser } = useAppContext();
 
   useEffect(() => {
     console.log("uiState: ", uiState);
@@ -46,6 +47,8 @@ function App() {
         <LoginForm />
         <RegisterForm />
       </main>
+
+      {loggedInUser && <PaletteGallery />}
     </div>
   );
 }

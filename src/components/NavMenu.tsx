@@ -2,7 +2,6 @@ import { useAppContext } from "../context/useAppContext";
 import LoginButton from "./LoginButton";
 import LogoutButton from "./LogoutButton";
 import PaletteControl from "./PaletteControl";
-import PaletteGallery from "./PaletteGallery";
 import RegisterButton from "./RegisterButton";
 
 export default function NavMenu() {
@@ -19,7 +18,6 @@ export default function NavMenu() {
           />
         )}
       </div>
-      <PaletteGallery />
     </header>
   );
 }
