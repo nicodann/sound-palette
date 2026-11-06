@@ -31,15 +31,17 @@ export default function PaletteGallery() {
         <button
           className="expand"
           aria-expanded={isExpanded}
-          aria-controls="paletteWords"
-          aria-label={isExpanded ? "Hide palette words" : "Show palette words"}
+          aria-controls="paletteObjects"
+          aria-label={
+            isExpanded ? "Hide palette objects" : "Show palette objects"
+          }
           onClick={() => setIsExpanded((prev) => !prev)}
         >
           <p>My Colours</p>▴
         </button>
       </div>
       <div className="drawer">
-        <div className="drawerInner">
+        <div className="drawerInner" id="paletteObjects">
           {userPalettes?.map((palette, i) => (
             <Fragment key={i}>
               <PaletteContainer paletteObject={palette} key={palette.id} />
