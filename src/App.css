@@ -73,7 +73,7 @@ button.expand {
 
 /*-----*/
 
-#nav[data-expanded="false"] button[aria-expanded],
+/* #nav[data-expanded="false"] button[aria-expanded], */
 #paletteGallery[data-expanded="false"] button[aria-expanded] {
   transform: rotateX(180deg);
 }

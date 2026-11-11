@@ -36,7 +36,7 @@ export default function NavMenu() {
               {saveStatus}
             </p>
             <button
-              className="expand"
+              // className="expand"
               aria-expanded={isPaletteDrawerExpanded}
               aria-controls="paletteWords"
               aria-label={
@@ -46,7 +46,8 @@ export default function NavMenu() {
               }
               onClick={() => setIsPaletteDrawerExpanded((prev) => !prev)}
             >
-              ▴
+              {isPaletteDrawerExpanded ? "words -->" : "<-- words"}
+              {/* ▴ */}
             </button>
           </>
         )}
