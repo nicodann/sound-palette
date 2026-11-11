@@ -22,6 +22,8 @@ type AppContextValue = {
   setDeleteStatus: Dispatch<SetStateAction<DeleteStatus>>;
   pendingDelete?: string;
   setPendingDelete: Dispatch<SetStateAction<string | undefined>>;
+  isPaletteDrawerExpanded: boolean;
+  setIsPaletteDrawerExpanded: Dispatch<SetStateAction<boolean>>;
 };
 
 export const AppContext = createContext<AppContextValue | null>(null);

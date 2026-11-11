@@ -1,66 +1,33 @@
-import { useState } from "react";
 import { useAppContext } from "../context/useAppContext";
-import ResetButton from "./ResetButton";
-import SavePaletteButton from "./SavePaletteButton";
+import PaletteWordsDrawer from "./PaletteWordsDrawer";
 
 export default function PaletteControl() {
-  const { currentPalette, saveStatus } = useAppContext();
-  const [isExpanded, setIsExpanded] = useState(true);
+  const {
+    currentPalette,
+    isPaletteDrawerExpanded,
+    setIsPaletteDrawerExpanded,
+  } = useAppContext();
 
   if (!currentPalette) return null;
 
   return (
-    <div id="paletteControl" data-expanded={isExpanded}>
-      <div className="drawer">
-        <div className="drawerInner" id="paletteWords">
-          <div id="response">
-            {currentPalette.palette.map((element, i, all) => {
-              return (
-                <h2
-                  key={i}
-                  style={
-                    {
-                      "--i": i,
-                    } as React.CSSProperties
-                  }
-                  onAnimationEnd={
-                    i === all.length - 1
-                      ? () => setIsExpanded(false)
-                      : undefined
-                  }
-                >
-                  {element.adjective}
-                </h2>
-              );
-            })}
-          </div>
-        </div>
-      </div>
+    <div id="paletteControl" data-expanded={isPaletteDrawerExpanded}>
       <div className="bar">
-        <ResetButton />
-        {!currentPalette.id && <SavePaletteButton />}
-        <p
-          id="saveStatus"
-          className={`
-            ${saveStatus === "error" && "error"}
-            ${saveStatus === "saving" && "saving"}
-            ${saveStatus === "saved" && "saved"}
-            `}
-          role="alert"
-          hidden={saveStatus === "idle"}
-        >
-          {saveStatus}
-        </p>
         <button
           className="expand"
-          aria-expanded={isExpanded}
+          aria-expanded={isPaletteDrawerExpanded}
           aria-controls="paletteWords"
-          aria-label={isExpanded ? "Hide palette words" : "Show palette words"}
-          onClick={() => setIsExpanded((prev) => !prev)}
+          aria-label={
+            isPaletteDrawerExpanded
+              ? "Hide palette words"
+              : "Show palette words"
+          }
+          onClick={() => setIsPaletteDrawerExpanded((prev) => !prev)}
         >
           ▴
         </button>
       </div>
+      <PaletteWordsDrawer />
     </div>
   );
 }

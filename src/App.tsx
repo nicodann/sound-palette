@@ -8,9 +8,9 @@ import LoginForm from "./components/LoginForm";
 import { useAppContext } from "./context/useAppContext";
 import RegisterForm from "./components/RegisterForm";
 import NavMenu from "./components/NavMenu";
-// import PaletteControl from "./components/PaletteControl";
 import { buildGradientString } from "./lib/buildGradientString";
 import PaletteGallery from "./components/PaletteGallery";
+import PaletteControl from "./components/PaletteControl";
 
 function App() {
   const { uiState, currentPalette, loggedInUser } = useAppContext();
@@ -34,12 +34,7 @@ function App() {
       }}
     >
       <NavMenu />
-
-      {/* {currentPalette && (
-        <PaletteControl
-          key={currentPalette.palette.map((c) => c.colour).join()}
-        />
-      )} */}
+      <PaletteControl />
 
       <main>
         <PaletteForm />

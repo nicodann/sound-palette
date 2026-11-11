@@ -1,11 +1,12 @@
 import { useAppContext } from "../context/useAppContext";
 import LoginButton from "./LoginButton";
 import LogoutButton from "./LogoutButton";
-import PaletteControl from "./PaletteControl";
 import RegisterButton from "./RegisterButton";
+import ResetButton from "./ResetButton";
+import SavePaletteButton from "./SavePaletteButton";
 
 export default function NavMenu() {
-  const { loggedInUser, currentPalette } = useAppContext();
+  const { loggedInUser, currentPalette, saveStatus } = useAppContext();
   return (
     <header id="navMenu">
       <div id="nav">
@@ -13,9 +14,22 @@ export default function NavMenu() {
         <RegisterButton />
         <LogoutButton />
         {currentPalette && (
-          <PaletteControl
-            key={currentPalette.palette.map((c) => c.colour).join()}
-          />
+          <>
+            <ResetButton />
+            {!currentPalette.id && <SavePaletteButton />}
+            <p
+              id="saveStatus"
+              className={`
+                ${saveStatus === "error" && "error"}
+                ${saveStatus === "saving" && "saving"}
+                ${saveStatus === "saved" && "saved"}
+                `}
+              role="alert"
+              hidden={saveStatus === "idle"}
+            >
+              {saveStatus}
+            </p>
+          </>
         )}
       </div>
     </header>
