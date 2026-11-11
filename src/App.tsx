@@ -10,10 +10,11 @@ import RegisterForm from "./components/RegisterForm";
 import NavMenu from "./components/NavMenu";
 import { buildGradientString } from "./lib/buildGradientString";
 import PaletteGallery from "./components/PaletteGallery";
-import PaletteControl from "./components/PaletteControl";
+import PaletteWordsDrawer from "./components/PaletteWordsDrawer";
 
 function App() {
-  const { uiState, currentPalette, loggedInUser } = useAppContext();
+  const { uiState, currentPalette, loggedInUser, isPaletteDrawerExpanded } =
+    useAppContext();
 
   useEffect(() => {
     console.log("uiState: ", uiState);
@@ -34,9 +35,9 @@ function App() {
       }}
     >
       <NavMenu />
-      <PaletteControl />
 
-      <main>
+      <main data-expanded={isPaletteDrawerExpanded}>
+        <PaletteWordsDrawer />
         <PaletteForm />
         <LoginRegisterModal />
         <LoginForm />

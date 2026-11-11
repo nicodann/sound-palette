@@ -6,10 +6,16 @@ import ResetButton from "./ResetButton";
 import SavePaletteButton from "./SavePaletteButton";
 
 export default function NavMenu() {
-  const { loggedInUser, currentPalette, saveStatus } = useAppContext();
+  const {
+    loggedInUser,
+    currentPalette,
+    saveStatus,
+    isPaletteDrawerExpanded,
+    setIsPaletteDrawerExpanded,
+  } = useAppContext();
   return (
     <header id="navMenu">
-      <div id="nav">
+      <div id="nav" data-expanded={isPaletteDrawerExpanded}>
         {loggedInUser ? <p>{loggedInUser}</p> : <LoginButton />}
         <RegisterButton />
         <LogoutButton />
@@ -29,6 +35,19 @@ export default function NavMenu() {
             >
               {saveStatus}
             </p>
+            <button
+              className="expand"
+              aria-expanded={isPaletteDrawerExpanded}
+              aria-controls="paletteWords"
+              aria-label={
+                isPaletteDrawerExpanded
+                  ? "Hide palette words"
+                  : "Show palette words"
+              }
+              onClick={() => setIsPaletteDrawerExpanded((prev) => !prev)}
+            >
+              ▴
+            </button>
           </>
         )}
       </div>
