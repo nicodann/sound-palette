@@ -81,13 +81,16 @@ button.expand {
 .drawer {
   display: grid;
   grid-template-rows: 0fr;
-  align-self: stretch;
   justify-self: stretch;
   transition: grid-template-rows 1s ease;
+}
+
+.wordsDrawer {
+  align-self: stretch;
   pointer-events: none;
 }
 
-main[data-expanded="true"] .drawer,
+/* main[data-expanded="true"] .drawer, */
 #paletteGallery[data-expanded="true"] .drawer {
   grid-template-rows: 1fr;
 }
@@ -110,9 +113,23 @@ main[data-expanded="true"] .drawer,
   height: 100%;
 }
 
-#response > * {
+#response > h2 {
   animation: slide-in 1s ease both;
   animation-delay: calc(var(--i) * 150ms);
+
+  translate: 100vw 0;
+  visibility: hidden;
+  transition:
+    translate 0.6s ease-in,
+    visibility 0.6s;
+  transition-delay: calc((4 - var(--i)) * 100ms);
+}
+
+main[data-expanded="true"] #response > h2 {
+  translate: 0 0;
+  visibility: visible;
+  transition-timing-function: ease-out;
+  transition-delay: calc(var(--i) * 100ms);
 }
 
 #paletteGallery {
