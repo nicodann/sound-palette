@@ -59,10 +59,9 @@ button:hover {
   }
 }
 
-#paletteAdjectiveContainer {
-  position: relative;
-  display: flex;
-  flex-direction: column;
+.wordsDrawer {
+  align-self: stretch;
+  pointer-events: none;
 }
 
 [data-palette="hidden"] #response > * {
@@ -87,11 +86,6 @@ button.expand {
   grid-template-rows: 0fr;
   justify-self: stretch;
   transition: grid-template-rows 1s ease;
-}
-
-.wordsDrawer {
-  align-self: stretch;
-  pointer-events: none;
 }
 
 /* main[data-palettes-expanded="true"] .drawer, */
