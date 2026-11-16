@@ -301,6 +301,11 @@ form#paletteForm {
   visibility: visible;
 }
 
+main[data-palettes-expanded="true"] form#paletteForm {
+  visibility: hidden;
+  opacity: 0;
+}
+
 textarea#prompt {
   padding: 0px 8px;
   width: 100%;

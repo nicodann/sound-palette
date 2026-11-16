@@ -10,8 +10,8 @@ export default function PaletteGallery() {
     setUserPalettes,
     userPalettes,
     pendingDelete,
-    isPaletteDrawerExpanded,
-    setIsPaletteDrawerExpanded,
+    openDrawer,
+    setOpenDrawer,
   } = useAppContext();
 
   useEffect(() => {
@@ -31,7 +31,7 @@ export default function PaletteGallery() {
   if (!loggedInUser) return null;
 
   return (
-    <div id="paletteGallery" data-palettes-expanded={isPaletteDrawerExpanded}>
+    <div id="paletteGallery" data-palettes-expanded={openDrawer === "palettes"}>
       <div className="galleryDrawer">
         {userPalettes?.map((palette, i, all) => (
           <div
@@ -43,7 +43,10 @@ export default function PaletteGallery() {
             }
             onAnimationEnd={
               i === all.length - 1
-                ? () => setIsPaletteDrawerExpanded(false)
+                ? () =>
+                    setOpenDrawer((prev) =>
+                      prev === "palettes" ? null : "palettes",
+                    )
                 : undefined
             }
           >
