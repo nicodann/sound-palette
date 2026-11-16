@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { useAppContext } from "../context/useAppContext";
 import LoginButton from "./LoginButton";
 import LogoutButton from "./LogoutButton";
@@ -11,27 +10,13 @@ export default function NavMenu() {
     loggedInUser,
     currentPalette,
     saveStatus,
-    isWordsDrawerExpanded,
-    setIsWordsDrawerExpanded,
-    isPaletteDrawerExpanded,
-    setIsPaletteDrawerExpanded,
+    openDrawer,
+    setOpenDrawer,
   } = useAppContext();
-
-  useEffect(() => {
-    console.log("isPaletteDrawerExpanded? ", isPaletteDrawerExpanded);
-    console.log("isWordsDrawerExpanded? ", isWordsDrawerExpanded);
-    if (isPaletteDrawerExpanded) setIsWordsDrawerExpanded(false);
-    if (isWordsDrawerExpanded) setIsPaletteDrawerExpanded(false);
-  }, [
-    isWordsDrawerExpanded,
-    isPaletteDrawerExpanded,
-    setIsPaletteDrawerExpanded,
-    setIsWordsDrawerExpanded,
-  ]);
 
   return (
     <header id="navMenu">
-      <div id="nav" data-expanded={isWordsDrawerExpanded}>
+      <div id="nav">
         {loggedInUser ? <p>{loggedInUser}</p> : <LoginButton />}
         <RegisterButton />
         <LogoutButton />
@@ -52,30 +37,36 @@ export default function NavMenu() {
               {saveStatus}
             </p>
             <button
-              aria-expanded={isWordsDrawerExpanded}
+              aria-expanded={openDrawer === "words"}
               aria-controls="paletteWords"
               aria-label={
-                isWordsDrawerExpanded
+                openDrawer === "words"
                   ? "Hide palette words"
                   : "Show palette words"
               }
-              onClick={() => setIsWordsDrawerExpanded((prev) => !prev)}
+              onClick={() =>
+                setOpenDrawer((prev) => (prev === "words" ? null : "words"))
+              }
             >
-              {isWordsDrawerExpanded ? "words -->" : "<-- words"}
+              {openDrawer === "words" ? "words -->" : "<-- words"}
               {/* ▴ */}
             </button>
             <button
               // className="expand"
-              aria-expanded={isPaletteDrawerExpanded}
+              aria-expanded={openDrawer === "palettes"}
               aria-controls="paletteObjects"
               aria-label={
-                isPaletteDrawerExpanded
+                openDrawer === "palettes"
                   ? "Hide palette objects"
                   : "Show palette objects"
               }
-              onClick={() => setIsPaletteDrawerExpanded((prev) => !prev)}
+              onClick={() =>
+                setOpenDrawer((prev) =>
+                  prev === "palettes" ? null : "palettes",
+                )
+              }
             >
-              {isPaletteDrawerExpanded ? "<-- palettes" : "palettes -->"}
+              {openDrawer == "palettes" ? "<-- palettes" : "palettes -->"}
               {/* <span className="drawerArrow">▴</span>▴ */}
             </button>
           </>

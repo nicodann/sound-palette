@@ -13,13 +13,7 @@ import PaletteGallery from "./components/PaletteGallery";
 import PaletteWordsDrawer from "./components/PaletteWordsDrawer";
 
 function App() {
-  const {
-    uiState,
-    currentPalette,
-    loggedInUser,
-    isWordsDrawerExpanded,
-    isPaletteDrawerExpanded,
-  } = useAppContext();
+  const { uiState, currentPalette, loggedInUser, openDrawer } = useAppContext();
 
   useEffect(() => {
     console.log("uiState: ", uiState);
@@ -42,8 +36,8 @@ function App() {
       <NavMenu />
 
       <main
-        data-words-expanded={isWordsDrawerExpanded}
-        data-palettes-expanded={isPaletteDrawerExpanded}
+        data-words-expanded={openDrawer === "words"}
+        data-palettes-expanded={openDrawer === "palettes"}
       >
         <PaletteWordsDrawer />
         {loggedInUser && <PaletteGallery />}
