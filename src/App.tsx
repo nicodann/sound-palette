@@ -38,13 +38,12 @@ function App() {
 
       <main data-words-expanded={isWordsDrawerExpanded}>
         <PaletteWordsDrawer />
+        {loggedInUser && <PaletteGallery />}
         <PaletteForm />
         <LoginRegisterModal />
         <LoginForm />
         <RegisterForm />
       </main>
-
-      {loggedInUser && <PaletteGallery />}
     </div>
   );
 }

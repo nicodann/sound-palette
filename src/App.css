@@ -59,6 +59,20 @@ button:hover {
   }
 }
 
+main {
+  flex: 1;
+  display: grid;
+  place-items: center;
+  width: 100%;
+  grid-template-columns: minmax(0, 1fr);
+}
+
+main > * {
+  grid-area: 1 / 1;
+}
+
+/* WORDS DRAWER */
+
 .wordsDrawer {
   align-self: stretch;
   pointer-events: none;
@@ -66,40 +80,6 @@ button:hover {
 
 [data-palette="hidden"] #response > * {
   margin-right: 0px;
-}
-
-button.expand {
-  background: none;
-  border: none;
-  color: black;
-  font-size: 2em;
-}
-
-/*-----*/
-
-#paletteGallery[data-palettes-expanded="false"] button[aria-expanded] {
-  transform: rotateX(180deg);
-}
-
-.drawer {
-  display: grid;
-  grid-template-rows: 0fr;
-  justify-self: stretch;
-  transition: grid-template-rows 1s ease;
-}
-
-/* main[data-palettes-expanded="true"] .drawer, */
-#paletteGallery[data-palettes-expanded="true"] .drawer {
-  grid-template-rows: 1fr;
-}
-
-/*-----*/
-
-.drawerInner {
-  overflow-x: visible;
-  overflow-y: clip;
-  min-height: 0;
-  pointer-events: auto;
 }
 
 #response {
@@ -128,6 +108,37 @@ main[data-words-expanded="true"] #response > h2 {
   visibility: visible;
   transition-timing-function: ease-out;
   transition-delay: calc(var(--i) * 100ms);
+}
+
+button.expand {
+  background: none;
+  border: none;
+  color: black;
+  font-size: 2em;
+}
+
+/*PALETTE GALLERY DRAWER*/
+
+#paletteGallery[data-palettes-expanded="false"] button[aria-expanded] {
+  transform: rotateX(180deg);
+}
+
+.galleryDrawer {
+  display: grid;
+  grid-template-rows: 0fr;
+  justify-self: stretch;
+  transition: grid-template-rows 1s ease;
+}
+
+#paletteGallery[data-palettes-expanded="true"] .galleryDrawer {
+  grid-template-rows: 1fr;
+}
+
+.galleryDrawerInner {
+  overflow-x: visible;
+  overflow-y: clip;
+  min-height: 0;
+  pointer-events: auto;
 }
 
 #paletteGallery {
@@ -185,6 +196,8 @@ main[data-words-expanded="true"] #response > h2 {
   border-style: outset;
 }
 
+/*-----*/
+
 .confirmDeletePaletteModal::backdrop {
   background-color: rgb(0 0 0 / 0.6);
 }
@@ -219,18 +232,6 @@ p.deleted {
 
 .deleteStatus.deleted {
   animation: fade-out 0.5s ease 2s forwards;
-}
-
-main {
-  flex: 1;
-  display: grid;
-  place-items: center;
-  width: 100%;
-  grid-template-columns: minmax(0, 1fr);
-}
-
-main > * {
-  grid-area: 1 / 1;
 }
 
 form {

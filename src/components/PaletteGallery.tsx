@@ -32,8 +32,8 @@ export default function PaletteGallery() {
   return (
     <div id="paletteGallery" data-palettes-expanded={isPaletteDrawerExpanded}>
       <div className="bar"></div>
-      <div className="drawer">
-        <div className="drawerInner" id="paletteObjects">
+      <div className="galleryDrawer">
+        <div className="galleryDrawerInner" id="paletteObjects">
           {userPalettes?.map((palette, i) => (
             <Fragment key={i}>
               <PaletteContainer paletteObject={palette} key={palette.id} />
