@@ -1,5 +1,10 @@
 import { useEffect, useState, type ReactNode } from "react";
-import { AppContext, type SaveStatus, type UiState } from "./AppContext";
+import {
+  AppContext,
+  type OpenDrawer,
+  type SaveStatus,
+  type UiState,
+} from "./AppContext";
 import type { CurrentPalette, DeleteStatus, SavedPalette } from "../types";
 import { getCurrentUser } from "../api/auth";
 import { ApiError } from "../api/client";
@@ -17,6 +22,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
   const [pendingDelete, setPendingDelete] = useState<string>();
   const [isWordsDrawerExpanded, setIsWordsDrawerExpanded] = useState(false);
   const [isPaletteDrawerExpanded, setIsPaletteDrawerExpanded] = useState(false);
+  const [openDrawer, setOpenDrawer] = useState<OpenDrawer>(null);
 
   useEffect(() => {
     getCurrentUser()
@@ -50,6 +56,8 @@ export function AppProvider({ children }: { children: ReactNode }) {
         setIsPaletteDrawerExpanded,
         isWordsDrawerExpanded,
         setIsWordsDrawerExpanded,
+        openDrawer,
+        setOpenDrawer,
       }}
     >
       {children}

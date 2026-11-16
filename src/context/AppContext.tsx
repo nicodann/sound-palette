@@ -5,6 +5,8 @@ export type UiState = "empty" | "loginRegister" | "login" | "register";
 
 export type SaveStatus = "idle" | "saving" | "saved" | "error";
 
+export type OpenDrawer = "words" | "palettes" | null;
+
 type AppContextValue = {
   uiState: UiState;
   setUiState: Dispatch<SetStateAction<UiState>>;
@@ -26,6 +28,8 @@ type AppContextValue = {
   setIsWordsDrawerExpanded: Dispatch<SetStateAction<boolean>>;
   isPaletteDrawerExpanded: boolean;
   setIsPaletteDrawerExpanded: Dispatch<SetStateAction<boolean>>;
+  openDrawer?: OpenDrawer;
+  setOpenDrawer: Dispatch<SetStateAction<OpenDrawer>>;
 };
 
 export const AppContext = createContext<AppContextValue | null>(null);
