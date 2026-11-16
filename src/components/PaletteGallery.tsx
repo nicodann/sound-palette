@@ -1,4 +1,4 @@
-import { Fragment, useEffect } from "react";
+import { useEffect } from "react";
 import { useAppContext } from "../context/useAppContext";
 import { getPalettes } from "../api/palette";
 import PaletteContainer from "./PaletteContainer";
@@ -11,6 +11,7 @@ export default function PaletteGallery() {
     userPalettes,
     pendingDelete,
     isPaletteDrawerExpanded,
+    setIsPaletteDrawerExpanded,
   } = useAppContext();
 
   useEffect(() => {
@@ -31,16 +32,25 @@ export default function PaletteGallery() {
 
   return (
     <div id="paletteGallery" data-palettes-expanded={isPaletteDrawerExpanded}>
-      <div className="bar"></div>
       <div className="galleryDrawer">
-        <div className="galleryDrawerInner" id="paletteObjects">
-          {userPalettes?.map((palette, i) => (
-            <Fragment key={i}>
-              <PaletteContainer paletteObject={palette} key={palette.id} />
-              {palette.id === pendingDelete && <DeleteStatus />}
-            </Fragment>
-          ))}
-        </div>
+        {userPalettes?.map((palette, i, all) => (
+          <div
+            key={i}
+            style={
+              {
+                "--i": i,
+              } as React.CSSProperties
+            }
+            onAnimationEnd={
+              i === all.length - 1
+                ? () => setIsPaletteDrawerExpanded(false)
+                : undefined
+            }
+          >
+            <PaletteContainer paletteObject={palette} key={palette.id} />
+            {palette.id === pendingDelete && <DeleteStatus />}
+          </div>
+        ))}
       </div>
     </div>
   );

@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { useAppContext } from "../context/useAppContext";
 import LoginButton from "./LoginButton";
 import LogoutButton from "./LogoutButton";
@@ -15,6 +16,19 @@ export default function NavMenu() {
     isPaletteDrawerExpanded,
     setIsPaletteDrawerExpanded,
   } = useAppContext();
+
+  useEffect(() => {
+    console.log("isPaletteDrawerExpanded? ", isPaletteDrawerExpanded);
+    console.log("isWordsDrawerExpanded? ", isWordsDrawerExpanded);
+    if (isPaletteDrawerExpanded) setIsWordsDrawerExpanded(false);
+    if (isWordsDrawerExpanded) setIsPaletteDrawerExpanded(false);
+  }, [
+    isWordsDrawerExpanded,
+    isPaletteDrawerExpanded,
+    setIsPaletteDrawerExpanded,
+    setIsWordsDrawerExpanded,
+  ]);
+
   return (
     <header id="navMenu">
       <div id="nav" data-expanded={isWordsDrawerExpanded}>
@@ -38,7 +52,6 @@ export default function NavMenu() {
               {saveStatus}
             </p>
             <button
-              // className="expand"
               aria-expanded={isWordsDrawerExpanded}
               aria-controls="paletteWords"
               aria-label={
