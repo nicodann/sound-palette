@@ -10,12 +10,12 @@ export default function NavMenu() {
     loggedInUser,
     currentPalette,
     saveStatus,
-    isPaletteDrawerExpanded,
-    setIsPaletteDrawerExpanded,
+    isWordsDrawerExpanded,
+    setIsWordsDrawerExpanded,
   } = useAppContext();
   return (
     <header id="navMenu">
-      <div id="nav" data-expanded={isPaletteDrawerExpanded}>
+      <div id="nav" data-expanded={isWordsDrawerExpanded}>
         {loggedInUser ? <p>{loggedInUser}</p> : <LoginButton />}
         <RegisterButton />
         <LogoutButton />
@@ -37,16 +37,16 @@ export default function NavMenu() {
             </p>
             <button
               // className="expand"
-              aria-expanded={isPaletteDrawerExpanded}
+              aria-expanded={isWordsDrawerExpanded}
               aria-controls="paletteWords"
               aria-label={
-                isPaletteDrawerExpanded
+                isWordsDrawerExpanded
                   ? "Hide palette words"
                   : "Show palette words"
               }
-              onClick={() => setIsPaletteDrawerExpanded((prev) => !prev)}
+              onClick={() => setIsWordsDrawerExpanded((prev) => !prev)}
             >
-              {isPaletteDrawerExpanded ? "words -->" : "<-- words"}
+              {isWordsDrawerExpanded ? "words -->" : "<-- words"}
               {/* ▴ */}
             </button>
           </>

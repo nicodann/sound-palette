@@ -78,7 +78,6 @@ button.expand {
 
 /*-----*/
 
-/* #nav[data-expanded="false"] button[aria-expanded], */
 #paletteGallery[data-expanded="false"] button[aria-expanded] {
   transform: rotateX(180deg);
 }
@@ -130,7 +129,7 @@ button.expand {
   transition-delay: calc((4 - var(--i)) * 100ms);
 }
 
-main[data-expanded="true"] #response > h2 {
+main[data-words-expanded="true"] #response > h2 {
   translate: 0 0;
   visibility: visible;
   transition-timing-function: ease-out;

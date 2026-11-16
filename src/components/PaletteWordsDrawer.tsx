@@ -1,11 +1,7 @@
 import { useAppContext } from "../context/useAppContext";
 
 export default function PaletteWordsDrawer() {
-  const {
-    currentPalette,
-    // isPaletteDrawerExpanded,
-    setIsPaletteDrawerExpanded,
-  } = useAppContext();
+  const { currentPalette, setIsWordsDrawerExpanded } = useAppContext();
 
   if (!currentPalette) return null;
 
@@ -23,7 +19,7 @@ export default function PaletteWordsDrawer() {
               }
               onAnimationEnd={
                 i === all.length - 1
-                  ? () => setIsPaletteDrawerExpanded(false)
+                  ? () => setIsWordsDrawerExpanded(false)
                   : undefined
               }
             >

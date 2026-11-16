@@ -15,6 +15,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
   const [userPalettes, setUserPalettes] = useState<SavedPalette[]>([]);
   const [deleteStatus, setDeleteStatus] = useState<DeleteStatus>("idle");
   const [pendingDelete, setPendingDelete] = useState<string>();
+  const [isWordsDrawerExpanded, setIsWordsDrawerExpanded] = useState(false);
   const [isPaletteDrawerExpanded, setIsPaletteDrawerExpanded] = useState(false);
 
   useEffect(() => {
@@ -47,6 +48,8 @@ export function AppProvider({ children }: { children: ReactNode }) {
         setPendingDelete,
         isPaletteDrawerExpanded,
         setIsPaletteDrawerExpanded,
+        isWordsDrawerExpanded,
+        setIsWordsDrawerExpanded,
       }}
     >
       {children}
