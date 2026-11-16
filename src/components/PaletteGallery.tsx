@@ -1,15 +1,18 @@
-import { Fragment, useEffect, useState } from "react";
+import { Fragment, useEffect } from "react";
 import { useAppContext } from "../context/useAppContext";
 import { getPalettes } from "../api/palette";
 import PaletteContainer from "./PaletteContainer";
 import DeleteStatus from "./DeleteStatus";
 
 export default function PaletteGallery() {
-  const { loggedInUser, setUserPalettes, userPalettes, pendingDelete } =
-    useAppContext();
-  const [isExpanded, setIsExpanded] = useState(true);
-
-  console.log("isExpanded: ", isExpanded);
+  const {
+    loggedInUser,
+    setUserPalettes,
+    userPalettes,
+    pendingDelete,
+    isPaletteDrawerExpanded,
+    setIsPaletteDrawerExpanded,
+  } = useAppContext();
 
   useEffect(() => {
     if (!loggedInUser) return;
@@ -28,17 +31,19 @@ export default function PaletteGallery() {
   if (!loggedInUser) return null;
 
   return (
-    <div id="paletteGallery" data-expanded={isExpanded}>
+    <div id="paletteGallery" data-expanded={isPaletteDrawerExpanded}>
       <div className="bar">
         <h2>My Colours</h2>
         <button
           className="expand"
-          aria-expanded={isExpanded}
+          aria-expanded={isPaletteDrawerExpanded}
           aria-controls="paletteObjects"
           aria-label={
-            isExpanded ? "Hide palette objects" : "Show palette objects"
+            isPaletteDrawerExpanded
+              ? "Hide palette objects"
+              : "Show palette objects"
           }
-          onClick={() => setIsExpanded((prev) => !prev)}
+          onClick={() => setIsPaletteDrawerExpanded((prev) => !prev)}
         >
           {/* <span className="drawerArrow">▴</span> */}▴
         </button>
