@@ -11,7 +11,6 @@ export default function PaletteGallery() {
     userPalettes,
     pendingDelete,
     isPaletteDrawerExpanded,
-    setIsPaletteDrawerExpanded,
   } = useAppContext();
 
   useEffect(() => {
@@ -31,23 +30,8 @@ export default function PaletteGallery() {
   if (!loggedInUser) return null;
 
   return (
-    <div id="paletteGallery" data-expanded={isPaletteDrawerExpanded}>
-      <div className="bar">
-        <h2>My Colours</h2>
-        <button
-          className="expand"
-          aria-expanded={isPaletteDrawerExpanded}
-          aria-controls="paletteObjects"
-          aria-label={
-            isPaletteDrawerExpanded
-              ? "Hide palette objects"
-              : "Show palette objects"
-          }
-          onClick={() => setIsPaletteDrawerExpanded((prev) => !prev)}
-        >
-          {/* <span className="drawerArrow">▴</span> */}▴
-        </button>
-      </div>
+    <div id="paletteGallery" data-palettes-expanded={isPaletteDrawerExpanded}>
+      <div className="bar"></div>
       <div className="drawer">
         <div className="drawerInner" id="paletteObjects">
           {userPalettes?.map((palette, i) => (

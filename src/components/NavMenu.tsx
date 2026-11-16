@@ -12,6 +12,8 @@ export default function NavMenu() {
     saveStatus,
     isWordsDrawerExpanded,
     setIsWordsDrawerExpanded,
+    isPaletteDrawerExpanded,
+    setIsPaletteDrawerExpanded,
   } = useAppContext();
   return (
     <header id="navMenu">
@@ -48,6 +50,20 @@ export default function NavMenu() {
             >
               {isWordsDrawerExpanded ? "words -->" : "<-- words"}
               {/* ▴ */}
+            </button>
+            <button
+              // className="expand"
+              aria-expanded={isPaletteDrawerExpanded}
+              aria-controls="paletteObjects"
+              aria-label={
+                isPaletteDrawerExpanded
+                  ? "Hide palette objects"
+                  : "Show palette objects"
+              }
+              onClick={() => setIsPaletteDrawerExpanded((prev) => !prev)}
+            >
+              {isPaletteDrawerExpanded ? "<-- palettes" : "palettes -->"}
+              {/* <span className="drawerArrow">▴</span>▴ */}
             </button>
           </>
         )}

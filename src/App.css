@@ -78,7 +78,7 @@ button.expand {
 
 /*-----*/
 
-#paletteGallery[data-expanded="false"] button[aria-expanded] {
+#paletteGallery[data-palettes-expanded="false"] button[aria-expanded] {
   transform: rotateX(180deg);
 }
 
@@ -94,8 +94,8 @@ button.expand {
   pointer-events: none;
 }
 
-/* main[data-expanded="true"] .drawer, */
-#paletteGallery[data-expanded="true"] .drawer {
+/* main[data-palettes-expanded="true"] .drawer, */
+#paletteGallery[data-palettes-expanded="true"] .drawer {
   grid-template-rows: 1fr;
 }
 
