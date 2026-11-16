@@ -20,8 +20,6 @@ export function AppProvider({ children }: { children: ReactNode }) {
   const [userPalettes, setUserPalettes] = useState<SavedPalette[]>([]);
   const [deleteStatus, setDeleteStatus] = useState<DeleteStatus>("idle");
   const [pendingDelete, setPendingDelete] = useState<string>();
-  const [isWordsDrawerExpanded, setIsWordsDrawerExpanded] = useState(false);
-  const [isPaletteDrawerExpanded, setIsPaletteDrawerExpanded] = useState(false);
   const [openDrawer, setOpenDrawer] = useState<OpenDrawer>(null);
 
   useEffect(() => {
@@ -52,10 +50,6 @@ export function AppProvider({ children }: { children: ReactNode }) {
         setDeleteStatus,
         pendingDelete,
         setPendingDelete,
-        isPaletteDrawerExpanded,
-        setIsPaletteDrawerExpanded,
-        isWordsDrawerExpanded,
-        setIsWordsDrawerExpanded,
         openDrawer,
         setOpenDrawer,
       }}

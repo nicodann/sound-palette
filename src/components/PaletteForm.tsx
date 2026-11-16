@@ -14,7 +14,7 @@ export default function PaletteForm() {
 
   const [error, setError] = useState<string>();
 
-  const { setCurrentPalette, setSaveStatus } = useAppContext();
+  const { setCurrentPalette, setSaveStatus, setOpenDrawer } = useAppContext();
 
   const handleSubmit = async (e: React.SubmitEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -32,6 +32,7 @@ export default function PaletteForm() {
         palette: response,
       };
       setCurrentPalette(newPalette);
+      setOpenDrawer("words");
       setFormValues({ prompt: "" });
     } catch {
       setError("Couldn't generate a palette, please try again.");

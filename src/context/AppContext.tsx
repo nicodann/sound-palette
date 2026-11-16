@@ -24,10 +24,6 @@ type AppContextValue = {
   setDeleteStatus: Dispatch<SetStateAction<DeleteStatus>>;
   pendingDelete?: string;
   setPendingDelete: Dispatch<SetStateAction<string | undefined>>;
-  isWordsDrawerExpanded: boolean;
-  setIsWordsDrawerExpanded: Dispatch<SetStateAction<boolean>>;
-  isPaletteDrawerExpanded: boolean;
-  setIsPaletteDrawerExpanded: Dispatch<SetStateAction<boolean>>;
   openDrawer?: OpenDrawer;
   setOpenDrawer: Dispatch<SetStateAction<OpenDrawer>>;
 };
