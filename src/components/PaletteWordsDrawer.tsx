@@ -15,6 +15,7 @@ export default function PaletteWordsDrawer() {
               style={
                 {
                   "--i": i,
+                  "--n": currentPalette.palette.length,
                 } as React.CSSProperties
               }
               onAnimationEnd={

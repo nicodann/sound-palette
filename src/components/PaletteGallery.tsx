@@ -39,6 +39,7 @@ export default function PaletteGallery() {
             style={
               {
                 "--i": i,
+                "--n": userPalettes.length,
               } as React.CSSProperties
             }
             onAnimationEnd={

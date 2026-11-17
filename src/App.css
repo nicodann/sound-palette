@@ -117,7 +117,7 @@ main > * {
   transition:
     translate 0.6s ease-in,
     visibility 0.6s;
-  transition-delay: calc((4 - var(--i)) * 100ms);
+  transition-delay: calc((var(--n) - var(--i)) * 100ms);
 }
 
 main[data-words-expanded="true"] #response > h2 {
@@ -156,7 +156,7 @@ main[data-words-expanded="true"] #response > h2 {
   transition:
     translate 0.6s ease-in,
     visibility 0.6s;
-  transition-delay: calc((4 - var(--i)) * 100ms);
+  transition-delay: calc(var(--i) * 100ms);
 }
 
 main[data-palettes-expanded="true"] {
@@ -164,7 +164,8 @@ main[data-palettes-expanded="true"] {
     translate: 0 0;
     visibility: visible;
     transition-timing-function: ease-out;
-    transition-delay: calc(var(--i) * 100ms);
+
+    transition-delay: calc((var(--n) - var(--i)) * 100ms);
   }
   #paletteGallery {
     pointer-events: auto;
