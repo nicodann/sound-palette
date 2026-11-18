@@ -45,9 +45,7 @@ export default function PaletteGallery() {
             onAnimationEnd={
               i === all.length - 1
                 ? () =>
-                    setOpenDrawer((prev) =>
-                      prev === "palettes" ? null : "palettes",
-                    )
+                    setOpenDrawer((prev) => (prev === "palettes" ? null : prev))
                 : undefined
             }
           >

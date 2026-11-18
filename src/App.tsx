@@ -13,7 +13,7 @@ import PaletteGallery from "./components/PaletteGallery";
 import PaletteWordsDrawer from "./components/PaletteWordsDrawer";
 
 function App() {
-  const { uiState, currentPalette, loggedInUser, openDrawer } = useAppContext();
+  const { uiState, currentPalette, openDrawer } = useAppContext();
 
   useEffect(() => {
     console.log("uiState: ", uiState);
@@ -40,7 +40,7 @@ function App() {
         data-palettes-expanded={openDrawer === "palettes"}
       >
         <PaletteWordsDrawer />
-        {loggedInUser && <PaletteGallery />}
+        <PaletteGallery />
         <PaletteForm />
         <LoginRegisterModal />
         <LoginForm />

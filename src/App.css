@@ -42,11 +42,15 @@ button:hover {
 }
 
 @keyframes slide-in-left {
-  from {
+  0% {
     transform: translateX(-100vw);
     opacity: 0;
   }
-  to {
+  30% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  100% {
     transform: translateX(0);
     opacity: 1;
   }
@@ -296,9 +300,11 @@ form#paletteForm {
   width: min(100%, 600px);
 }
 
-[data-ui="empty"][data-palette="visible"] form#paletteForm {
-  transform: scale(1);
+[data-ui="empty"][data-palette="visible"]
+  main:not([data-palettes-expanded="true"])
+  form#paletteForm {
   opacity: 1;
+  transform: scale(1);
   visibility: visible;
 }
 

@@ -51,25 +51,25 @@ export default function NavMenu() {
               {openDrawer === "words" ? "words -->" : "<-- words"}
               {/* ▴ */}
             </button>
-            <button
-              // className="expand"
-              aria-expanded={openDrawer === "palettes"}
-              aria-controls="paletteObjects"
-              aria-label={
-                openDrawer === "palettes"
-                  ? "Hide palette objects"
-                  : "Show palette objects"
-              }
-              onClick={() =>
-                setOpenDrawer((prev) =>
-                  prev === "palettes" ? null : "palettes",
-                )
-              }
-            >
-              {openDrawer == "palettes" ? "<-- palettes" : "palettes -->"}
-              {/* <span className="drawerArrow">▴</span>▴ */}
-            </button>
           </>
+        )}
+        {loggedInUser && (
+          <button
+            // className="expand"
+            aria-expanded={openDrawer === "palettes"}
+            aria-controls="paletteObjects"
+            aria-label={
+              openDrawer === "palettes"
+                ? "Hide palette objects"
+                : "Show palette objects"
+            }
+            onClick={() =>
+              setOpenDrawer((prev) => (prev === "palettes" ? null : "palettes"))
+            }
+          >
+            {openDrawer == "palettes" ? "<-- palettes" : "palettes -->"}
+            {/* <span className="drawerArrow">▴</span>▴ */}
+          </button>
         )}
       </div>
     </header>

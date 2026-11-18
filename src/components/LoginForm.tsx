@@ -7,7 +7,8 @@ import { ApiError } from "../api/client";
 import useSavePalette from "../hooks/useSavePalette";
 
 export default function LoginForm() {
-  const { setLoggedInUser, setUiState, pendingSave } = useAppContext();
+  const { setLoggedInUser, setUiState, pendingSave, setOpenDrawer } =
+    useAppContext();
 
   const [formValues, setFormValues] = useState<LoginValues>({
     email: "",
@@ -46,6 +47,7 @@ export default function LoginForm() {
       const user = await login({ email, password: formValues.password });
 
       setLoggedInUser(user.email);
+      setOpenDrawer("palettes");
 
       if (pendingSave) await saveCurrentPalette();
 
