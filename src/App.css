@@ -77,6 +77,9 @@ button:hover {
     rgb(255 255 255 / 1),
     rgb(255 255 255 / 0)
   );
+  h1 {
+    color: black;
+  }
 
   #nav {
     display: flex;
@@ -84,6 +87,10 @@ button:hover {
     gap: 4px;
     align-items: center;
   }
+}
+
+#background[data-palette="hidden"] #navMenu {
+  background: none;
 }
 
 main {
@@ -143,8 +150,10 @@ main[data-words-expanded="true"] #response > h2 {
 
 #paletteGallery {
   align-self: stretch;
+  justify-self: stretch;
   overflow-y: auto;
   overflow-x: hidden;
+  pointer-events: none;
   & h2 {
     font-weight: bold;
   }
@@ -439,13 +448,31 @@ p.saved {
 } */
 
 @media (min-width: 768px) {
-  #background {
-    flex-direction: row;
+  #navMenu {
+    align-items: flex-end;
+    padding-right: 20px;
   }
-
   form {
     padding: 8px 20px;
     /* font-size: 1em; */
+  }
+
+  .wordsDrawer {
+    justify-self: stretch;
+    padding-right: 20px;
+  }
+
+  #response {
+    align-items: flex-end;
+  }
+
+  .galleryDrawer {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 24px;
+    justify-items: center;
+    align-content: start;
+    padding: 16px;
   }
 }
 

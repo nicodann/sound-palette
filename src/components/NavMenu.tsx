@@ -17,7 +17,7 @@ export default function NavMenu() {
   return (
     <header id="navMenu">
       <div id="nav">
-        {loggedInUser ? <p>{loggedInUser}</p> : <LoginButton />}
+        {loggedInUser ? <h1>{loggedInUser}</h1> : <LoginButton />}
         <RegisterButton />
         <LogoutButton />
         {currentPalette && (
