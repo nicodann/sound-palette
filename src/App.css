@@ -12,6 +12,13 @@
   /* font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif; */
 }
 
+#background[data-palette="hidden"] {
+  color-scheme: light;
+  --text: #6b6375;
+  --text-h: #08060d;
+  /* ...any other variables whose dark value doesn't suit a gradient */
+}
+
 button {
   padding: 2px 8px;
   width: 100%;
@@ -64,7 +71,6 @@ button:hover {
   align-items: center;
   justify-content: center;
   gap: 20px;
-  /* background-color: rgba(255, 255, 255, 0.5); */
   background: linear-gradient(
     to bottom,
     rgb(255 255 255 / 1),
@@ -204,7 +210,7 @@ main[data-palettes-expanded="true"] {
   button {
     background: none;
     border: none;
-    color: black;
+    /* color: black; */
     display: flex;
     flex-direction: column;
     align-items: center;
