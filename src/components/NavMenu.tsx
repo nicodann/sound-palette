@@ -67,7 +67,7 @@ export default function NavMenu() {
               setOpenDrawer((prev) => (prev === "palettes" ? null : "palettes"))
             }
           >
-            {openDrawer == "palettes" ? "<-- palettes" : "palettes -->"}
+            {openDrawer == "palettes" ? "<-- my palettes" : "my palettes -->"}
             {/* <span className="drawerArrow">▴</span>▴ */}
           </button>
         )}

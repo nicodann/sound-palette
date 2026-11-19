@@ -16,6 +16,7 @@
   color-scheme: light;
   --text: #6b6375;
   --text-h: #08060d;
+  color: var(--text);
   /* ...any other variables whose dark value doesn't suit a gradient */
 }
 
