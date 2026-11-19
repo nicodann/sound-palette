@@ -5,6 +5,7 @@ export default function CloseButton() {
   return (
     <button
       id="close"
+      type="button"
       onClick={() => {
         setUiState("empty");
         setPendingSave(false);
