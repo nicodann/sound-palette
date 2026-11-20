@@ -10,6 +10,7 @@ export default function NavMenu() {
     loggedInUser,
     currentPalette,
     saveStatus,
+    setSaveStatus,
     openDrawer,
     setOpenDrawer,
   } = useAppContext();
@@ -33,6 +34,7 @@ export default function NavMenu() {
                 `}
               role="alert"
               hidden={saveStatus === "idle"}
+              onAnimationEnd={() => setSaveStatus("idle")}
             >
               {saveStatus}
             </p>
