@@ -294,8 +294,9 @@ p.deleted {
 form {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 20px;
   padding: 8px;
+  color: black;
 }
 
 form button[type="submit"] {
@@ -305,9 +306,13 @@ form button[type="submit"] {
 .field {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 4px;
   align-items: flex-start;
   flex-wrap: wrap;
+}
+
+.field-hint {
+  font-size: 0.8em;
 }
 
 form#paletteForm {

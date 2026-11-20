@@ -84,7 +84,7 @@ export default function RegisterForm() {
       <div className="field">
         <label htmlFor={idEmail}>Email</label>
         <input
-          id={`${idEmail}`}
+          id={idEmail}
           type="email"
           aria-invalid={!!error.email}
           aria-describedby={`${idEmail}-error`}
