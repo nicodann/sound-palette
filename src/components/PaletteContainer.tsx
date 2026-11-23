@@ -2,7 +2,7 @@ import { createPortal } from "react-dom";
 import { useAppContext } from "../context/useAppContext";
 import type { SavedPalette } from "../types";
 import ConfirmPaletteDeleteModal from "./ConfirmPaletteDeleteModal";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { buildBackgroundColorString } from "../lib/buildBackgroundColorString";
 
 export default function PaletteContainer({
@@ -26,13 +26,6 @@ export default function PaletteContainer({
     setPendingDelete(undefined);
     setDeleteStatus("idle");
   };
-
-  useEffect(() => {
-    console.log(
-      "STRING:",
-      buildBackgroundColorString(paletteObject.palette, "striped"),
-    );
-  }, [paletteObject.palette]);
 
   return (
     <div

@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import "./App.css";
 
 import "@fontsource-variable/dm-sans";
@@ -14,10 +13,6 @@ import PaletteWordsDrawer from "./components/PaletteWordsDrawer";
 
 function App() {
   const { uiState, currentPalette, openDrawer } = useAppContext();
-
-  useEffect(() => {
-    console.log("uiState: ", uiState);
-  }, [uiState]);
 
   return (
     <div

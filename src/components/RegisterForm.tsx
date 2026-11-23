@@ -55,7 +55,6 @@ export default function RegisterForm() {
     }
 
     setError({});
-    console.log("form submitted", formValues);
 
     try {
       const user = await register({ email, password: formValues.password });
@@ -111,9 +110,6 @@ export default function RegisterForm() {
       <div className="field">
         <label htmlFor={idPassword}>Password</label>
         <input
-          onKeyDown={(e) =>
-            console.log("key:", e.key, "prevented:", e.defaultPrevented)
-          }
           id={idPassword}
           type="password"
           aria-invalid={!!error.password}
@@ -144,9 +140,6 @@ export default function RegisterForm() {
       <div className="field">
         <label htmlFor={idConfirmPassword}>Confirm Password</label>
         <input
-          onKeyDown={(e) =>
-            console.log("key:", e.key, "prevented:", e.defaultPrevented)
-          }
           id={idConfirmPassword}
           type="password"
           aria-invalid={!!error.confirmPassword}

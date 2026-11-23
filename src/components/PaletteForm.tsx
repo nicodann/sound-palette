@@ -39,7 +39,6 @@ export default function PaletteForm() {
     } finally {
       setIsLoading(false);
     }
-    console.log("form submitted", formValues);
   };
 
   return (

@@ -94,9 +94,6 @@ export default function LoginForm() {
       <div className="field">
         <label htmlFor="password">Password</label>
         <input
-          onKeyDown={(e) =>
-            console.log("key:", e.key, "prevented:", e.defaultPrevented)
-          }
           id="password"
           type="password"
           aria-invalid={!!error.password}
