@@ -32,7 +32,7 @@ export default function PaletteForm() {
         palette: response,
       };
       setCurrentPalette(newPalette);
-      setOpenDrawer("words");
+      setOpenDrawer({ name: "words", auto: true });
       setFormValues({ prompt: "" });
     } catch {
       setError("Couldn't generate a palette, please try again.");

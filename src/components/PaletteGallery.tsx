@@ -31,11 +31,14 @@ export default function PaletteGallery() {
   if (!loggedInUser) return null;
 
   return (
-    <div id="paletteGallery" data-palettes-expanded={openDrawer === "palettes"}>
+    <div
+      id="paletteGallery"
+      data-palettes-expanded={openDrawer?.name === "palettes"}
+    >
       <div className="galleryDrawer">
         {userPalettes?.map((palette, i, all) => (
           <div
-            key={i}
+            key={palette.id}
             style={
               {
                 "--i": i,
@@ -44,12 +47,16 @@ export default function PaletteGallery() {
             }
             onAnimationEnd={
               i === all.length - 1
-                ? () =>
-                    setOpenDrawer((prev) => (prev === "palettes" ? null : prev))
+                ? (e) => {
+                    if (e.target !== e.currentTarget) return;
+                    setOpenDrawer((prev) =>
+                      prev?.name === "palettes" && prev.auto ? null : prev,
+                    );
+                  }
                 : undefined
             }
           >
-            <PaletteContainer paletteObject={palette} key={palette.id} />
+            <PaletteContainer paletteObject={palette} />
             {palette.id === pendingDelete && <DeleteStatus />}
           </div>
         ))}

@@ -5,7 +5,7 @@ export type UiState = "empty" | "loginRegister" | "login" | "register";
 
 export type SaveStatus = "idle" | "saving" | "saved" | "error";
 
-export type OpenDrawer = "words" | "palettes" | null;
+export type OpenDrawer = { name: "words" | "palettes"; auto: boolean } | null;
 
 type AppContextValue = {
   uiState: UiState;

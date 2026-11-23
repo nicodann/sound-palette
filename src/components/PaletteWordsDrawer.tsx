@@ -20,8 +20,12 @@ export default function PaletteWordsDrawer() {
               }
               onAnimationEnd={
                 i === all.length - 1
-                  ? () =>
-                      setOpenDrawer((prev) => (prev === "words" ? null : prev))
+                  ? (e) => {
+                      if (e.target !== e.currentTarget) return;
+                      setOpenDrawer((prev) =>
+                        prev?.name === "words" && prev.auto ? null : prev,
+                      );
+                    }
                   : undefined
               }
             >

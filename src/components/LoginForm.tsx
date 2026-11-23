@@ -47,7 +47,7 @@ export default function LoginForm() {
       const user = await login({ email, password: formValues.password });
 
       setLoggedInUser(user.email);
-      setOpenDrawer("palettes");
+      setOpenDrawer({ name: "palettes", auto: true });
 
       if (pendingSave) await saveCurrentPalette();
 

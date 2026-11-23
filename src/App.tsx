@@ -31,8 +31,8 @@ function App() {
       <NavMenu />
 
       <main
-        data-words-expanded={openDrawer === "words"}
-        data-palettes-expanded={openDrawer === "palettes"}
+        data-words-expanded={openDrawer?.name === "words"}
+        data-palettes-expanded={openDrawer?.name === "palettes"}
       >
         <PaletteWordsDrawer />
         <PaletteGallery />

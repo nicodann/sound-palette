@@ -39,18 +39,22 @@ export default function NavMenu() {
               {saveStatus}
             </p>
             <button
-              aria-expanded={openDrawer === "words"}
+              aria-expanded={openDrawer?.name === "words"}
               aria-controls="paletteWords"
               aria-label={
-                openDrawer === "words"
+                openDrawer?.name === "words"
                   ? "Hide palette words"
                   : "Show palette words"
               }
               onClick={() =>
-                setOpenDrawer((prev) => (prev === "words" ? null : "words"))
+                setOpenDrawer((prev) =>
+                  prev?.name === "words"
+                    ? null
+                    : { name: "words", auto: false },
+                )
               }
             >
-              {openDrawer === "words" ? "words -->" : "<-- words"}
+              {openDrawer?.name === "words" ? "words -->" : "<-- words"}
               {/* ▴ */}
             </button>
           </>
@@ -58,18 +62,24 @@ export default function NavMenu() {
         {loggedInUser && (
           <button
             // className="expand"
-            aria-expanded={openDrawer === "palettes"}
+            aria-expanded={openDrawer?.name === "palettes"}
             aria-controls="paletteObjects"
             aria-label={
-              openDrawer === "palettes"
+              openDrawer?.name === "palettes"
                 ? "Hide palette objects"
                 : "Show palette objects"
             }
             onClick={() =>
-              setOpenDrawer((prev) => (prev === "palettes" ? null : "palettes"))
+              setOpenDrawer((prev) =>
+                prev?.name === "palettes"
+                  ? null
+                  : { name: "palettes", auto: false },
+              )
             }
           >
-            {openDrawer == "palettes" ? "<-- my palettes" : "my palettes -->"}
+            {openDrawer?.name == "palettes"
+              ? "<-- my palettes"
+              : "my palettes -->"}
             {/* <span className="drawerArrow">▴</span>▴ */}
           </button>
         )}
