@@ -1,9 +1,9 @@
 import { createPortal } from "react-dom";
 import { useAppContext } from "../context/useAppContext";
-import { buildGradientString } from "../lib/buildGradientString";
 import type { SavedPalette } from "../types";
 import ConfirmPaletteDeleteModal from "./ConfirmPaletteDeleteModal";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { buildBackgroundColorString } from "../lib/buildBackgroundColorString";
 
 export default function PaletteContainer({
   paletteObject,
@@ -27,6 +27,13 @@ export default function PaletteContainer({
     setDeleteStatus("idle");
   };
 
+  useEffect(() => {
+    console.log(
+      "STRING:",
+      buildBackgroundColorString(paletteObject.palette, "striped"),
+    );
+  }, [paletteObject.palette]);
+
   return (
     <div
       className={`paletteContainer ${currentPalette && currentPalette.id === paletteObject.id && "selected"}`}
@@ -40,7 +47,12 @@ export default function PaletteContainer({
         <h3>{paletteObject.name}</h3>
         <div
           className="paletteColourBox"
-          style={{ background: buildGradientString(paletteObject.palette) }}
+          style={{
+            background: buildBackgroundColorString(
+              paletteObject.palette,
+              "striped",
+            ),
+          }}
         />
       </button>
       <button

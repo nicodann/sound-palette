@@ -324,6 +324,7 @@ form#paletteForm {
   opacity: 0;
   visibility: hidden;
   width: min(100%, 600px);
+  color: white;
 }
 
 [data-ui="empty"][data-palette="visible"]
