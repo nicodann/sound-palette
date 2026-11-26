@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useAppContext } from "../context/useAppContext";
 import { postAiQuery } from "../api/ai";
 import type { CurrentPalette } from "../types";
+import { ApiError } from "../api/client";
 
 type FormValues = {
   prompt: string;
@@ -34,8 +35,12 @@ export default function PaletteForm() {
       setCurrentPalette(newPalette);
       setOpenDrawer({ name: "words", auto: true });
       setFormValues({ prompt: "" });
-    } catch {
-      setError("Couldn't generate a palette, please try again.");
+    } catch (error) {
+      if (error instanceof ApiError && error.status === 429) {
+        setError(error.message);
+      } else {
+        setError("Couldn't generate a palette, please try again.");
+      }
     } finally {
       setIsLoading(false);
     }

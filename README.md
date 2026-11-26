@@ -1,73 +1,62 @@
-# React + TypeScript + Vite
+# Sound Palette
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Describe a scene or a feeling, and Sound Palette turns it into five words that capture its rhythm, tempo and energy, each paired with a colour. The colours fill the screen as a backdrop, and if you create an account you can save palettes and come back to them.
 
-Currently, two official plugins are available:
+> **This is a demo.** It's a personal learning project, not a production service. AI generation is rate-limited and capped per day, the database may be reset at any time, and there's no password reset. Please don't reuse a password you use anywhere else.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+This repo is the **frontend** (React + TypeScript + Vite). The backend is a Go API in a separate repo: [sound-palette-api](https://github.com/nicodann/sound-palette-api).
 
-## React Compiler
+## Using it
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+1. **Describe something.** Type a scene or feeling (up to 500 characters), e.g. _"A misty lake full of poison fishies..."_, and submit.
+2. **See your palette.** The background fills with five colours, and the matching words slide in, then tuck away into a drawer. Use the **words** button to bring them back.
+3. **Save it (optional).** Click **save palette**. If you're not logged in, you'll be asked to log in or register first, and the palette is saved once you are.
+4. **Browse your palettes.** When logged in, **my palettes** opens a gallery of everything you've saved. Click one to load it, or delete it.
+5. **Start again.** **Reset Palette** clears the current palette so you can write a new prompt.
 
-## Expanding the ESLint configuration
+You don't need an account to generate palettes, only to save them.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+### Limits
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+To keep the demo affordable, palette generation is limited per visitor (a few a minute and a daily allowance) and in total per day. If you hit a limit, you'll see a message telling you to slow down or come back tomorrow.
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+## Running it locally
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+You'll need [Node.js](https://nodejs.org/) and the [API](https://github.com/nicodann/sound-palette-api) running locally (see its README).
+
+```sh
+git clone https://github.com/nicodann/sound-palette.git
+cd sound-palette
+npm install
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+Copy the example env. It already contains the url of the local API (http://localhost:8080):
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```sh
+cp .env.example .env
 ```
+
+Then start the dev server:
+
+```sh
+npm run dev
+```
+
+and open <http://localhost:5173>. The API's `ALLOWED_ORIGIN` must match this address, or the browser will block its requests.
+
+### Scripts
+
+| Command           | What it does                                     |
+| ----------------- | ------------------------------------------------ |
+| `npm run dev`     | start the dev server with hot reload             |
+| `npm run build`   | type-check and build for production into `dist/` |
+| `npm run preview` | serve the production build locally               |
+| `npm run lint`    | run ESLint                                       |
+
+`VITE_API_URL` is read at **build time**, so set it to the deployed API's URL before running `npm run build` for production.
+
+## How it works
+
+- The frontend sends your prompt to the API, which asks Claude (Anthropic's model) for five `{ adjective, colour }` pairs and checks the reply before returning it.
+- Logging in sets an `HttpOnly` cookie, so the page's JavaScript never handles the login token.
+- Saved palettes are stored in Postgres by the API.
